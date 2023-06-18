@@ -1,0 +1,79 @@
+/* Start course Styles */
+
+.breadcrumb {
+  position: relative;
+  z-index: 50;
+}
+
+.courses-header__custom-fillter {
+  cursor: pointer;
+  color: var(--white-color);
+  font-size: 2rem;
+  padding: 1rem 0;
+  position: relative;
+}
+.custom-fillter__default {
+  user-select: none;
+  padding: 2rem 1.5rem;
+  border-radius: 1rem;
+  background: var(--dark-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.custom-fillter-icon {
+  transition: transform 200ms;
+}
+
+.courses-header__custom-fillter:hover :is(.custom-fillter-icon) {
+  transform: rotate(90deg);
+}
+.custom-fillter__dropdown {
+  user-select: none;
+  top: 9rem;
+  left: -5rem;
+  position: absolute;
+  background-color: var(--box-color-glass);
+  border-bottom: 0.2rem solid var(--primary-color);
+  transition: all 150ms ease-in-out;
+  border-radius: 1.5rem;
+  width: 100%;
+  z-index: -1;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.custom-fillter__dropdown:hover {
+  background-color: var(--dark-color);
+}
+
+.courses-header__custom-fillter:hover :is(.custom-fillter__dropdown) {
+  left: 0;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 999999999 !important;
+}
+
+.custom-fillter__dropdown-list {
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+}
+.custom-fillter__dropdown-item {
+  padding: 0.5rem 1rem;
+  transition: all 300ms;
+}
+
+.custom-fillter__dropdown-item:hover {
+  color: var(--primary-color);
+  background-color: var(--box-color);
+}
+
+.custom-fillter__active {
+  color: var(--primary-color);
+}
+
+/* Finish course Styles */

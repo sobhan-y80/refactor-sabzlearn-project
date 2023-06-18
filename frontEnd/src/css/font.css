@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "IRANSansLight";
+  /* src: url("../font/Font-yekan/YekanBakh_Light.ttf"); */
+  src: url("font/IRANSansWeb_Light.ttf");
+}
+
+@font-face {
+  font-family: "IRANSansBold";
+  src: url("font/IRANSansWeb_Bold.ttf");
+}

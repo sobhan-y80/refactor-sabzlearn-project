@@ -1,0 +1,281 @@
+/* Start header */
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.header .global__searchbar {
+  display: none;
+}
+
+.global__searchbar {
+  background-color: var(--bg-searchbar-glass);
+}
+
+.main-header__account-btn {
+  border-color: var(--dark-color);
+}
+
+/* Finish header */
+
+/* Start Landing */
+
+.landing {
+  background-image: url("../../../images/landing/landing.jpg");
+  background-repeat: no-repeat;
+  background-color: #333;
+  background-blend-mode: multiply;
+  background-size: 100% auto;
+  background-position: 15% 27%;
+  padding: 20rem 0;
+  transition: all 500ms;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.landing__contnet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  gap: 1rem;
+}
+
+.landing__title {
+  text-align: center;
+  font-size: 4rem;
+  color: var(--text-main-header-color);
+}
+
+.landing-header__searchbar {
+  width: 60%;
+  padding: 1.5rem;
+  border-radius: 5rem;
+}
+
+.landing-header___search-input {
+  width: 80%;
+  font-size: 2.5rem;
+}
+
+.landing-hader__search-btn {
+  width: 15%;
+}
+
+.landing-header__serach-icon {
+  font-size: 5.5rem;
+}
+
+/* Finish landing */
+
+/* Start Courses Header Section Styles */
+.courses-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: perspective(1000px);
+  transform: translateZ(-20px);
+}
+
+.courses-header__right {
+  display: flex;
+  flex-flow: column;
+}
+
+.courses-header__link {
+  font-weight: bold;
+  padding: 0.7rem 1.5rem;
+  background-color: transparent;
+  border: 0.2rem solid var(--primary-color);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  position: relative;
+}
+
+.courses-header__link:hover {
+  color: var(--dark-color);
+  background-color: var(--primary-color);
+}
+
+.courses-header__link-icon {
+  font-size: 2rem;
+  animation: 1000ms linear alternate-reverse infinite;
+}
+
+.courses-header__link:hover .courses-header__link-icon {
+  animation-name: FadeInTransform;
+}
+/* finish Courses Header Section Styles */
+/* Start Slider Container */
+.swiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}
+/* Finish Slider Container */
+
+/* Start Style About Me */
+
+.about-us {
+  /* background: rgba(255, 255, 255, 0.1); */
+  /* #43c67956 */
+  background-image: url("../images/about-us/pexels-lukas-574069.jpg");
+  background-color: #444;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.about-us .container {
+  padding: 5rem 15rem;
+}
+
+.about-us__box {
+  cursor: default;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: var(--dark-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.about-us__box-right {
+  flex-flow: row;
+}
+
+.about-us__img-wrapper {
+  display: flex;
+  align-items: center;
+  width: 20%;
+  height: 100%;
+}
+
+.about-us__content {
+  display: flex;
+  width: 65%;
+  padding: 0 1rem;
+  color: var(--white-color);
+  display: flex;
+  flex-flow: column;
+}
+
+.about-us__title {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.about-us__subtitle {
+  font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 1200px) {
+  .about-us .container {
+    padding: 5rem;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .landing {
+    background-size: 200% auto;
+    background-position: 65% 70%;
+  }
+
+  .landing__title {
+    font-size: 3rem;
+  }
+
+  .about-us__title {
+    font-size: 1.5rem;
+  }
+
+  .about-us__subtitle {
+    font-size: 1.3rem;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .landing {
+    background-size: 300% auto;
+    background-position: 70% 0%;
+  }
+
+  .landing__title {
+    font-size: 2rem;
+  }
+
+  .landing-header__searchbar {
+    width: 80%;
+  }
+
+  .about-us {
+    background-position: 100% 100%;
+  }
+
+  .about-us .container {
+    padding: 5rem 1rem;
+  }
+
+  .about-us__box {
+    flex-flow: row;
+    padding: 2rem;
+  }
+
+  .about-us__img-wrapper {
+    width: 20%;
+  }
+
+  .about-us__content {
+    width: 70%;
+  }
+}
+
+/* Finish Style About Me */
+
+@media only screen and (max-width: 600px) {
+  .main-header__content {
+    padding: 0 0.5rem;
+  }
+
+  .main-header__menu-small-device {
+    padding: 0;
+  }
+
+  .header-main__logo-text {
+    font-size: 2rem;
+  }
+
+  .main-header__profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main-header__icon-wrapper {
+    padding: 0;
+  }
+
+  .main-header__profile-name {
+    display: none;
+  }
+}
+
+/* Finsish Main Header Responsive */

@@ -1,0 +1,25 @@
+.breadcrumb > .breadcrumb-container {
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  background-color: var(--dark-color);
+}
+
+.list-item__arrow {
+  display: flex;
+}
+
+.home-icon {
+  padding: 1rem !important;
+  background-color: var(--primary-color);
+}
+
+.location-symbol {
+  display: inline-block;
+  padding: 0.7rem 1rem;
+  border-radius: 0.3rem;
+  background-color: var(--box-color);
+}
+
+.breadCrumb-list li:last-child {
+  color: var(--primary-color);
+}

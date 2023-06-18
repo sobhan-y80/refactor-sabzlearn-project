@@ -1,0 +1,281 @@
+html {
+  overflow-x: unset !important;
+}
+/* Start Main Styles */
+
+.main__content {
+  overflow: hidden;
+  border-radius: 1rem;
+  padding-bottom: 3rem;
+}
+
+/* =========== Start Article Styles =========== */
+
+.article {
+  display: flex;
+  flex-flow: column;
+  gap: 5rem;
+}
+
+/*====================== Start Article Header Styles ======================*/
+
+.article__header {
+  color: var(--white-color);
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.article-header__link:hover {
+  color: unset;
+  opacity: 0.7;
+}
+
+.article-header__title {
+  font-size: 3rem;
+}
+
+.article-header__article-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.article-info__author-name {
+  color: var(--text-main-header-color);
+  margin: 0 0.5rem;
+}
+
+.article-info__published-name {
+  color: var(--text-main-header-color);
+  margin: 0 0.5rem;
+}
+.article-header__desc {
+  text-align: center;
+}
+
+/* ====================== Finish Article Header Styles  ====================== */
+/* ====================== Start Article Section Styles  ====================== */
+
+.article__section {
+  display: flex;
+  flex-flow: column;
+  gap: 2rem;
+}
+
+.article__paragrapg-title {
+  color: var(--white-color);
+  font-size: 3.5rem;
+}
+
+.article__paragrapg-sub {
+  color: var(--white-color);
+  font-size: 2.5rem;
+}
+
+.article__paragrapg {
+  color: var(--white-color);
+}
+
+.article__paragrapg-pre {
+  text-align: left;
+  color: var(--white-color);
+  padding: 2rem 1rem;
+  background-color: #1d1e28;
+  border: 0.2rem solid var(--white-color);
+}
+
+.article__img {
+  border-radius: 1rem;
+}
+
+.article__img-sub {
+  padding: 0 5rem;
+}
+
+.article__read-box {
+  padding: 2.5rem 1rem;
+  border-radius: 1rem;
+  background-color: var(--dark-color);
+}
+
+.read-box__title {
+  color: var(--white-color);
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.article__read-box-list {
+  display: flex;
+  flex-flow: column;
+  gap: 1.5rem;
+}
+
+.article__read-box-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.article__read-box-link:hover {
+  color: var(--text-main-header-color);
+}
+
+.read-box-link__count {
+  font-size: 2rem;
+  color: var(--dark-color);
+  width: 3rem;
+  height: 3rem;
+  border: 0.2rem solid var(--primary-color);
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  transition: all 300ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.article__read-box-link:hover .read-box-link__count {
+  color: var(--white-color);
+  background-color: unset;
+}
+
+/* ====================== Finish Article Section Styles  ====================== */
+
+/* =========== Finish Article Styles =========== */
+
+/* =========== Start Course Info Styles =========== */
+
+/*====================== Start Default Course Info Styles ======================*/
+
+/*   
+
+*/
+
+.courses-info {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 8%;
+  color: var(--white-color);
+  border-radius: 1rem;
+  padding: 1rem 3rem;
+  background: #242532;
+  box-shadow: inset 50px 50px 100px #1d1e28, inset -50px -50px 100px #2b2c3c;
+}
+
+.courses-info .hpc__title {
+  font-size: 2.5rem;
+}
+
+.course-info__courses-list {
+  margin: 1rem;
+  display: flex;
+  flex-flow: column;
+}
+
+.course-info__courses-link {
+  padding: 1rem;
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.course-info__courses-link:hover {
+  color: unset;
+}
+
+.course-info__courses-item {
+  cursor: pointer;
+  transition: all 300ms linear;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.course-info__courses-item:hover {
+  transform: translate(-0.5rem);
+}
+
+.sidebar-articles__link {
+  position: relative;
+}
+
+.course-info__course-high-score-link:hover {
+  color: var(--primary-color);
+}
+
+/*====================== Finish Default Course Info Styles ======================*/
+
+/*====================== Start Course SideBar Styles ======================*/
+
+.course-info__courses-img-wrapper {
+  width: 8rem;
+  position: relative;
+}
+
+.course-info__courses-img {
+  width: 100%;
+  border-radius: 1rem;
+}
+
+.course-info__courses-img-wrapper::before {
+  content: "";
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  background: #2f3041;
+  box-shadow: inset 20px 20px 60px #282937, inset -20px -20px 60px #36374b;
+  position: absolute;
+  top: -2rem;
+  right: -2rem;
+}
+
+/*====================== Finish Course SideBar Styles ======================*/
+
+.last-articles__link:hover {
+  color: var(--primary-color);
+}
+
+/* --------------------------------------- */
+
+.course-info__courses-icon {
+  transition: all 300ms linear;
+}
+
+.course-info__courses-item:hover .course-info__courses-icon {
+  transform: rotate(180deg);
+  color: var(--primary-color);
+}
+
+.sidebar-articles__link::before {
+  transition: bottom 300ms, width 200ms;
+  content: "";
+  width: 100%;
+  height: 0.5rem;
+  border-radius: 1rem;
+  background-color: var(--box-color);
+  box-shadow: 0 0 1rem var(--box-color), 0 0 1.2rem var(--box-color);
+  position: absolute;
+  right: 0;
+  bottom: -0.5rem;
+}
+
+.sidebar-articles__item:hover .sidebar-articles__link {
+  color: unset;
+}
+
+.sidebar-articles__item:hover .sidebar-articles__link::before {
+  width: 0;
+}
+
+/* =========== Finish Course Info Styles =========== */
+
+@media only screen and (max-width: 767px) {
+  .article__img-sub {
+    padding: 0 0.2rem;
+  }
+}
+/* Finish Main Styles */

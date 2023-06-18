@@ -1,0 +1,132 @@
+.footer {
+  color: var(--white-color);
+  background-color: var(--box-color-glass);
+  box-shadow: 20px -20px 50px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.footer.hpc__section {
+  /* margin-top: 30rem; */
+  padding: 4rem;
+  margin-bottom: 0;
+}
+
+.footer__svg-wrapper {
+  position: relative;
+  width: 100%;
+  height: 5rem;
+  top: -5rem;
+}
+
+.footer__svg-wrapper .svg {
+  position: relative;
+  bottom: 0;
+  left: 0;
+}
+
+.footer__desc {
+  margin: 3rem 0;
+}
+
+.footer__desc-text {
+  text-align: justify;
+}
+
+.footer__widget
+  .row
+  :is(
+    .footer-widget__quick-access,
+    .footer-widget__working-hours,
+    .footer-widget__contact-us,
+    .footer-widget__trust-symbol
+  ) {
+  cursor: default;
+  padding: 3rem 2rem;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+}
+
+.footer-widget__title {
+  color: var(--primary-color);
+  font-size: 2rem;
+}
+
+.footer-widget__contact-us .row {
+  /* flex-shrink: unset; */
+  justify-content: space-between;
+}
+
+.footer-widget__namda-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-widget__namda-box .footer-widget__link {
+  background: #fff;
+  border-radius: 2rem;
+}
+
+.footer__copyright {
+  text-align: center;
+}
+.footer__copyright .hpc__popular {
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.footer__copyright .footer__link:hover {
+  color: unset;
+}
+/* Start Animation Footer */
+.footer__animation {
+  z-index: -10;
+  width: 100%;
+  height: 100%;
+  /* background: red; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.particles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.particles span {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  bottom: 1rem;
+  margin: 0 0.5rem;
+  background: #4fc3dc;
+  box-shadow: 0 0 0 10px #4fc3dc44, 0 0 50px #4fc3dc, -100px 0 #4fc3dc99,
+    100px 0 #ff2d7599;
+  animation: animateShow 15s ease-in-out infinite;
+  animation-duration: calc(130s / var(--delay));
+  position: relative;
+}
+
+.particles span:nth-child(even) {
+  background: #ff2d75;
+  box-shadow: 0 0 0 10px #ff2d7544, 0 0 50px 5px #ff2d75, 100px 0 #4fc3dc99,
+    -100px 0 #4fc3dc99;
+}
+/* Finish Animation Footer */
+
+@media only screen and (max-width: 1250px) {
+  .particles span {
+    width: 4px;
+    height: 4px;
+  }
+}
+
+@media only screen and (max-width: 590px) {
+  .footer__desc-title.hpc__title {
+    font-size: 2.5rem;
+  }
+}

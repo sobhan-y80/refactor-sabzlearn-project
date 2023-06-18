@@ -1,0 +1,27 @@
+@import "./font.css";
+
+:root {
+  --perecnt-number: 95;
+  --primary-color: #43c67a;
+  --primary-font: "IRANSansLight";
+  --seccend-font: "Roboto";
+  --dark-color: #242532;
+  --white-color: #f1f1f1;
+  --box-color: #2f3041;
+  --box-color-glass: #242532e6;
+  --text-main-header-color: #ffffff99;
+  --color-account-text: #1e83f0;
+  --bg-searchbar: #706e6e;
+  --bg-searchbar-glass: #373433;
+  --ofer-price-color: #646464dc;
+  --golden-color: #d4af37;
+  --rnadom-color: #45596b;
+  --dangerous: #dc3545;
+  --warning: #f7bd02;
+  /*  */
+}
+
+/* #2F3041 */
+/* #43c67a */
+
+/* b3e8c9 */
