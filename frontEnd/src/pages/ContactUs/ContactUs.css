@@ -1,0 +1,45 @@
+.main__contact-us .container {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.main__contact-us__logo-text {
+  font-size: 5rem;
+}
+
+.main__contact-us__title {
+  cursor: default;
+  user-select: none;
+  font-size: 5rem;
+  margin: 5rem 0;
+  color: var(--white-color);
+}
+
+.main__contact-us__email-link {
+  color: var(--white-color);
+  font-size: 2rem;
+}
+
+.main__contact-us__email-link:hover {
+  color: var(--text-main-header-color);
+}
+
+@media only screen and (max-width: 980px) {
+  .main__contact-us__title {
+    font-size: 4rem;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .main__contact-us__title {
+    font-size: 3rem;
+  }
+  .main__contact-us .container {
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+  }
+}

@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useRef } from "react";
 import { NavLink } from "react-router-dom";
 
 import "./Header.css";
 
 const Header = () => {
+  const mobielMenuWrapper = useRef();
+
+  const menuMobileHandler = () => {
+    mobielMenuWrapper.current.classList.add("open");
+  };
+
+  const closeMenuMobileHandler = () => {
+    mobielMenuWrapper.current.classList.remove("open");
+  };
+
   return (
     <header className="header">
       <div className="top-bar">
@@ -100,14 +110,36 @@ const Header = () => {
                 id="main-header__mobile-menu-btn"
                 className="main-header__item"
               >
-                <NavLink className="main-header__link">
-                  <i className="fa-solid fa-bars main-header__menu-small-icon"></i>
-                </NavLink>
-                <div className="mobile-menu__dropdown-wrapper">
+                <button
+                  onClick={menuMobileHandler}
+                  className="bg-[#43c67a] px-8 py-5 rounded-lg"
+                >
+                  <i>
+                    <svg
+                      width="16"
+                      height="14"
+                      viewBox="0 0 16 14"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M5 13L15 13M9 1L15 1M1 7H15"
+                        stroke="var(--box-color)"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </i>
+                </button>
+                <div
+                  ref={mobielMenuWrapper}
+                  className="mobile-menu__dropdown-wrapper"
+                >
                   <button
+                    onClick={closeMenuMobileHandler}
                     id="closeDropDownBtn"
                     title="close"
-                    className="mobile-menu__close-dropdown d-flex align-items-center"
+                    className="mobile-menu__close-dropdown flex items-center"
                   >
                     <i className="fa-solid fa-xmark"></i>
                   </button>
@@ -148,7 +180,7 @@ const Header = () => {
                 </div>
               </li>
             </div>
-            <div className="main-header__right animate__animated animate__fadeInRightBig">
+            <div className="main-header__right">
               <div className="main-header__logo">
                 <div className="header-main__logo-text-wrapper">
                   <span className="header-main__logo-text">L</span>
@@ -162,7 +194,7 @@ const Header = () => {
                 className="main-header__menu main-header__course-menu"
               >
                 <li className="main-header__item">
-                  <NavLink className="main-header__link">
+                  <NavLink to="/Product" className="main-header__link">
                     فرانت اند
                     <span className="main-header__icon-wrapper">
                       <i className="fa-solid fa-angle-down main-header__link-icon"></i>
@@ -241,7 +273,7 @@ const Header = () => {
                 ></div>
               </div>
             </div>
-            <div className="main-header__left animate__animated animate__fadeInLeftBig">
+            <div className="main-header__left">
               <ul className="main-header__menu">
                 <li className="main-header__item">
                   <div

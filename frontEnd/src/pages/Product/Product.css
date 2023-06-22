@@ -82,11 +82,6 @@
 /* =========== Finish Desc Warn ===========*/
 /* =========== Start Course Status Btn ===========*/
 
-.course-info__course-status-btn {
-  display: flex;
-  justify-content: space-between;
-}
-
 .course-info__course-status-btn :is(.course-info__link),
 .course-btn {
   font-size: 1.8rem;

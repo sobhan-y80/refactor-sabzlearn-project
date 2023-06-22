@@ -6,8 +6,8 @@ const Footer = () => {
   return (
     <>
       {/* <!-- Start Footer --> */}
-      <div className="footer hpc__section">
-        <div className="w-full flex flex-col gap-16">
+      <div className="footer">
+        <div className="w-full flex flex-col gap-16 px-10">
           <div className="footer__desc">
             <div className="row">
               <div className="col-12">

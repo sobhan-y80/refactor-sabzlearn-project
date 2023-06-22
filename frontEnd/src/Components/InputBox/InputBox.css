@@ -1,0 +1,341 @@
+.footer {
+  padding: 5rem 0;
+}
+
+.main {
+  min-height: 100vh;
+  padding: 5rem 0;
+  overflow: hidden;
+  background-color: #2f3041d7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Start Animation Shape  */
+.animation-shape {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -2;
+}
+.animation-shape__circle {
+  position: absolute;
+  width: 100rem;
+  height: 100rem;
+  border-radius: 50%;
+  animation: alternate infinite 15s;
+}
+
+.animation-shape__circle:nth-child(1) {
+  background-image: url("../images/login/mesh-491.png");
+  top: -50%;
+  left: -30%;
+  animation-name: bring-down;
+}
+.animation-shape__circle:nth-child(2) {
+  background-image: url("../images/login/mesh-676.png");
+  bottom: -50%;
+  right: -30%;
+  animation-name: bring-top;
+}
+
+/* Finish Animation Shape  */
+
+/* Start Login User Styles */
+
+.login-form__box {
+  cursor: default;
+  padding: 2rem 2.5rem;
+  border-radius: 1rem;
+  background: #242532c7;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  gap: 2rem;
+  position: relative;
+}
+
+.login-form__title {
+  font-size: 5rem;
+  color: var(--white-color);
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.1rem;
+}
+
+.login-form__subtitle {
+  color: var(--text-main-header-color);
+  text-align: center;
+}
+
+.login-form__change-form-stutus {
+  color: var(--white-color);
+  transform: translateY(-35%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.8rem;
+}
+
+.login-form__change-form-stutus-link {
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.login-form__change-form-stutus-link:hover {
+  opacity: 0.8;
+  color: unset;
+}
+
+.login-form__box-inputs {
+  display: flex;
+  flex-flow: column;
+  gap: 5rem;
+}
+
+.login-form__input-box {
+  width: 100%;
+  position: relative;
+}
+
+.input-box__input {
+  position: relative;
+  width: 100%;
+  padding: 20px 10px 10px;
+  background-color: transparent;
+  color: var(--white-color);
+  z-index: 10;
+  transition: 0.5s linear;
+  font-size: 1em;
+}
+
+.login-form__username-input,
+.login-form__email-input {
+  direction: ltr;
+}
+
+.password-box__btn {
+  z-index: 20;
+  width: 4rem;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.password-box__svg {
+  width: 100%;
+}
+.input-box__placeholder {
+  font-size: 2rem;
+  color: var(--text-main-header-color);
+  pointer-events: none;
+  padding: 20px 10px 10px;
+  transition: all 300ms;
+  position: absolute;
+  right: 0;
+}
+
+.input-box__input.active ~ .input-box__placeholder {
+  font-weight: bold;
+  color: var(--primary-color);
+  transform: translateY(-70%);
+}
+
+.input-box__shape {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0.2rem;
+  background: var(--box-color);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: 500ms cubic-bezier(0.175, 0.885, 0.32, 1.5);
+  pointer-events: none;
+}
+
+.input-box__input.active ~ .input-box__shape {
+  height: 80%;
+}
+.input-box__shape::after {
+  content: "";
+  transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+  width: 100%;
+  height: 0.3rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.input-box__input.err ~ .input-box__shape::after {
+  background-color: var(--dangerous);
+}
+
+.input-box__input.success ~ .input-box__shape::after {
+  background-color: var(--primary-color);
+}
+
+.login-form__password-setting {
+  font-size: 1.5rem;
+  color: var(--white-color);
+  margin-top: 2.5rem;
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.login-form__password-remember-me {
+  display: flex;
+  align-items: center;
+}
+
+.login-form__remember-me-input {
+  width: 2rem;
+  height: 2rem;
+}
+
+.login-form__remember-me-label {
+  padding: 0 1rem;
+}
+
+.login-form__remember-me-label:hover {
+  color: var(--primary-color);
+}
+
+.login-form__password-forgot {
+  align-self: flex-end;
+}
+
+.login-form__submit {
+  width: 100%;
+  font-weight: bold;
+  font-size: 2.5rem;
+  color: #fff;
+  padding: 1.3rem 0;
+  transition: all 100ms linear;
+  border: 0.2rem solid var(--primary-color);
+  border-radius: 1rem;
+}
+
+.login-form__submit:hover {
+  color: var(--dark-color);
+  background-color: var(--primary-color);
+}
+
+/* Start Style TextArea */
+
+.login-form__textarea {
+  width: 100%;
+  transition: height 1000ms !important;
+  border: none;
+  resize: none;
+}
+
+:has(.input-box__input.login-form__textarea.active) .login-form__textarea {
+  height: 8rem;
+  padding: 1rem;
+  transform: translateY(1.2rem);
+  transition: height 600ms;
+}
+
+.login-form__textarea-box .input-box__placeholder {
+  transform: translateY(50%);
+}
+
+:has(.input-box__input.login-form__textarea.active).login-form__textarea-box
+  .input-box__shape {
+  height: 8rem;
+}
+/* Finish Style TextArea */
+
+/* Start Style File Input */
+
+.login-form__file-input {
+  padding: 0;
+  width: unset;
+  font-family: var(--seccend-font);
+}
+
+input[type="file"]::file-selector-button {
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--dark-color);
+  padding: 1rem 2rem;
+  margin: 0 1rem;
+  border-radius: 1rem;
+  background: var(--primary-color);
+  transition: opacity 0.2s ease-in-out;
+}
+
+input[type="file"]::file-selector-button:hover {
+  opacity: 0.7;
+}
+
+.login-form__drop-wrapper {
+  cursor: pointer;
+  color: var(--text-main-header-color);
+  height: 15rem;
+  padding: 1rem 0;
+  border: 0.1rem solid var(--box-color);
+  border-radius: 10px;
+  background-color: var(--box-color);
+  transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+}
+
+.login-form__drop-wrapper:hover,
+:has(.login-form__file-input.active) .login-form__drop-wrapper {
+  border-color: var(--primary-color);
+}
+
+.login-form__drop-wrapper:hover .drop-title,
+:has(.login-form__file-input.active) .drop-title {
+  color: var(--white-color);
+}
+
+.drop-title {
+  color: #444;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  transition: color 0.2s ease-in-out;
+}
+/* Finish Style File Input */
+
+/* Start Animate Login Page */
+@keyframes bring-down {
+  from {
+    top: 0;
+    left: -30%;
+  }
+  to {
+    top: -60%;
+    left: -30%;
+  }
+}
+
+@keyframes bring-top {
+  from {
+    bottom: 0;
+    right: -30%;
+  }
+  to {
+    bottom: -60%;
+    right: -30%;
+  }
+}
+/* css/login.css */
+/* Finish Animate Login Page */
+
+/* Finish Login User Styles */
