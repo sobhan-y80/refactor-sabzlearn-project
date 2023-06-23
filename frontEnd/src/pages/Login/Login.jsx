@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 import InputBox from "../../Components/InputBox/InputBox";
 import Header from "../../Components/Header/Header";
@@ -29,7 +30,22 @@ const Login = () => {
     false
   );
 
-  console.log(formState);
+  const loginMeHandler = () => {
+    //   console.log(formState);
+    //   if (formState.isFormValid) {
+    //     const mainNewUserObj = {
+    //       username,
+    //       email,
+    //       password,
+    //       confirmPassword,
+    //       name,
+    //       phone,
+    //     };
+    //   } else {
+    //     toast("This is an error!");
+    //   }
+  };
+
   return (
     <>
       <Header></Header>
@@ -110,7 +126,11 @@ const Login = () => {
                   </a>
                 </div>
               </div>
-              <button id="login-btn" className="login-form__submit">
+              <button
+                id="login-btn"
+                className="login-form__submit"
+                onClick={loginMeHandler}
+              >
                 وارد شوید
               </button>
             </div>

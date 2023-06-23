@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import InputBox from "../../Components/InputBox/InputBox";
+import toast, { Toaster } from "react-hot-toast";
 
 import {
   requiredValidatior,
@@ -11,6 +12,7 @@ import {
 } from "../../Components/InputBox/Validation/Rules";
 
 import { useForm } from "../../Hooks/useForm";
+import { mainUrl } from "../../Utils/Utils";
 
 const Register = () => {
   const [formState, onInputHandler] = useForm(
@@ -39,7 +41,41 @@ const Register = () => {
     false
   );
 
-  console.log(formState);
+  const RegisterNewUser = () => {
+    console.log(formState);
+    if (formState.isFormValid) {
+      const mainNewUserObj = {
+        username: formState.inputs.username.value,
+        email: formState.inputs.email.value,
+        password: formState.inputs.password.value,
+        confirmPassword: formState.inputs.password.value,
+        name: formState.inputs.name.value,
+        phone: formState.inputs.phoneNumber.value,
+      };
+
+      console.log(mainNewUserObj);
+      console.log(`${mainUrl}/auth/register`);
+
+      fetch(`${mainUrl}/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(mainNewUserObj),
+      })
+        .then((res) => {
+          console.log(res);
+          res.json();
+        })
+        .then((data) => {
+          console.log(data);
+        });
+    } else {
+      toast.error("اطلاعات درست نیست !!");
+    }
+  };
+
+  // console.log(formState);
   return (
     <>
       <Header></Header>
@@ -100,7 +136,7 @@ const Register = () => {
                   placeHolder={`نام کاربری`}
                   validations={[
                     requiredValidatior(),
-                    minValidator(10),
+                    minValidator(5),
                     maxValidator(20),
                   ]}
                   onInputHandler={onInputHandler}
@@ -164,7 +200,11 @@ const Register = () => {
                   </label>
                 </div>
               </div>
-              <button className="login-form__submit" id="register-btn">
+              <button
+                onClick={RegisterNewUser}
+                className="login-form__submit"
+                id="register-btn"
+              >
                 ثبت نام
               </button>
             </div>
@@ -174,6 +214,7 @@ const Register = () => {
       </div>
       {/* <!-- Finish Main --> */}
       <Footer></Footer>
+      <Toaster></Toaster>
     </>
   );
 };
