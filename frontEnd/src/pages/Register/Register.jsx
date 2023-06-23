@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import InputBox from "../../Components/InputBox/InputBox";
+import toast, { Toaster } from "react-hot-toast";
+import { AuthContext } from "../../Context/AuthContext";
 
 import {
   requiredValidatior,
@@ -11,6 +13,8 @@ import {
 } from "../../Components/InputBox/Validation/Rules";
 
 import { useForm } from "../../Hooks/useForm";
+import { mainUrl } from "../../Utils/Utils";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [formState, onInputHandler] = useForm(
@@ -39,7 +43,38 @@ const Register = () => {
     false
   );
 
-  console.log(formState);
+  const authContext = useContext(AuthContext);
+
+  const RegisterNewUser = () => {
+    if (formState.isFormValid) {
+      const mainNewUserObj = {
+        username: formState.inputs.username.value,
+        email: formState.inputs.email.value,
+        password: formState.inputs.password.value,
+        confirmPassword: formState.inputs.password.value,
+        name: formState.inputs.name.value,
+        phone: formState.inputs.phoneNumber.value,
+      };
+
+      fetch(`${mainUrl}/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(mainNewUserObj),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log(data);
+          authContext.login(data.user, data.accessToken);
+          toast.success("خوش اومدییی ;)");
+        });
+    } else {
+      toast.error("اطلاعات درست نیست !!");
+    }
+  };
+
+  // console.log(formState);
   return (
     <>
       <Header></Header>
@@ -68,12 +103,12 @@ const Register = () => {
                 <span className="login-form__change-form-stutus-text">
                   قبلا اکانت ساختی !!؟
                 </span>
-                <a
-                  href="login.html"
+                <Link
+                  to="/Login"
                   className="login-form__change-form-stutus-link hpc__popular"
                 >
                   ورود
-                </a>
+                </Link>
               </div>
               <div className="login-form__box-inputs">
                 {/* <!-- Start Name --> */}
@@ -88,9 +123,9 @@ const Register = () => {
                   ]}
                   onInputHandler={onInputHandler}
                 >
-                  نام کاربری
-                  <span className="hpc__space-word">یا</span>
-                  ایمیل
+                  نام
+                  <p className="hpc__space-word">و</p>
+                  نام خانوادگی
                 </InputBox>
                 {/* <!-- Finish Name --> */}
 
@@ -100,7 +135,7 @@ const Register = () => {
                   placeHolder={`نام کاربری`}
                   validations={[
                     requiredValidatior(),
-                    minValidator(10),
+                    minValidator(5),
                     maxValidator(20),
                   ]}
                   onInputHandler={onInputHandler}
@@ -164,7 +199,11 @@ const Register = () => {
                   </label>
                 </div>
               </div>
-              <button className="login-form__submit" id="register-btn">
+              <button
+                onClick={RegisterNewUser}
+                className="login-form__submit"
+                id="register-btn"
+              >
                 ثبت نام
               </button>
             </div>
@@ -174,6 +213,7 @@ const Register = () => {
       </div>
       {/* <!-- Finish Main --> */}
       <Footer></Footer>
+      <Toaster></Toaster>
     </>
   );
 };

@@ -16,7 +16,6 @@ const validator = (value, validation) => {
       mainValue.length < validator.min && validationResualt.push(false);
     }
     if (validator.value === Rules.emailValue) {
-      console.log(testEmail(value));
       !testEmail(value) && validationResualt.push(false);
     }
   }

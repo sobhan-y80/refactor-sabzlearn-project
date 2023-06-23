@@ -17,6 +17,7 @@ const EmailInputType = ({
           onFocus={(e) => focusHandler(e)}
           onBlur={(e) => blurHandler(e)}
           value={value}
+          dir="ltr"
           id="login-form__email-input"
           type="email"
           className={`input-box__input ${className}`}

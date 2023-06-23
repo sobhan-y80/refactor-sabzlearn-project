@@ -197,6 +197,7 @@ img,
 }
 
 .hpc__space-word {
+  display: inline-block;
   color: #ffffff99;
   padding-inline: 1rem;
 }

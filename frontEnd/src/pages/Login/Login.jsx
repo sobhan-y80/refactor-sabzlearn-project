@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 import InputBox from "../../Components/InputBox/InputBox";
 import Header from "../../Components/Header/Header";
@@ -13,11 +14,13 @@ import {
 } from "../../Components/InputBox/Validation/Rules";
 
 import { useForm } from "../../Hooks/useForm";
+import { mainUrl } from "../../Utils/Utils";
+import { AuthContext } from "../../Context/AuthContext";
 
 const Login = () => {
   const [formState, onInputHandler] = useForm(
     {
-      username: {
+      identifier: {
         value: "",
         isValid: false,
       },
@@ -29,7 +32,46 @@ const Login = () => {
     false
   );
 
+  const authContext = useContext(AuthContext);
+
   console.log(formState);
+
+  const loginMeHandler = () => {
+    //   console.log(formState);
+    if (formState.isFormValid) {
+      const mainNewUserObj = {
+        identifier: formState.inputs.identifier.value,
+        password: formState.inputs.password.value,
+      };
+
+      fetch(`${mainUrl}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(mainNewUserObj),
+      })
+        .then((res) => {
+          if (!res.ok) {
+            toast.error("مشخصاتی که دادی جدید هستن");
+          } else {
+            toast.success("خوش برگشتییی ;-))");
+            return res.json();
+          }
+        })
+        .then((data) => {
+          console.log("lets gooooo", data.accessToken);
+          authContext.login({}, data.accessToken);
+        })
+        .catch((err) => {
+          // console.log(err);
+          toast.error("خطا در ورود به سایت :((");
+        });
+    } else {
+      toast.error("لطفا اطلاعات رو به درستی پر کن");
+    }
+  };
+
   return (
     <>
       <Header></Header>
@@ -65,14 +107,10 @@ const Login = () => {
               </div>
               <div className="login-form__box-inputs">
                 <InputBox
-                  id={`username`}
+                  id={`identifier`}
                   placeHolder={`نام کاربری`}
                   onInputHandler={onInputHandler}
-                  validations={[
-                    requiredValidatior(),
-                    minValidator(8),
-                    maxValidator(20),
-                  ]}
+                  validations={[requiredValidatior()]}
                 ></InputBox>
 
                 <InputBox
@@ -110,7 +148,11 @@ const Login = () => {
                   </a>
                 </div>
               </div>
-              <button id="login-btn" className="login-form__submit">
+              <button
+                id="login-btn"
+                className="login-form__submit"
+                onClick={loginMeHandler}
+              >
                 وارد شوید
               </button>
             </div>
@@ -120,6 +162,7 @@ const Login = () => {
       </div>
       {/* <!-- Finish Main --> */}
       <Footer></Footer>
+      <Toaster></Toaster>
     </>
   );
 };

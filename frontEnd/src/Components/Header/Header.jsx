@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext, useRef } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 import "./Header.css";
+import { AuthContext } from "../../Context/AuthContext";
 
 const Header = () => {
   const mobielMenuWrapper = useRef();
@@ -13,6 +14,9 @@ const Header = () => {
   const closeMenuMobileHandler = () => {
     mobielMenuWrapper.current.classList.remove("open");
   };
+
+  const authContext = useContext(AuthContext);
+  // console.log(authContext);
 
   return (
     <header className="header">
@@ -280,53 +284,67 @@ const Header = () => {
                     id="header__profile"
                     className="main-header__link main-header__profile cursor-pointer"
                   >
-                    <div className="main-header__account-btn">
-                      <span className="main-header__profile-name">sobhan</span>
-                      <span className="main-header__icon-wrapper">
-                        <i className="fa-solid fa-user main-header__profile-icon"></i>
-                      </span>
-                    </div>
-                    <ul
-                      id="dropdown__profile"
-                      className="main-header__dropdown"
-                    >
-                      <li className="main-header__item">
-                        <NavLink className="main-header__link">پیشخوان</NavLink>
-                      </li>
-                      <li className="main-header__item">
-                        <NavLink className="main-header__link">
-                          سفارش ها
-                        </NavLink>
-                      </li>
-                      <li className="main-header__item">
-                        <NavLink className="main-header__link">
-                          کیف پول من
-                        </NavLink>
-                      </li>
-                      <li className="main-header__item">
-                        <NavLink className="main-header__link">
-                          جزعیات حساب
-                        </NavLink>
-                      </li>
-                      <li className="main-header__item">
-                        <NavLink className="main-header__link">
-                          دوره های خریداری شده
-                        </NavLink>
-                      </li>
-                      <li className="main-header__item">
-                        <NavLink className="main-header__link">
-                          تیکت های پشتیبانی
-                        </NavLink>
-                      </li>
-                      <li className="main-header__item">
-                        <NavLink
-                          id="logout"
-                          className="main-header__link hpc__DANGER"
-                        >
-                          خروج از سیستم
-                        </NavLink>
-                      </li>
-                    </ul>
+                    {authContext.isLoggedIn ? (
+                      <div className="main-header__account-btn inline-block">
+                        <span className="main-header__profile-name">
+                          {authContext.userInfo.username}
+                        </span>
+                        <span className="main-header__icon-wrapper">
+                          <i className="fa-solid fa-user main-header__profile-icon"></i>
+                        </span>
+                      </div>
+                    ) : (
+                      <Link to="/Login" className="main-header__account-btn">
+                        <span className="main-header__profile-login-text">
+                          ورود / ثبت نام
+                        </span>
+                      </Link>
+                    )}
+                    {authContext.isLoggedIn && (
+                      <ul
+                        id="dropdown__profile"
+                        className="main-header__dropdown"
+                      >
+                        <li className="main-header__item">
+                          <NavLink className="main-header__link">
+                            پیشخوان
+                          </NavLink>
+                        </li>
+                        <li className="main-header__item">
+                          <NavLink className="main-header__link">
+                            سفارش ها
+                          </NavLink>
+                        </li>
+                        <li className="main-header__item">
+                          <NavLink className="main-header__link">
+                            کیف پول من
+                          </NavLink>
+                        </li>
+                        <li className="main-header__item">
+                          <NavLink className="main-header__link">
+                            جزعیات حساب
+                          </NavLink>
+                        </li>
+                        <li className="main-header__item">
+                          <NavLink className="main-header__link">
+                            دوره های خریداری شده
+                          </NavLink>
+                        </li>
+                        <li className="main-header__item">
+                          <NavLink className="main-header__link">
+                            تیکت های پشتیبانی
+                          </NavLink>
+                        </li>
+                        <li className="main-header__item">
+                          <NavLink
+                            id="logout"
+                            className="main-header__link hpc__DANGER"
+                          >
+                            خروج از سیستم
+                          </NavLink>
+                        </li>
+                      </ul>
+                    )}
                   </div>
                 </li>
                 <li className="main-header__item">

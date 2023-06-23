@@ -9,11 +9,9 @@ import FileInputType from "./FileInputType/FileInputType";
 import EmailInputType from "./EmailInputType/EmailInputType";
 
 const inputReducer = (state, action) => {
-  // console.log(state, action);
   switch (action.type) {
     case "CHANGE":
       {
-        // console.log(action.validation);
         return {
           ...state,
           value: action.value,
@@ -36,8 +34,6 @@ const InputBox = ({
   validations,
   onInputHandler,
 }) => {
-  // console.log(validations);
-
   const inputFocusHandler = (e) => {
     e.target.classList.add("active");
   };
@@ -53,7 +49,6 @@ const InputBox = ({
   const { value, isValid } = mainInput;
 
   useEffect(() => {
-    console.log(id);
     onInputHandler(id, value, isValid);
   }, [value]);
 
