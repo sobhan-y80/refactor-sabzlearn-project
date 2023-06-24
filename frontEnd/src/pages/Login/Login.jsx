@@ -32,6 +32,7 @@ const Login = () => {
     false
   );
 
+<<<<<<< HEAD
   const authContext = useContext(AuthContext);
 
   console.log(formState);
@@ -70,6 +71,22 @@ const Login = () => {
     } else {
       toast.error("لطفا اطلاعات رو به درستی پر کن");
     }
+=======
+  const loginMeHandler = () => {
+    //   console.log(formState);
+    //   if (formState.isFormValid) {
+    //     const mainNewUserObj = {
+    //       username,
+    //       email,
+    //       password,
+    //       confirmPassword,
+    //       name,
+    //       phone,
+    //     };
+    //   } else {
+    //     toast("This is an error!");
+    //   }
+>>>>>>> 72694425bd00ff2dd90dd8aec4a1952dada6e7ca
   };
 
   return (
