@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
 import InputBox from "../../Components/InputBox/InputBox";
@@ -15,9 +15,10 @@ import {
 
 import { useForm } from "../../Hooks/useForm";
 import { mainUrl } from "../../Utils/Utils";
-import { AuthContext } from "../../Context/AuthContext";
+import AuthContext from "../../Context/AuthContext";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formState, onInputHandler] = useForm(
     {
       identifier: {
@@ -32,61 +33,34 @@ const Login = () => {
     false
   );
 
-<<<<<<< HEAD
   const authContext = useContext(AuthContext);
+  console.log(authContext);
 
-  console.log(formState);
-
-  const loginMeHandler = () => {
-    //   console.log(formState);
+  const loginMeHandler = async () => {
     if (formState.isFormValid) {
       const mainNewUserObj = {
         identifier: formState.inputs.identifier.value,
         password: formState.inputs.password.value,
       };
 
-      fetch(`${mainUrl}/auth/login`, {
+      await fetch(`${mainUrl}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(mainNewUserObj),
       })
-        .then((res) => {
-          if (!res.ok) {
-            toast.error("مشخصاتی که دادی جدید هستن");
-          } else {
-            toast.success("خوش برگشتییی ;-))");
-            return res.json();
-          }
-        })
+        .then((res) => res.json())
         .then((data) => {
-          console.log("lets gooooo", data.accessToken);
+          console.log(data);
           authContext.login({}, data.accessToken);
         })
         .catch((err) => {
-          // console.log(err);
           toast.error("خطا در ورود به سایت :((");
         });
     } else {
       toast.error("لطفا اطلاعات رو به درستی پر کن");
     }
-=======
-  const loginMeHandler = () => {
-    //   console.log(formState);
-    //   if (formState.isFormValid) {
-    //     const mainNewUserObj = {
-    //       username,
-    //       email,
-    //       password,
-    //       confirmPassword,
-    //       name,
-    //       phone,
-    //     };
-    //   } else {
-    //     toast("This is an error!");
-    //   }
->>>>>>> 72694425bd00ff2dd90dd8aec4a1952dada6e7ca
   };
 
   return (

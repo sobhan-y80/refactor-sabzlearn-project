@@ -1,26 +1,18 @@
 import React, { useContext } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { Link } from "react-router-dom";
+import { mainUrl } from "../../Utils/Utils";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import InputBox from "../../Components/InputBox/InputBox";
-import toast, { Toaster } from "react-hot-toast";
-<<<<<<< HEAD
-import { AuthContext } from "../../Context/AuthContext";
-=======
->>>>>>> 72694425bd00ff2dd90dd8aec4a1952dada6e7ca
-
+import { useForm } from "../../Hooks/useForm";
 import {
   requiredValidatior,
   maxValidator,
   emailValidator,
   minValidator,
 } from "../../Components/InputBox/Validation/Rules";
-
-import { useForm } from "../../Hooks/useForm";
-import { mainUrl } from "../../Utils/Utils";
-<<<<<<< HEAD
-import { Link } from "react-router-dom";
-=======
->>>>>>> 72694425bd00ff2dd90dd8aec4a1952dada6e7ca
+import AuthContext from "../../Context/AuthContext";
 
 const Register = () => {
   const [formState, onInputHandler] = useForm(
@@ -49,14 +41,10 @@ const Register = () => {
     false
   );
 
-<<<<<<< HEAD
   const authContext = useContext(AuthContext);
+  console.log(authContext);
 
   const RegisterNewUser = () => {
-=======
-  const RegisterNewUser = () => {
-    console.log(formState);
->>>>>>> 72694425bd00ff2dd90dd8aec4a1952dada6e7ca
     if (formState.isFormValid) {
       const mainNewUserObj = {
         username: formState.inputs.username.value,
@@ -67,12 +55,6 @@ const Register = () => {
         phone: formState.inputs.phoneNumber.value,
       };
 
-<<<<<<< HEAD
-=======
-      console.log(mainNewUserObj);
-      console.log(`${mainUrl}/auth/register`);
-
->>>>>>> 72694425bd00ff2dd90dd8aec4a1952dada6e7ca
       fetch(`${mainUrl}/auth/register`, {
         method: "POST",
         headers: {
@@ -80,27 +62,16 @@ const Register = () => {
         },
         body: JSON.stringify(mainNewUserObj),
       })
-<<<<<<< HEAD
         .then((res) => res.json())
         .then((data) => {
-          // console.log(data);
           authContext.login(data.user, data.accessToken);
           toast.success("خوش اومدییی ;)");
-=======
-        .then((res) => {
-          console.log(res);
-          res.json();
-        })
-        .then((data) => {
-          console.log(data);
->>>>>>> 72694425bd00ff2dd90dd8aec4a1952dada6e7ca
         });
     } else {
       toast.error("اطلاعات درست نیست !!");
     }
   };
 
-  // console.log(formState);
   return (
     <>
       <Header></Header>

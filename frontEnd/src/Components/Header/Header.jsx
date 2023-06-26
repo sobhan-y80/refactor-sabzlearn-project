@@ -2,7 +2,7 @@ import React, { useContext, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 import "./Header.css";
-import { AuthContext } from "../../Context/AuthContext";
+import AuthContext from "../../Context/AuthContext";
 
 const Header = () => {
   const mobielMenuWrapper = useRef();
@@ -16,7 +16,6 @@ const Header = () => {
   };
 
   const authContext = useContext(AuthContext);
-  // console.log(authContext);
 
   return (
     <header className="header">

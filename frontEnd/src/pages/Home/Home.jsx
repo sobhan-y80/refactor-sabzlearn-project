@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./Home.css";
 
 import Header from "../../Components/Header/Header";
@@ -13,8 +13,13 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { Autoplay, EffectCoverflow, Pagination } from "swiper";
 // Finish Import Swiper
+import AuthContext from "../../Context/AuthContext";
 
 const Home = () => {
+  const authContext = useContext(AuthContext);
+  useEffect(() => {
+    console.log(authContext);
+  }, []);
   return (
     <>
       <Header></Header>
