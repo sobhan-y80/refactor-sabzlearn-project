@@ -11,7 +11,6 @@ const Header = () => {
   const mobielMenuWrapper = useRef();
   const [topBarMenu, setTopBarMenu] = useState([]);
   const [menus, setMenus] = useState([]);
-  console.log(menus);
 
   const menuMobileHandler = () => {
     mobielMenuWrapper.current.classList.add("open");

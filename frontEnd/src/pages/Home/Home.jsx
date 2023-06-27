@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Home.css";
 
 import Header from "../../Components/Header/Header";
@@ -14,10 +14,30 @@ import "swiper/css/pagination";
 import { Autoplay, EffectCoverflow, Pagination } from "swiper";
 // Finish Import Swiper
 import AuthContext from "../../Context/AuthContext";
+import { mainUrl } from "../../Utils/Utils";
 
 const Home = () => {
   const authContext = useContext(AuthContext);
-  console.log(authContext);
+  const [presellsCourses, setPresellsCourses] = useState([]);
+  const [popularCourses, setPopularCourses] = useState([]);
+
+  const presellsRender = () => {
+    fetch(`${mainUrl}/courses/presell`)
+      .then((res) => res.json())
+      .then((presellsData) => setPresellsCourses(presellsData));
+  };
+
+  const popularsRender = () => {
+    fetch(`${mainUrl}/courses/popular`)
+      .then((res) => res.json())
+      .then((popularData) => setPopularCourses(popularData));
+  };
+
+  useEffect(() => {
+    presellsRender();
+    popularsRender();
+  }, []);
+
   return (
     <>
       <Header></Header>
@@ -76,28 +96,28 @@ const Home = () => {
                 className="grid gap-4 grid-cols-2 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 "
               >
                 <div className="grid-cols-1 flex justify-center items-center">
-                  <CourseBox></CourseBox>
+                  {/* <CourseBox></CourseBox> */}
                 </div>
                 <div className="grid-cols-1 flex justify-center items-center">
-                  <CourseBox></CourseBox>
+                  {/* <CourseBox></CourseBox> */}
                 </div>
                 <div className="grid-cols-1 flex justify-center items-center">
-                  <CourseBox></CourseBox>
+                  {/* <CourseBox></CourseBox> */}
                 </div>
                 <div className="grid-cols-1 flex justify-center items-center">
-                  <CourseBox></CourseBox>
+                  {/* <CourseBox></CourseBox> */}
                 </div>
                 <div className="grid-cols-1 flex justify-center items-center">
-                  <CourseBox></CourseBox>
+                  {/* <CourseBox></CourseBox> */}
                 </div>
                 <div className="grid-cols-1 flex justify-center items-center">
-                  <CourseBox></CourseBox>
+                  {/* <CourseBox></CourseBox> */}
                 </div>
                 <div className="grid-cols-1 flex justify-center items-center">
-                  <CourseBox></CourseBox>
+                  {/* <CourseBox></CourseBox> */}
                 </div>
                 <div className="grid-cols-1 flex justify-center items-center">
-                  <CourseBox></CourseBox>
+                  {/* <CourseBox></CourseBox> */}
                 </div>
               </div>
             </div>
@@ -141,21 +161,11 @@ const Home = () => {
                     modules={[Autoplay, EffectCoverflow, Pagination]}
                     className="mySwiper"
                   >
-                    <SwiperSlide>
-                      <CourseBox smalMode={true} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <CourseBox smalMode={true} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <CourseBox smalMode={true} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <CourseBox smalMode={true} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <CourseBox smalMode={true} />
-                    </SwiperSlide>
+                    {popularCourses.map((course) => (
+                      <SwiperSlide key={course._id}>
+                        <CourseBox smalMode={true} {...course} />
+                      </SwiperSlide>
+                    ))}
                   </Swiper>
                 </div>
               </div>
@@ -193,21 +203,11 @@ const Home = () => {
                     modules={[Autoplay, EffectCoverflow, Pagination]}
                     className="mySwiper"
                   >
-                    <SwiperSlide>
-                      <CourseBox smalMode={true} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <CourseBox smalMode={true} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <CourseBox smalMode={true} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <CourseBox smalMode={true} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <CourseBox smalMode={true} />
-                    </SwiperSlide>
+                    {presellsCourses.map((course) => (
+                      <SwiperSlide key={course._id}>
+                        <CourseBox smalMode={true} {...course} />
+                      </SwiperSlide>
+                    ))}
                   </Swiper>
                 </div>
               </div>
@@ -345,7 +345,7 @@ const Home = () => {
                 modules={[Autoplay, EffectCoverflow, Pagination]}
                 className="mySwiper"
               >
-                <SwiperSlide>
+                {/* <SwiperSlide>
                   <CourseBox smalMode={true} />
                 </SwiperSlide>
                 <SwiperSlide>
@@ -374,7 +374,7 @@ const Home = () => {
                 </SwiperSlide>
                 <SwiperSlide>
                   <CourseBox smalMode={true} />
-                </SwiperSlide>
+                </SwiperSlide> */}
               </Swiper>
             </div>
           </div>
