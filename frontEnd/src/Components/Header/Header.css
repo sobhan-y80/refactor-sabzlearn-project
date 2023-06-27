@@ -26,9 +26,10 @@
 }
 
 .top-bar__link {
-  padding: 0 0.7rem;
-  font-size: 1.7rem;
-  word-spacing: 0.2rem;
+  padding: 0 1rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
 }
 
 .top-bar__left {
@@ -42,11 +43,6 @@
 
 .top-bar__social-media-menu {
   display: flex;
-}
-
-.top-bar__link {
-  display: flex;
-  align-items: center;
 }
 
 .top-bar__left .top-bar__link:hover {
@@ -111,7 +107,10 @@
 }
 
 .main-header__dropdown > .main-header__item {
-  padding: 0.5rem 2.5rem;
+  padding: 1rem 2.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #dropdown__profile:has(#logout:hover) {
@@ -129,7 +128,8 @@
   border-bottom: 0.2rem solid var(--primary-color);
   transition: all 150ms ease-in-out;
   border-radius: 1.5rem;
-  width: 24rem;
+  width: max-content;
+  max-width: 50rem;
   z-index: 1;
   padding: 1rem 0;
   opacity: 0;
@@ -440,6 +440,8 @@
 
 .landing-hader__search-btn {
   width: 15%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .landing-header__serach-icon {
@@ -457,10 +459,6 @@
 }
 /* Medium devices (landscape tablets, 992px and down) */
 @media only screen and (max-width: 992px) {
-  .top-bar__link {
-    font-size: 1.4rem;
-  }
-
   .main-header__content {
     padding: 0;
   }

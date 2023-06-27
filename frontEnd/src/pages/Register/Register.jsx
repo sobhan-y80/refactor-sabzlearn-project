@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { mainUrl } from "../../Utils/Utils";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
@@ -15,6 +15,7 @@ import {
 import AuthContext from "../../Context/AuthContext";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formState, onInputHandler] = useForm(
     {
       name: {
@@ -44,7 +45,7 @@ const Register = () => {
   const authContext = useContext(AuthContext);
   console.log(authContext);
 
-  const RegisterNewUser = () => {
+  const RegisterNewUser = async () => {
     if (formState.isFormValid) {
       const mainNewUserObj = {
         username: formState.inputs.username.value,
@@ -55,7 +56,7 @@ const Register = () => {
         phone: formState.inputs.phoneNumber.value,
       };
 
-      fetch(`${mainUrl}/auth/register`, {
+      await fetch(`${mainUrl}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,9 +64,13 @@ const Register = () => {
         body: JSON.stringify(mainNewUserObj),
       })
         .then((res) => res.json())
-        .then((data) => {
+        .then(async (data) => {
           authContext.login(data.user, data.accessToken);
           toast.success("خوش اومدییی ;)");
+          setTimeout(() => {
+            console.log("chekc the settime out");
+          }, 1000);
+          navigate("/");
         });
     } else {
       toast.error("اطلاعات درست نیست !!");

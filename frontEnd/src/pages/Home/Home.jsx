@@ -17,9 +17,7 @@ import AuthContext from "../../Context/AuthContext";
 
 const Home = () => {
   const authContext = useContext(AuthContext);
-  useEffect(() => {
-    console.log(authContext);
-  }, []);
+  console.log(authContext);
   return (
     <>
       <Header></Header>

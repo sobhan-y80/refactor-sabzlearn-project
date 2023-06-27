@@ -16,13 +16,15 @@ function App() {
   const [token, setToken] = useState(null);
   const [userInfo, setUserInfo] = useState({});
 
-  const login = useCallback((userInfo, token) => {
-    console.log("token");
-    setIsLoggedIn(true);
-    setUserInfo(userInfo);
-    setToken(token);
-    localStorage.setItem("token", JSON.stringify({ token }));
-  }, []);
+  const login = useCallback(
+    (userInfo, token) => {
+      setIsLoggedIn(true);
+      setUserInfo(userInfo);
+      setToken(token);
+      localStorage.setItem("token", JSON.stringify({ token }));
+    },
+    [token]
+  );
 
   const logout = useCallback(() => {}, []);
 

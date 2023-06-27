@@ -54,6 +54,7 @@ const Login = () => {
         .then((data) => {
           console.log(data);
           authContext.login({}, data.accessToken);
+          navigate("/");
         })
         .catch((err) => {
           toast.error("خطا در ورود به سایت :((");

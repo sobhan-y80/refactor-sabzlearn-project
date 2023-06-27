@@ -1,11 +1,17 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+
+import { mainUrl } from "../../Utils/Utils";
 
 import "./Header.css";
 import AuthContext from "../../Context/AuthContext";
+import useShuffled from "../../Hooks/useShuffled";
 
 const Header = () => {
   const mobielMenuWrapper = useRef();
+  const [topBarMenu, setTopBarMenu] = useState([]);
+  const [menus, setMenus] = useState([]);
+  console.log(menus);
 
   const menuMobileHandler = () => {
     mobielMenuWrapper.current.classList.add("open");
@@ -14,6 +20,24 @@ const Header = () => {
   const closeMenuMobileHandler = () => {
     mobielMenuWrapper.current.classList.remove("open");
   };
+
+  const topBarRender = () => {
+    fetch(`${mainUrl}/menus/topbar`)
+      .then((res) => res.json())
+      .then((topbarData) => setTopBarMenu(topbarData));
+  };
+  let shuffledTopBarItems = useShuffled(topBarMenu);
+
+  const menuRender = () => {
+    fetch(`${mainUrl}/menus`)
+      .then((res) => res.json())
+      .then((menuData) => setMenus(menuData));
+  };
+
+  useEffect(() => {
+    topBarRender();
+    menuRender();
+  }, []);
 
   const authContext = useContext(AuthContext);
 
@@ -24,80 +48,62 @@ const Header = () => {
           <div className="top-bar__content">
             <div className="top-bar__right animate__animated animate__fadeInRightBig">
               <ul id="top-bar__course-menu" className="top-bar__menu">
-                <li className="top-bar__item">
-                  <NavLink href="${item.href}" className="top-bar__link">
-                    ;,s
-                  </NavLink>
-                </li>
-                <li className="top-bar__item">
-                  <NavLink href="${item.href}" className="top-bar__link">
-                    ;,s
-                  </NavLink>
-                </li>
-                <li className="top-bar__item">
-                  <NavLink href="${item.href}" className="top-bar__link">
-                    ;,s
-                  </NavLink>
-                </li>
-                <li className="top-bar__item">
-                  <NavLink href="${item.href}" className="top-bar__link">
-                    ;,s
-                  </NavLink>
-                </li>
-                <li className="top-bar__item">
-                  <NavLink href="${item.href}" className="top-bar__link">
-                    ;,s
-                  </NavLink>
-                </li>
+                {[...shuffledTopBarItems].slice(0, 4).map((item) => (
+                  <li key={item._id} className="top-bar__item">
+                    <Link to={item.href} className="top-bar__link">
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="top-bar__left animate__animated animate__fadeInLeftBig">
               <div className="top-bar__email">
-                <NavLink
+                <Link
                   title="email"
-                  href=""
+                  to=""
                   className="top-bar__email-text top-bar__link"
                 >
                   soobhanybi@gmail.com
-                </NavLink>
+                </Link>
               </div>
               <div className="top-bar__social-media">
                 <ul className="top-bar__social-media-menu">
                   <li className="top-bar__item">
-                    <NavLink
+                    <Link
                       title="instagram"
-                      href="#instagram"
+                      to="#instagram"
                       className="top-bar__social-link-icon top-bar__link"
                     >
                       <i className="fa-brands fa-instagram top-bar__instagram-icon"></i>
-                    </NavLink>
+                    </Link>
                   </li>
                   <li className="top-bar__item">
-                    <NavLink
+                    <Link
                       title="telegram"
-                      href="#telegram"
+                      to="#telegram"
                       className="top-bar__social-link-icon top-bar__link"
                     >
                       <i className="fa-brands fa-telegram top-bar__telegram-icon"></i>
-                    </NavLink>
+                    </Link>
                   </li>
                   <li className="top-bar__item">
-                    <NavLink
+                    <Link
                       title="youtube"
-                      href="#youtube"
+                      to="#youtube"
                       className="top-bar__social-link-icon top-bar__link"
                     >
                       <i className="fa-brands fa-youtube top-bar__youtube-icon"></i>
-                    </NavLink>
+                    </Link>
                   </li>
                   <li className="top-bar__item">
-                    <NavLink
+                    <Link
                       title="twitter"
-                      href="#twitter"
+                      to="#twitter"
                       className="top-bar__social-link-icon top-bar__link"
                     >
                       <i className="fa-brands fa-twitter top-bar__twitter-icon"></i>
-                    </NavLink>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -159,26 +165,11 @@ const Header = () => {
                         </button>
                       </div>
                     </li>
-                    <li className="main-header__item">
-                      <NavLink className="main-header__link">فرانت اند</NavLink>
-                    </li>
-                    <li className="main-header__item">
-                      <NavLink className="main-header__link">امنیت</NavLink>
-                    </li>
-                    <li className="main-header__item">
-                      <NavLink className="main-header__link">مقالات</NavLink>
-                    </li>
-                    <li className="main-header__item">
-                      <NavLink className="main-header__link">پایتون</NavLink>
-                    </li>
-                    <li className="main-header__item">
-                      <NavLink className="main-header__link">
-                        مهارت های نرم
-                      </NavLink>
-                    </li>
-                    <li className="main-header__item">
-                      <NavLink className="main-header__link">فروشگاه</NavLink>
-                    </li>
+                    {menus.map((menu) => (
+                      <li key={menu._id} className="main-header__item">
+                        <Link className="main-header__link">{menu.title}</Link>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </li>
@@ -196,64 +187,36 @@ const Header = () => {
                 id="menu__wrapper"
                 className="main-header__menu main-header__course-menu"
               >
-                <li className="main-header__item">
-                  <NavLink to="/Product" className="main-header__link">
-                    فرانت اند
-                    <span className="main-header__icon-wrapper">
-                      <i className="fa-solid fa-angle-down main-header__link-icon"></i>
-                    </span>
-                  </NavLink>
-                </li>
-                <li className="main-header__item">
-                  <NavLink className="main-header__link">
-                    امنیت
-                    <span className="main-header__icon-wrapper">
-                      <i className="fa-solid fa-angle-down main-header__link-icon"></i>
-                    </span>
-                  </NavLink>
-                </li>
-                <li className="main-header__item">
-                  <NavLink className="main-header__link">
-                    مقالات
-                    <span className="main-header__icon-wrapper">
-                      <i className="fa-solid fa-angle-down main-header__link-icon"></i>
-                    </span>
-                  </NavLink>
-                </li>
-                <li className="main-header__item">
-                  <NavLink className="main-header__link">
-                    پایتون
-                    <span className="main-header__icon-wrapper">
-                      <i className="fa-solid fa-angle-down main-header__link-icon"></i>
-                    </span>
-                  </NavLink>
-                </li>
-                <li className="main-header__item">
-                  <NavLink className="main-header__link">
-                    مهارت های نرم
-                    <span className="main-header__icon-wrapper">
-                      <i className="fa-solid fa-angle-down main-header__link-icon"></i>
-                    </span>
-                  </NavLink>
-                </li>
-                <li className="main-header__item">
-                  <NavLink className="main-header__link">فروشگاه</NavLink>
-                </li>
-
-                <ul className="main-header__dropdown">
-                  <li className="main-header__item">
-                    <NavLink className="main-header__link">1</NavLink>
+                {menus.map((menu) => (
+                  <li key={menu._id} className="main-header__item">
+                    <Link to={menu.href} className="main-header__link">
+                      {menu.title}
+                      {menu.submenus.length ? (
+                        <span className="main-header__icon-wrapper">
+                          <i className="fa-solid fa-angle-down main-header__link-icon"></i>
+                        </span>
+                      ) : (
+                        ""
+                      )}
+                    </Link>
+                    {menu.submenus.length ? (
+                      <ul className="main-header__dropdown">
+                        {menu.submenus.map((submenu) => (
+                          <li key={submenu._id} className="main-header__item">
+                            <Link
+                              to={submenu.href}
+                              className="main-header__link "
+                            >
+                              {submenu.title}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      ""
+                    )}
                   </li>
-                  <li className="main-header__item">
-                    <NavLink className="main-header__link">3</NavLink>
-                  </li>
-                  <li className="main-header__item">
-                    <NavLink className="main-header__link">4</NavLink>
-                  </li>
-                  <li className="main-header__item">
-                    <NavLink className="main-header__link">5</NavLink>
-                  </li>
-                </ul>
+                ))}
               </ul>
               <div className="main-header__search-wrapper">
                 <div
@@ -284,8 +247,11 @@ const Header = () => {
                     className="main-header__link main-header__profile cursor-pointer"
                   >
                     {authContext.isLoggedIn ? (
-                      <div className="main-header__account-btn inline-block">
-                        <span className="main-header__profile-name">
+                      <div
+                        className="main-header__account-btn flex
+                      "
+                      >
+                        <span className="main-header__profile-name truncate max-w-[10rem]">
                           {authContext.userInfo.username}
                         </span>
                         <span className="main-header__icon-wrapper">
