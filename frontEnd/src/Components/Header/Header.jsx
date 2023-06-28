@@ -311,18 +311,20 @@ const Header = () => {
                     )}
                   </div>
                 </li>
-                <li className="main-header__item">
-                  <div className="main-header__link main-header__cart-shopping">
-                    <span className="main-header__icon-wrapper">
-                      <i className="fa-solid fa-wallet main-header__cart-shop-icon"></i>
-                    </span>
-                    <ul className="main-header__dropdown">
-                      <li className="main-header__item">
-                        محصولی در سبد خرید موجود نیست
-                      </li>
-                    </ul>
-                  </div>
-                </li>
+                {authContext.isLoggedIn && (
+                  <li className="main-header__item">
+                    <div className="main-header__link main-header__cart-shopping">
+                      <span className="main-header__icon-wrapper">
+                        <i className="fa-solid fa-wallet main-header__cart-shop-icon"></i>
+                      </span>
+                      <ul className="main-header__dropdown">
+                        <li className="main-header__item">
+                          محصولی در سبد خرید موجود نیست
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                )}
               </ul>
             </div>
           </div>

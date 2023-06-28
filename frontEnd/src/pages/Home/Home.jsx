@@ -12,6 +12,7 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { Autoplay, EffectCoverflow, Pagination } from "swiper";
+import ArticleBox from "../../Components/ArticleBox/ArticleBox";
 // Finish Import Swiper
 
 const Home = () => {
@@ -19,6 +20,7 @@ const Home = () => {
   const [allCourses, setAllCourses] = useState([]);
   const [presellsCourses, setPresellsCourses] = useState([]);
   const [popularCourses, setPopularCourses] = useState([]);
+  const [allArticle, setAllArticle] = useState([]);
 
   const allCoursesRender = () => {
     fetch(`${mainUrl}/courses`)
@@ -38,10 +40,19 @@ const Home = () => {
       .then((popularData) => setPopularCourses(popularData));
   };
 
+  const allArticleRender = () => {
+    fetch(`${mainUrl}/articles`)
+      .then((res) => res.json())
+      .then((articleData) => setAllArticle(articleData));
+  };
+
+  console.log(allArticle);
+
   useEffect(() => {
     allCoursesRender();
     presellsRender();
     popularsRender();
+    allArticleRender();
   }, []);
 
   return (
@@ -309,61 +320,38 @@ const Home = () => {
             id="articles__content"
             className="articles__content xl:flex items-center justify-center"
           >
-            <div className="articles__stage px-0 md:px-80 xl:max-w-[1024px]">
-              <Swiper
-                effect={"coverflow"}
-                grabCursor={true}
-                centeredSlides={true}
-                slidesPerView={2}
-                spaceBetween={10}
-                coverflowEffect={{
-                  rotate: 50,
-                  stretch: 0,
-                  depth: 100,
-                  modifier: 1,
-                  slideShadows: true,
-                }}
-                autoplay={{
-                  delay: 2500,
-                  disableOnInteraction: false,
-                  pauseOnMouseEnter: true,
-                }}
-                pagination={true}
-                modules={[Autoplay, EffectCoverflow, Pagination]}
-                className="mySwiper"
-              >
-                {/* <SwiperSlide>
-                  <CourseBox smalMode={true} />
-                </SwiperSlide>
+            <Swiper
+              effect={"coverflow"}
+              grabCursor={true}
+              centeredSlides={true}
+              slidesPerView={2}
+              spaceBetween={10}
+              coverflowEffect={{
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+              }}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              pagination={true}
+              modules={[Autoplay, EffectCoverflow, Pagination]}
+              className="mySwiper"
+            >
+              {allArticle.map((article) => (
                 <SwiperSlide>
-                  <CourseBox smalMode={true} />
+                  <ArticleBox
+                    key={article._id}
+                    {...article}
+                    smalMode={true}
+                  ></ArticleBox>
                 </SwiperSlide>
-                <SwiperSlide>
-                  <CourseBox smalMode={true} />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <CourseBox smalMode={true} />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <CourseBox smalMode={true} />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <CourseBox smalMode={true} />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <CourseBox smalMode={true} />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <CourseBox smalMode={true} />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <CourseBox smalMode={true} />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <CourseBox smalMode={true} />
-                </SwiperSlide> */}
-              </Swiper>
-            </div>
+              ))}
+            </Swiper>
           </div>
         </div>
       </div>

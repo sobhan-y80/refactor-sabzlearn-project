@@ -40,7 +40,6 @@ function PaginationCustom({ CurentPage, pageItemCount, arrays, children }) {
 
   useEffect(() => {
     updatePagination();
-    console.log(curentPage);
   }, [arrays, curentPage]);
 
   return (
