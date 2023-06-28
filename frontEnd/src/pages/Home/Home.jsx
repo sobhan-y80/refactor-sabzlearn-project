@@ -1,25 +1,30 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Home.css";
-
+import AuthContext from "../../Context/AuthContext";
+import { mainUrl } from "../../Utils/Utils";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import CourseBox from "../../Components/CourseBox/CourseBox";
-
+import PaginationCustom from "../../Components/Pagination/Pagination";
 // Start Import Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { Autoplay, EffectCoverflow, Pagination } from "swiper";
 // Finish Import Swiper
-import AuthContext from "../../Context/AuthContext";
-import { mainUrl } from "../../Utils/Utils";
 
 const Home = () => {
   const authContext = useContext(AuthContext);
+  const [allCourses, setAllCourses] = useState([]);
   const [presellsCourses, setPresellsCourses] = useState([]);
   const [popularCourses, setPopularCourses] = useState([]);
+
+  const allCoursesRender = () => {
+    fetch(`${mainUrl}/courses`)
+      .then((res) => res.json())
+      .then((allCoursesData) => setAllCourses(allCoursesData));
+  };
 
   const presellsRender = () => {
     fetch(`${mainUrl}/courses/presell`)
@@ -34,6 +39,7 @@ const Home = () => {
   };
 
   useEffect(() => {
+    allCoursesRender();
     presellsRender();
     popularsRender();
   }, []);
@@ -95,30 +101,11 @@ const Home = () => {
                 id="courses__container"
                 className="grid gap-4 grid-cols-2 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 "
               >
-                <div className="grid-cols-1 flex justify-center items-center">
-                  {/* <CourseBox></CourseBox> */}
-                </div>
-                <div className="grid-cols-1 flex justify-center items-center">
-                  {/* <CourseBox></CourseBox> */}
-                </div>
-                <div className="grid-cols-1 flex justify-center items-center">
-                  {/* <CourseBox></CourseBox> */}
-                </div>
-                <div className="grid-cols-1 flex justify-center items-center">
-                  {/* <CourseBox></CourseBox> */}
-                </div>
-                <div className="grid-cols-1 flex justify-center items-center">
-                  {/* <CourseBox></CourseBox> */}
-                </div>
-                <div className="grid-cols-1 flex justify-center items-center">
-                  {/* <CourseBox></CourseBox> */}
-                </div>
-                <div className="grid-cols-1 flex justify-center items-center">
-                  {/* <CourseBox></CourseBox> */}
-                </div>
-                <div className="grid-cols-1 flex justify-center items-center">
-                  {/* <CourseBox></CourseBox> */}
-                </div>
+                <PaginationCustom
+                  arrays={allCourses}
+                  CurentPage={1}
+                  pageItemCount={4}
+                ></PaginationCustom>
               </div>
             </div>
           </div>

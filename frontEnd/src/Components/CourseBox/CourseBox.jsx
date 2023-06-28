@@ -2,9 +2,10 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 import "./CourseBox.css";
+import { mainUrl } from "../../Utils/Utils";
 
 const CourseBox = ({ smalMode, ...props }) => {
-  console.log(props);
+  // console.log(props);
   return (
     <div className="course-box">
       <div className="course-box__img-wrapper">
@@ -12,7 +13,8 @@ const CourseBox = ({ smalMode, ...props }) => {
           <img
             className="course-box__img inline-block"
             // src="images/courses/jango.png"
-            src={`http://localhost:4000/v1/courses/covers/${props.cover}`}
+
+            src={`http://localhost:4000/courses/covers/${props.cover}`}
             width="100%"
             alt="course img"
           />
@@ -38,14 +40,20 @@ const CourseBox = ({ smalMode, ...props }) => {
           }`}
         >
           <span className="course-box__price hpc__off">
-            <span className="course-box__price-number">1,000,000</span>
+            <span className="course-box__price-number">
+              {(props.price + 1_000_000).toLocaleString()}
+            </span>
             <span className="course-box__price-text">تومان</span>
           </span>
           <span
             className={`course-box__price-amount ${smalMode ? "text-xl" : ""}`}
           >
-            <span className="course-box__price-amount-number">500,000</span>
-            <span className="course-box__price-amount-text">تومان</span>
+            <span className="course-box__price-amount-number">
+              {props.price !== 0 ? props.price.toLocaleString() : "رایگان"}
+            </span>
+            <span className="course-box__price-amount-text">
+              {props.price !== 0 ? "تومان" : ""}
+            </span>
           </span>
         </div>
         <div className="course-box__student-wrapper col-span-2 w-full sm:col-span-1 sm:w-auto">
@@ -54,9 +62,11 @@ const CourseBox = ({ smalMode, ...props }) => {
               smalMode ? "text-lg" : ""
             }`}
           >
-            1,100
+            {props.registers ? props.registers : "دانشجو ندارد"}
           </span>
-          <span className="course-box__studnet-name">دانشجو</span>
+          <span className="course-box__studnet-name text-sm">
+            {props.registers ? "دانشجو" : ""}
+          </span>
         </div>
       </div>
     </div>

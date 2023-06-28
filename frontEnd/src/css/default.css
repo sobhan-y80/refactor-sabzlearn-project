@@ -81,6 +81,36 @@ img,
   color: var(--white-color);
 }
 
+.global-pagination {
+  margin: 2rem 0;
+}
+
+.global__pagination-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.global__pagination-link {
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  border: 2px solid var(--primary-color);
+  background-color: var(--primary-color);
+}
+
+.global__pagination-link:is(.active) {
+  color: var(--white-color);
+  background-color: transparent;
+}
+
+.global__pagination-item:hover .global__pagination-link:is(.active) {
+  color: unset;
+}
+
+.global__pagination-item:hover .global__pagination-link {
+  color: var(--dark-color);
+}
 /* Finish Global SearchBar Style */
 /* Start Helper Classes */
 .hpc__center {
