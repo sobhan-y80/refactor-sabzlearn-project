@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
-import { mainUrl } from "../../Utils/Utils";
+import { mainUrlApi } from "../../Utils/Utils";
 
 import "./Header.css";
 import AuthContext from "../../Context/AuthContext";
@@ -21,14 +21,14 @@ const Header = () => {
   };
 
   const topBarRender = () => {
-    fetch(`${mainUrl}/menus/topbar`)
+    fetch(`${mainUrlApi}/menus/topbar`)
       .then((res) => res.json())
       .then((topbarData) => setTopBarMenu(topbarData));
   };
   let shuffledTopBarItems = useShuffled(topBarMenu);
 
   const menuRender = () => {
-    fetch(`${mainUrl}/menus`)
+    fetch(`${mainUrlApi}/menus`)
       .then((res) => res.json())
       .then((menuData) => setMenus(menuData));
   };

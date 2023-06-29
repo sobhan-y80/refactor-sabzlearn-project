@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-
 import "./CourseBox.css";
 import { mainUrl } from "../../Utils/Utils";
 
@@ -9,16 +8,16 @@ const CourseBox = ({ smalMode, ...props }) => {
   return (
     <div className="course-box">
       <div className="course-box__img-wrapper">
-        <NavLink className="course-box__img-wrapper__link">
+        <Link className="course-box__img-wrapper__link">
           <img
             className="course-box__img inline-block"
             // src="images/courses/jango.png"
 
-            src={`http://localhost:4000/courses/covers/${props.cover}`}
+            src={`${mainUrl}/courses/covers/${props.cover}`}
             width="100%"
             alt="course img"
           />
-        </NavLink>
+        </Link>
       </div>
       <div className="course-box__content grid grid-cols-2 items-center gap-3">
         <div className="course-box__title-wrapper col-span-2">
@@ -27,7 +26,7 @@ const CourseBox = ({ smalMode, ...props }) => {
           </span>
           <p className="course-box__name">
             <Link
-              to={`Course/${props.shortName}`}
+              to={`/Course/${props.shortName}`}
               className="course-box__link hpc__short-text"
             >
               {props.name}

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { mainUrl } from "../../Utils/Utils";
+import { mainUrlApi } from "../../Utils/Utils";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import InputBox from "../../Components/InputBox/InputBox";
@@ -56,7 +56,7 @@ const Register = () => {
         phone: formState.inputs.phoneNumber.value,
       };
 
-      await fetch(`${mainUrl}/auth/register`, {
+      await fetch(`${mainUrlApi}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

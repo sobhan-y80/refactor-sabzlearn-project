@@ -1,7 +1,7 @@
-.swiper.swiper-coverflow {
+#articles__content .swiper.swiper-coverflow {
   width: 50vw;
 }
-.swiper-wrapper {
+#articles__content .swiper-wrapper {
   padding: 3rem 0;
 }
 .article-box {

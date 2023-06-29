@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 import { Router, useRoutes } from "react-router-dom";
 import routes from "./routes";
 import AuthContext from "./Context/AuthContext";
-import { mainUrl } from "./Utils/Utils";
+import { mainUrlApi } from "./Utils/Utils";
 
 import "./css/reset.css";
 import "./css/default.css";
@@ -37,7 +37,7 @@ function App() {
       localStorageTokenData.token &&
       localStorageTokenData.token.length
     ) {
-      fetch(`${mainUrl}/auth/me`, {
+      fetch(`${mainUrlApi}/auth/me`, {
         headers: {
           Authorization: `Bearer ${localStorageTokenData.token}`,
         },

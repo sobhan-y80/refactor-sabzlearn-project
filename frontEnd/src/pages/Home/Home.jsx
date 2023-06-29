@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Home.css";
 import AuthContext from "../../Context/AuthContext";
-import { mainUrl } from "../../Utils/Utils";
+import { mainUrlApi } from "../../Utils/Utils";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import CourseBox from "../../Components/CourseBox/CourseBox";
@@ -23,25 +23,25 @@ const Home = () => {
   const [allArticle, setAllArticle] = useState([]);
 
   const allCoursesRender = () => {
-    fetch(`${mainUrl}/courses`)
+    fetch(`${mainUrlApi}/courses`)
       .then((res) => res.json())
       .then((allCoursesData) => setAllCourses(allCoursesData));
   };
 
   const presellsRender = () => {
-    fetch(`${mainUrl}/courses/presell`)
+    fetch(`${mainUrlApi}/courses/presell`)
       .then((res) => res.json())
       .then((presellsData) => setPresellsCourses(presellsData));
   };
 
   const popularsRender = () => {
-    fetch(`${mainUrl}/courses/popular`)
+    fetch(`${mainUrlApi}/courses/popular`)
       .then((res) => res.json())
       .then((popularData) => setPopularCourses(popularData));
   };
 
   const allArticleRender = () => {
-    fetch(`${mainUrl}/articles`)
+    fetch(`${mainUrlApi}/articles`)
       .then((res) => res.json())
       .then((articleData) => setAllArticle(articleData));
   };
@@ -178,7 +178,6 @@ const Home = () => {
               <div className="flex items-center justify-center">
                 <div className="w-full py-10 px-0 md:px-10 max-w-[768px]">
                   <Swiper
-                    initialSlide={4}
                     effect={"coverflow"}
                     grabCursor={true}
                     centeredSlides={true}
@@ -195,7 +194,6 @@ const Home = () => {
                       delay: 2500,
                       disableOnInteraction: false,
                       pauseOnMouseEnter: true,
-                      reverseDirection: true,
                     }}
                     pagination={true}
                     modules={[Autoplay, EffectCoverflow, Pagination]}
@@ -343,12 +341,8 @@ const Home = () => {
               className="mySwiper"
             >
               {allArticle.map((article) => (
-                <SwiperSlide>
-                  <ArticleBox
-                    key={article._id}
-                    {...article}
-                    smalMode={true}
-                  ></ArticleBox>
+                <SwiperSlide key={article._id}>
+                  <ArticleBox smalMode={true} {...article}></ArticleBox>
                 </SwiperSlide>
               ))}
             </Swiper>

@@ -8,7 +8,7 @@ import ContactUs from "./pages/ContactUs/ContactUs";
 
 const routes = [
   { path: "/", element: <Home /> },
-  { path: "/Product", element: <Product /> },
+  { path: "/Course/*", element: <Product /> },
   { path: "/Category", element: <Category /> },
   { path: "/Blog", element: <Blog /> },
   { path: "/Login", element: <Login /> },

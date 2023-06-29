@@ -14,7 +14,7 @@ import {
 } from "../../Components/InputBox/Validation/Rules";
 
 import { useForm } from "../../Hooks/useForm";
-import { mainUrl } from "../../Utils/Utils";
+import { mainUrlApi } from "../../Utils/Utils";
 import AuthContext from "../../Context/AuthContext";
 
 const Login = () => {
@@ -43,7 +43,7 @@ const Login = () => {
         password: formState.inputs.password.value,
       };
 
-      await fetch(`${mainUrl}/auth/login`, {
+      await fetch(`${mainUrlApi}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
