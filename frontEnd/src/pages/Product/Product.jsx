@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./Product.css";
 import Header from "../../Components/Header/Header";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 
-import { Link, NavLink, useParams } from "react-router-dom";
+import { Link, NavLink, json, useNavigate, useParams } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
 import { mainUrl, mainUrlApi } from "../../Utils/Utils";
 import useShuffled from "../../Hooks/useShuffled";
@@ -13,16 +13,22 @@ import {
   requiredValidatior,
 } from "../../Components/InputBox/Validation/Rules";
 import { useForm } from "../../Hooks/useForm";
+import AuthContext from "../../Context/AuthContext";
+import toast, { Toaster } from "react-hot-toast";
+import PaginationCustom from "../../Components/Pagination/Pagination";
 
 const Product = () => {
   const [isDataLoad, setIsDataLoad] = useState(false);
+  const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
   const params = useParams();
   const [courseInfo, setCourseInfo] = useState([]);
-  const [scoreOfCourseInComment, setScoreOfCourseInComment] = useState(null);
+  const [scoreOfCourseInComment, setScoreOfCourseInComment] = useState(1);
   const [commentCourse, setCommentCourse] = useState([]);
   const [sessionCourse, setSessionCourse] = useState([]);
   const [relatedCourse, setRelatedCourse] = useState([]);
   let shuffledRelatedCourse = useShuffled(relatedCourse);
+  const courseProgressBarRef = useRef();
 
   const [formState, onInputHandler] = useForm(
     {
@@ -49,6 +55,13 @@ const Product = () => {
     setIsDataLoad(true);
   };
 
+  const courseProgressScrollHandler = () => {
+    const scrollPosition = window.scrollY;
+    courseProgressBarRef.current &&
+      scrollPosition >= 700 &&
+      courseProgressBarRef.current.classList.add("active");
+  };
+
   const toggleAccordionHandler = (e) => {
     if (e.target.parentElement.parentElement.classList.contains("active")) {
       e.target.parentElement.parentElement.classList.remove("active");
@@ -62,13 +75,46 @@ const Product = () => {
   };
 
   const submitHandler = () => {
-    console.log("submitHandler");
+    if (authContext.isLoggedIn) {
+      if (formState.isFormValid) {
+        const localStorageData = JSON.parse(localStorage.getItem("token"));
+        const commentObj = {
+          courseShortName: "js-20-lib",
+          body: formState.inputs.commentTextArea.value,
+          score: scoreOfCourseInComment,
+        };
+        fetch(`${mainUrlApi}/comments`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Berear ${localStorageData.token}`,
+          },
+          body: JSON.stringify(commentObj),
+        }).then((res) => {
+          if (res.ok) {
+            toast.success("کامنتت با موفقیت ثبت شد");
+          }
+        });
+      } else {
+        toast.error("مثل اینکه فراموش کردی نظرتو بنویسی :(");
+      }
+    } else {
+      toast.error("قبل ثبت کامنت باید وارد بشی");
+      setTimeout(() => {
+        navigate("/Login");
+      }, 5000);
+    }
   };
-
-  console.log(commentCourse);
 
   useEffect(() => {
     courseInfoRender();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", courseProgressScrollHandler);
+    return () => {
+      window.removeEventListener("scroll", courseProgressScrollHandler);
+    };
   }, []);
 
   if (isDataLoad) {
@@ -542,7 +588,10 @@ const Product = () => {
                                 </span>
                               </h3>
                             </div>
-                            <div className="course-progress__bar">
+                            <div
+                              className="course-progress__bar"
+                              ref={courseProgressBarRef}
+                            >
                               <div className="course-progress__perecnt">
                                 <div className="course-progress__dot"></div>
                                 <svg className="course-progress__svg">
@@ -749,10 +798,7 @@ const Product = () => {
                       امتیاز شما
                     </h4>
                     <div className="comment__respond__custom-select-score">
-                      <form
-                        onSubmit={submitHandler}
-                        id="comment__respond__score-form"
-                      >
+                      <form id="comment__respond__score-form">
                         <select
                           id="comment__respond__score-select"
                           onChange={(e) => changeHandler(e)}
@@ -780,6 +826,7 @@ const Product = () => {
                   </div>
                   <div className="comment__respond__submit">
                     <button
+                      onClick={submitHandler}
                       id="comment-submit-btn"
                       className="comment__respond__submit-btn"
                     >
@@ -794,144 +841,12 @@ const Product = () => {
                 className="comment__container comment__comment-wrapper"
               >
                 {commentCourse.length ? (
-                  commentCourse.map((comment) => (
-                    <div className="comment__contnet">
-                      <div className="comment__card">
-                        <div className="comment-card__header">
-                          <div className="commnet-card__header__profile">
-                            <div className="commnet-card__header__profile-icon comment-card__svg-wrapper">
-                              <img
-                                src="./images/product-svg/user-comment.svg"
-                                alt="user Cm"
-                                className="comment-card__svg"
-                              />
-                            </div>
-                            <span className="commnet-card__header__profile-name">
-                              {comment.creator.name}
-                            </span>
-                          </div>
-                          <div className="comment-card__user-stutus">
-                            <span className="comment-card__user-stutus-text">
-                              {comment.creator.role === "ADMIN"
-                                ? "ادمین"
-                                : comment.creator.role === "USER"
-                                ? "کاربر"
-                                : ""}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="commnet-card__content">
-                          <p className="commnet-card__content-text">
-                            {comment.body}
-                          </p>
-                        </div>
-                        <div className="comment-card__control">
-                          <ul className="comment-card__control-list">
-                            <li className="comment-card__control-item">
-                              <a
-                                href="#"
-                                className="comment-card__control-reply comment-card__control-link"
-                                title="پاسخ"
-                              >
-                                <img
-                                  src="./images/comment/reply.svg"
-                                  alt="commnet icon"
-                                  className="comment-card__control-svg"
-                                />
-                              </a>
-                            </li>
-                            <li className="comment-card__control-item">
-                              <a
-                                href="#"
-                                className="comment-card__control-like comment-card__control-link"
-                                title="پسندیدن"
-                              >
-                                <span className="comment-card__control-like-count">
-                                  13
-                                </span>
-                                <img
-                                  src="./images/comment/like-outline.svg"
-                                  alt="commnet icon"
-                                  className="comment-card__control-svg"
-                                />
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      {JSON.stringify(comment.answerContent) !== "{}" ? (
-                        <div className="comment__container">
-                          <div className="comment__card">
-                            <div className="comment-card__header">
-                              <div className="commnet-card__header__profile">
-                                <div className="commnet-card__header__profile-icon comment-card__svg-wrapper">
-                                  <img
-                                    src="./images/product-svg/user-comment.svg"
-                                    alt="user Cm"
-                                    className="comment-card__svg"
-                                  />
-                                </div>
-                                <span className="commnet-card__header__profile-name">
-                                  {comment.answerContent.creator.name}
-                                </span>
-                              </div>
-                              <div className="comment-card__user-stutus">
-                                <span className="comment-card__user-stutus-text">
-                                  {comment.answerContent.creator.role ===
-                                  "ADMIN"
-                                    ? "ادمین"
-                                    : comment.answerContent.creator.role ===
-                                      "USER"
-                                    ? "کاربر"
-                                    : ""}
-                                </span>
-                              </div>
-                            </div>
-                            <div className="commnet-card__content">
-                              <p className="commnet-card__content-text">
-                                {comment.answerContent.body}
-                              </p>
-                            </div>
-                            <div className="comment-card__control">
-                              <ul className="comment-card__control-list">
-                                <li className="comment-card__control-item">
-                                  <a
-                                    href="#"
-                                    className="comment-card__control-reply comment-card__control-link"
-                                    title="پاسخ"
-                                  >
-                                    <img
-                                      src="./images/comment/reply.svg"
-                                      alt="commnet icon"
-                                      className="comment-card__control-svg"
-                                    />
-                                  </a>
-                                </li>
-                                <li className="comment-card__control-item">
-                                  <a
-                                    href="#"
-                                    className="comment-card__control-like comment-card__control-link"
-                                    title="پسندیدن"
-                                  >
-                                    <span className="comment-card__control-like-count">
-                                      13
-                                    </span>
-                                    <img
-                                      src="./images/comment/like-outline.svg"
-                                      alt="commnet icon"
-                                      className="comment-card__control-svg"
-                                    />
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  ))
+                  <PaginationCustom
+                    typeFor="comment"
+                    CurentPage={1}
+                    arrays={commentCourse}
+                    pageItemCount={2}
+                  ></PaginationCustom>
                 ) : (
                   <div className="text-3xl text-center hpc__title comment__contnet">
                     هنوز کامنتی برای این دوره وجود ندارد 🙄
@@ -944,6 +859,7 @@ const Product = () => {
         {/* <!-- Finish Comment --> */}
 
         <Footer></Footer>
+        <Toaster></Toaster>
       </>
     );
   }

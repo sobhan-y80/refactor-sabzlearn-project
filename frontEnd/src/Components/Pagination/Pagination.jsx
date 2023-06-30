@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Pagination.css";
 import CourseBox from "../CourseBox/CourseBox";
+import CommentBox from "../CommentBox/CommentBox";
 
-function PaginationCustom({ CurentPage, pageItemCount, arrays, children }) {
+function PaginationCustom({ typeFor, CurentPage, pageItemCount, arrays }) {
   const [paginatedArray, setPaginatedArray] = useState([]);
   const [curentPage, setCurentPage] = useState(CurentPage);
   const [pageNumber, setPageNumber] = useState([]);
@@ -44,14 +45,18 @@ function PaginationCustom({ CurentPage, pageItemCount, arrays, children }) {
 
   return (
     <>
-      {paginatedArray.map((item) => (
-        <div
-          key={item._id}
-          className="grid-cols-1 flex justify-center items-center"
-        >
-          <CourseBox {...item}></CourseBox>
-        </div>
-      ))}
+      {typeFor === "comment"
+        ? paginatedArray.map((item) => (
+            <CommentBox key={item._id} {...item}></CommentBox>
+          ))
+        : paginatedArray.map((item) => (
+            <div
+              key={item._id}
+              className="grid-cols-1 flex justify-center items-center"
+            >
+              <CourseBox {...item}></CourseBox>
+            </div>
+          ))}
       {pageNumber.length > 1 && (
         <div className="global-pagination col-span-4 d-flex justify-content-center">
           <ul

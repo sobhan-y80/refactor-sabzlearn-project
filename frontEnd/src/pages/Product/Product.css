@@ -243,7 +243,7 @@
   transform: translate(5px, 5px);
 }
 
-.course-progress__circle:nth-child(2) {
+.course-progress__bar:is(.active) .course-progress__circle:nth-child(2) {
   stroke: var(--primary-color);
   stroke-dasharray: 440;
   stroke-dashoffset: calc(440 - (440 * var(--perecnt-number) / 100));
@@ -252,7 +252,7 @@
   animation-delay: 2s;
 }
 
-.course-progress__dot {
+.course-progress__bar:is(.active) .course-progress__dot {
   z-index: 10;
   position: absolute;
   inset: 0px;
