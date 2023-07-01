@@ -21,13 +21,16 @@ const CourseBox = ({ smalMode, ...props }) => {
       </div>
       <div className="course-box__content grid grid-cols-2 items-center gap-3">
         <div className="course-box__title-wrapper col-span-2">
-          {props.categoryID && (
-            <span
-              className={`course-box__category ${smalMode ? "text-xs" : ""}`}
-            >
-              {props.categoryID.title}
-            </span>
-          )}
+          {props.categoryID &&
+            (props.categoryID.title ? (
+              <span
+                className={`course-box__category ${smalMode ? "text-xs" : ""}`}
+              >
+                {props.categoryID.title}
+              </span>
+            ) : (
+              ""
+            ))}
 
           <p className="course-box__name">
             <Link
@@ -53,10 +56,12 @@ const CourseBox = ({ smalMode, ...props }) => {
             className={`course-box__price-amount ${smalMode ? "text-xl" : ""}`}
           >
             <span className="course-box__price-amount-number">
-              {props.price !== 0 ? props.price.toLocaleString() : "رایگان"}
+              {props.price && props.price !== 0
+                ? props.price.toLocaleString()
+                : "رایگان"}
             </span>
             <span className="course-box__price-amount-text">
-              {props.price !== 0 ? "تومان" : ""}
+              {props.price && props.price !== 0 ? "تومان" : ""}
             </span>
           </span>
         </div>

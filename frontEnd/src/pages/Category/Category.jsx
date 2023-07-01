@@ -101,8 +101,12 @@ const Category = () => {
       <BreadCrumb></BreadCrumb>
 
       {/* <!-- Start Main --> */}
-      <div className="main category">
-        {!courseCategory.length ? (
+      <div
+        className={`main category ${
+          courseCategory.length ? "" : "!items-center"
+        }`}
+      >
+        {courseCategory.length ? (
           <div className="w-full px-10">
             {/* <!-- Start Breadcrumb --> */}
             <div className="breadcrumb hpc__section">
@@ -172,7 +176,7 @@ const Category = () => {
             {/* <!-- Finish Category  --> */}
           </div>
         ) : (
-          <div className="col-span-12 py-52 text-3xl text-center hpc__title">
+          <div className="col-span-12 text-3xl text-center hpc__title">
             دوره ای با کتگوری مورد نظر شما یافت نشد
           </div>
         )}

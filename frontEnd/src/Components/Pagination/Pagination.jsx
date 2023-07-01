@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Pagination.css";
 import CourseBox from "../CourseBox/CourseBox";
 import CommentBox from "../CommentBox/CommentBox";
+import ArticleBox from "../ArticleBox/ArticleBox";
 
 function PaginationCustom({
   typeFor,
@@ -55,8 +56,24 @@ function PaginationCustom({
         ? paginatedArray.map((item) => (
             <CommentBox key={item._id} {...item}></CommentBox>
           ))
+        : typeFor === "article"
+        ? paginatedArray.map((item) => (
+            <div
+              key={item._id}
+              className={`${
+                parentClassNameHolder ? parentClassNameHolder : ""
+              }`}
+            >
+              <ArticleBox size={"smal"} {...item}></ArticleBox>
+            </div>
+          ))
         : paginatedArray.map((item) => (
-            <div key={item._id} className={`${parentClassNameHolder}`}>
+            <div
+              key={item._id}
+              className={`${
+                parentClassNameHolder ? parentClassNameHolder : ""
+              }`}
+            >
               <CourseBox {...item}></CourseBox>
             </div>
           ))}

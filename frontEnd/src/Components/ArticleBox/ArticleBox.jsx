@@ -3,8 +3,13 @@ import React from "react";
 import "./ArticleBox.css";
 
 function ArticleBox({ ...props }) {
+  console.log(props.size);
   return (
-    <div className="article-wrapper-box flex items-center justify-center">
+    <div
+      className={`article-wrapper-box flex items-center justify-center ${
+        props.size === "smal" ? "smal" : ""
+      }`}
+    >
       <div className="article-box">
         <div className="article-box__img-wrapper">
           <div className="article-box__background-img"></div>

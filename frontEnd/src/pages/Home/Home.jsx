@@ -13,6 +13,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { Autoplay, EffectCoverflow, Pagination } from "swiper";
 import ArticleBox from "../../Components/ArticleBox/ArticleBox";
+import SearchBox from "../../Components/SearchBox/SearchBox";
 // Finish Import Swiper
 
 const Home = () => {
@@ -57,7 +58,7 @@ const Home = () => {
 
   return (
     <>
-      <Header></Header>
+      <Header customClassForParet="home"></Header>
 
       {/* <!-- Start Landing --> */}
       <section className="landing">
@@ -67,20 +68,7 @@ const Home = () => {
               با آکادمی سبز لرن برنامه نویسی رو با خیال راحت یاد بگیر و پیشرفت
               کن
             </h1>
-            <div className="landing-header__searchbar global__searchbar">
-              <input
-                type="text"
-                className="landing-header___search-input global__search-input"
-                placeholder="جستجو..."
-                id="search-input"
-              />
-              <button
-                id="search-btn"
-                className="landing-hader__search-btn global__search-btn"
-              >
-                <i className="fa-solid fa-magnifying-glass landing-header__serach-icon global__search-icon"></i>
-              </button>
-            </div>
+            <SearchBox type={"large"}></SearchBox>
           </div>
         </div>
       </section>
@@ -317,7 +305,7 @@ const Home = () => {
           </div>
           <div
             id="articles__content"
-            className="articles__content xl:flex items-center justify-center"
+            className="articles__content flex items-center justify-center"
           >
             <Swiper
               effect={"coverflow"}

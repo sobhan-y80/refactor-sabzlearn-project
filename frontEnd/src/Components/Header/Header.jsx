@@ -6,8 +6,9 @@ import { mainUrlApi } from "../../Utils/Utils";
 import "./Header.css";
 import AuthContext from "../../Context/AuthContext";
 import useShuffled from "../../Hooks/useShuffled";
+import SearchBox from "../SearchBox/SearchBox";
 
-const Header = () => {
+const Header = ({ customClassForParet }) => {
   const mobielMenuWrapper = useRef();
   const [topBarMenu, setTopBarMenu] = useState([]);
   const [menus, setMenus] = useState([]);
@@ -41,7 +42,9 @@ const Header = () => {
   const authContext = useContext(AuthContext);
 
   return (
-    <header className="header">
+    <header
+      className={`header ${customClassForParet ? customClassForParet : ""}`}
+    >
       <div className="top-bar">
         <div className="conatiner-fluid">
           <div className="top-bar__content">
@@ -218,24 +221,7 @@ const Header = () => {
                 ))}
               </ul>
               <div className="main-header__search-wrapper">
-                <div
-                  id="main-header__searchbar"
-                  className="main-header__searchbar global__searchbar"
-                >
-                  <input
-                    type="text"
-                    id="main-header__search-input"
-                    className="main-header___search-input global__search-input"
-                    placeholder="جستجو..."
-                  />
-                  <button className="main-header__search-btn global__search-btn">
-                    <i className="fa-solid fa-magnifying-glass main-header__serach-icon global__search-icon"></i>
-                  </button>
-                </div>
-                <div
-                  id="auto-search-box"
-                  className="main-header___auto-search-box"
-                ></div>
+                <SearchBox></SearchBox>
               </div>
             </div>
             <div className="main-header__left">
