@@ -21,6 +21,7 @@ const CourseBox = ({ smalMode, ...props }) => {
       </div>
       <div className="course-box__content grid grid-cols-2 items-center gap-3">
         <div className="course-box__title-wrapper col-span-2">
+<<<<<<< HEAD
           {props.categoryID &&
             (props.categoryID.title ? (
               <span
@@ -31,6 +32,15 @@ const CourseBox = ({ smalMode, ...props }) => {
             ) : (
               ""
             ))}
+=======
+          {props.categoryID && (
+            <span
+              className={`course-box__category ${smalMode ? "text-xs" : ""}`}
+            >
+              {props.categoryID.title}
+            </span>
+          )}
+>>>>>>> 3bf763510aba7b7ae817680a148a7084462f4891
 
           <p className="course-box__name">
             <Link

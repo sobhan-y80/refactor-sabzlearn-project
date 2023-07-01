@@ -95,6 +95,7 @@ const Category = () => {
   useEffect(() => {
     courseCategoryRender();
   }, []);
+
   return (
     <>
       <Header></Header>
