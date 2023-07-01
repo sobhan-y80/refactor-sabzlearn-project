@@ -1,5 +1,10 @@
 /* Start course Styles */
 
+.main:is(.category) {
+  padding: unset;
+  align-items: unset;
+}
+
 .breadcrumb {
   position: relative;
   z-index: 50;

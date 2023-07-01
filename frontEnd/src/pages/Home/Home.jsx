@@ -116,6 +116,7 @@ const Home = () => {
                   arrays={allCourses}
                   CurentPage={1}
                   pageItemCount={4}
+                  parentClassNameHolder={`grid-cols-1 flex justify-center items-center`}
                 ></PaginationCustom>
               </div>
             </div>
