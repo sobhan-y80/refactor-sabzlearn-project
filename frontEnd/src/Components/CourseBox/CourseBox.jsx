@@ -21,9 +21,14 @@ const CourseBox = ({ smalMode, ...props }) => {
       </div>
       <div className="course-box__content grid grid-cols-2 items-center gap-3">
         <div className="course-box__title-wrapper col-span-2">
-          <span className={`course-box__category ${smalMode ? "text-xs" : ""}`}>
-            {props.categoryID.title}
-          </span>
+          {props.categoryID && (
+            <span
+              className={`course-box__category ${smalMode ? "text-xs" : ""}`}
+            >
+              {props.categoryID.title}
+            </span>
+          )}
+
           <p className="course-box__name">
             <Link
               to={`/Course/${props.shortName}`}

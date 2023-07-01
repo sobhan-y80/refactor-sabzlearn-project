@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const BreadCrumb = () => {
   return (
-    <div className="breadcrumb hpc__section px-10">
+    <div className="breadcrumb my-10 px-10">
       <div className="breadcrumb-container w-full">
         <div className="breadcrumb__contnet flex items-center gap-5">
           <ul className="breadCrumb-list flex items-center gap-5 flex-wrap">
