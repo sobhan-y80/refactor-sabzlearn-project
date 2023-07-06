@@ -8,7 +8,6 @@ body {
   font-size: 1.6rem;
   line-height: 1.6;
   color: var(--white-color);
-  font-family: var(--primary-font);
   direction: rtl;
   background-color: var(--box-color);
   min-height: 100vh;

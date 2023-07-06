@@ -5,15 +5,15 @@ import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import Footer from "../../Components/Footer/Footer";
 import PaginationCustom from "../../Components/Pagination/Pagination";
 import ArticleBox from "../../Components/ArticleBox/ArticleBox";
+import { useParams } from "react-router-dom";
 
 function Search() {
   const [courseReasult, setCourseReasult] = useState([]);
   const [articleReasult, setArticleReasult] = useState([]);
-
-  console.log(courseReasult, articleReasult);
+  const searchValueParam = useParams().valueSearch;
 
   const resualtRender = () => {
-    fetch(`${mainUrlApi}/search/js`)
+    fetch(`${mainUrlApi}/search/${searchValueParam}`)
       .then((res) => res.json())
       .then((resualtData) => {
         setCourseReasult(resualtData.allResultCourses);
@@ -23,7 +23,7 @@ function Search() {
 
   useEffect(() => {
     resualtRender();
-  }, []);
+  }, [searchValueParam]);
 
   return (
     <>

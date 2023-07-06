@@ -7,6 +7,7 @@ import CourseBox from "../../Components/CourseBox/CourseBox";
 import Footer from "../../Components/Footer/Footer";
 import { mainUrlApi } from "../../Utils/Utils";
 import PaginationCustom from "../../Components/Pagination/Pagination";
+import { useParams } from "react-router-dom";
 
 const itemCategoryCourseData = [
   { id: 1, name: "مرتب سازی پیشفرض", key: "default" },
@@ -17,6 +18,7 @@ const itemCategoryCourseData = [
 ];
 
 const Category = () => {
+  const { categoryID } = useParams();
   const customDefaultNameElm = useRef();
   const [courseCategory, setCourseCategory] = useState([]);
 
@@ -31,7 +33,7 @@ const Category = () => {
   const [customCategorySort, setCustomCategorySort] = useState([]);
 
   const courseCategoryRender = () => {
-    fetch(`${mainUrlApi}/courses/category/frontend`)
+    fetch(`${mainUrlApi}/courses/category/${categoryID}`)
       .then((res) => res.json())
       .then((courseCategoryData) => setCourseCategory(courseCategoryData));
   };
@@ -94,7 +96,7 @@ const Category = () => {
 
   useEffect(() => {
     courseCategoryRender();
-  }, []);
+  }, [categoryID]);
 
   return (
     <>

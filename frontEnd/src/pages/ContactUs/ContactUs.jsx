@@ -14,11 +14,21 @@ import {
 } from "../../Components/InputBox/Validation/Rules";
 
 import { useForm } from "../../Hooks/useForm";
+import { mainUrlApi } from "../../Utils/Utils";
+import { Toaster, toast } from "react-hot-toast";
 
 const ContactUs = () => {
   const [formState, onInputHandler] = useForm(
     {
       username: {
+        value: "",
+        isValid: false,
+      },
+      email: {
+        value: "",
+        isValid: false,
+      },
+      phone: {
         value: "",
         isValid: false,
       },
@@ -30,7 +40,30 @@ const ContactUs = () => {
     false
   );
 
-  console.log(formState);
+  const sendMessageClickHandler = () => {
+    if (formState.isFormValid) {
+      const messageObj = {
+        name: formState.inputs.username.value,
+        email: formState.inputs.email.value,
+        phone: formState.inputs.phone.value,
+        body: formState.inputs.message.value,
+      };
+      fetch(`${mainUrlApi}/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(messageObj),
+      }).then((res) => {
+        if (res.ok) {
+          toast.success("پیام شما با موفقیت ارسال شد منتظر پاسخ بمانید");
+        } else {
+          toast.error("خطایی رخ داده لطفا مجدد امتحان کنید");
+        }
+      });
+    }
+  };
+
   return (
     <>
       <Header></Header>
@@ -99,8 +132,26 @@ const ContactUs = () => {
                       onInputHandler={onInputHandler}
                       validations={[requiredValidatior()]}
                     >
+                      نام
+                    </InputBox>
+                    <InputBox
+                      id={`email`}
+                      placeHolder={null}
+                      onInputHandler={onInputHandler}
+                      validations={[requiredValidatior(), emailValidator()]}
+                    >
                       ایمیل
-                      <span className="hpc__space-word">یا</span>
+                    </InputBox>
+                    <InputBox
+                      id={`phone`}
+                      placeHolder={null}
+                      onInputHandler={onInputHandler}
+                      validations={[
+                        requiredValidatior(),
+                        minValidator(10),
+                        maxValidator(12),
+                      ]}
+                    >
                       شماره تلفن
                     </InputBox>
 
@@ -112,7 +163,11 @@ const ContactUs = () => {
                       onInputHandler={onInputHandler}
                     ></InputBox>
                   </div>
-                  <button id="send-message-btn" className="login-form__submit">
+                  <button
+                    onClick={sendMessageClickHandler}
+                    id="send-message-btn"
+                    className="login-form__submit"
+                  >
                     ارسال شو
                   </button>
                 </div>
@@ -124,6 +179,7 @@ const ContactUs = () => {
       </div>
       {/* <!-- Finish Main --> */}
       <Footer></Footer>
+      <Toaster></Toaster>
     </>
   );
 };

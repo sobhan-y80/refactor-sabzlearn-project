@@ -3,7 +3,6 @@ import React from "react";
 import "./ArticleBox.css";
 
 function ArticleBox({ ...props }) {
-  console.log(props.size);
   return (
     <div
       className={`article-wrapper-box flex items-center justify-center ${

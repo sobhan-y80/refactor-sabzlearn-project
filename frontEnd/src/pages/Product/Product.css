@@ -201,7 +201,9 @@
 /* ====================== Start progress bar ======================*/
 
 .course-progress {
+  height: 100%;
   display: flex;
+  justify-content: space-between;
   flex-flow: column;
   border-radius: 1rem;
   background-color: var(--dark-color);

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { memo, useContext, useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 import { mainUrlApi } from "../../Utils/Utils";
@@ -8,7 +8,7 @@ import AuthContext from "../../Context/AuthContext";
 import useShuffled from "../../Hooks/useShuffled";
 import SearchBox from "../SearchBox/SearchBox";
 
-const Header = ({ customClassForParet }) => {
+const Header = memo(({ customClassForParet }) => {
   const mobielMenuWrapper = useRef();
   const [topBarMenu, setTopBarMenu] = useState([]);
   const [menus, setMenus] = useState([]);
@@ -169,7 +169,9 @@ const Header = ({ customClassForParet }) => {
                     </li>
                     {menus.map((menu) => (
                       <li key={menu._id} className="main-header__item">
-                        <Link className="main-header__link">{menu.title}</Link>
+                        <Link to={menu.href} className="main-header__link">
+                          {menu.title}
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -191,7 +193,10 @@ const Header = ({ customClassForParet }) => {
               >
                 {menus.map((menu) => (
                   <li key={menu._id} className="main-header__item">
-                    <Link to={menu.href} className="main-header__link">
+                    <Link
+                      to={`/Category/${menu.href}`}
+                      className="main-header__link"
+                    >
                       {menu.title}
                       {menu.submenus.length ? (
                         <span className="main-header__icon-wrapper">
@@ -318,6 +323,6 @@ const Header = ({ customClassForParet }) => {
       </div>
     </header>
   );
-};
+});
 
 export default Header;

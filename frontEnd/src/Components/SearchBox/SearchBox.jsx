@@ -6,19 +6,16 @@ function SearchBox({ type }) {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState("");
 
-  const changeHandler = (e) => {
+  const goSearchClickHandler = (e) => {
     if (e.keyCode === 13) {
       clickForSearchHandler();
-    } else {
-      setInputValue(e.target.value);
     }
   };
 
   const clickForSearchHandler = () => {
-    console.log(inputValue);
-
     if (inputValue) {
-      navigate("/Search");
+      navigate(`/Search/${inputValue}`);
+      setInputValue("");
     } else {
       toast.error("چیزی برای سرچ کردن ننوشتی خب من دنبال چی بگردم :/");
     }
@@ -29,7 +26,9 @@ function SearchBox({ type }) {
         <>
           <div className="landing-header__searchbar global__searchbar">
             <input
-              onKeyDown={(e) => changeHandler(e)}
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={(e) => goSearchClickHandler(e)}
               type="text"
               className="landing-header___search-input global__search-input"
               placeholder="جستجو..."
@@ -52,7 +51,9 @@ function SearchBox({ type }) {
             className="main-header__searchbar global__searchbar"
           >
             <input
-              onKeyDown={(e) => changeHandler(e)}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={(e) => goSearchClickHandler(e)}
+              value={inputValue}
               type="text"
               id="main-header__search-input"
               className="main-header___search-input global__search-input"

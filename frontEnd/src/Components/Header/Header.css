@@ -79,7 +79,6 @@
   font-size: 3rem;
   color: var(--primary-color);
   text-transform: uppercase;
-  font-weight: 800;
   text-shadow: -0.1em 0em 0.12em rgba(0, 0, 0, 0.9);
 }
 

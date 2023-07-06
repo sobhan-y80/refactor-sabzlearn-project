@@ -9,13 +9,13 @@ import Search from "./pages/Search/Search";
 
 const routes = [
   { path: "/", element: <Home /> },
-  { path: "/Course", element: <Product /> },
-  { path: "/Category", element: <Category /> },
+  { path: "/Course/:courseID", element: <Product /> },
+  { path: "/Category/:categoryID", element: <Category /> },
   { path: "/Blog", element: <Blog /> },
   { path: "/Login", element: <Login /> },
   { path: "/Register", element: <Register /> },
   { path: "/ContactUs", element: <ContactUs /> },
-  { path: "/Search", element: <Search /> },
+  { path: "/Search/:valueSearch", element: <Search /> },
 ];
 
 export default routes;
