@@ -47,8 +47,6 @@ const Home = () => {
       .then((articleData) => setAllArticle(articleData));
   };
 
-  console.log(allArticle);
-
   useEffect(() => {
     allCoursesRender();
     presellsRender();

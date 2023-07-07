@@ -1,0 +1,116 @@
+/* Start Home Panel Style  */
+
+.panel-home__wrapper {
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-flow: column;
+  gap: 2rem;
+}
+
+.info-timezone {
+  color: #b3e8c9;
+  font-size: 2rem;
+}
+
+/* = Start Header Styles = */
+
+.panel-home__header {
+  cursor: default;
+  color: var(--white-color);
+  font-weight: 700;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.panel-home__header-title {
+  font-size: 2.5rem;
+}
+
+/* = Finihs Header Styles = */
+
+.panel-home__chart {
+  z-index: 0;
+}
+
+/* = Start Header Box Styles = */
+
+.panel-home__info-box {
+  color: var(--white-color);
+  height: 15rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: #2f3041;
+  box-shadow: inset 20px 20px 60px #282937, inset -20px -20px 60px #36374b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.info-box__right {
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+}
+
+.info-box__title {
+  font-weight: bold;
+  cursor: default;
+  font-size: 3.5rem;
+}
+
+.info-box__desc {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.info-box__symbol {
+  cursor: default;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.info-box__number {
+  font-size: 2.5rem;
+}
+
+.info-box___title-name {
+  font-weight: bold;
+}
+
+.info-box__left {
+  width: 25%;
+}
+
+.info-box__icon-wrapper {
+  width: 100%;
+}
+
+.info-box__icon {
+  width: 100%;
+}
+
+/* = Finish Header Box Styles = */
+
+/* = Start Header Last Users Styles = */
+
+.panel-home__last-users {
+  color: var(--white-color);
+  display: flex;
+  flex-flow: column;
+  gap: 1.5rem;
+}
+
+.panel-home__last-users__title {
+  word-spacing: 0.2rem;
+}
+
+.panel-home__last-users__title .hpc__title {
+  font-size: 2rem;
+}
+/* = Finish Header Last Users Styles = */
+
+/* Finish Home Panel Style  */
+.panel-home__users-table {
+  border-spacing: 1rem;
+}

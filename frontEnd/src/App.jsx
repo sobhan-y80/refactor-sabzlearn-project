@@ -26,7 +26,10 @@ function App() {
     [token]
   );
 
-  const logout = useCallback(() => {}, []);
+  const logout = useCallback(() => {
+    setIsLoggedIn(false);
+    userInfo({});
+  }, []);
 
   useEffect(() => {
     console.log("useEffect app run");

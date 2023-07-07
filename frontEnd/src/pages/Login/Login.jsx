@@ -34,7 +34,6 @@ const Login = () => {
   );
 
   const authContext = useContext(AuthContext);
-  console.log(authContext);
 
   const loginMeHandler = async () => {
     if (formState.isFormValid) {
@@ -52,7 +51,6 @@ const Login = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           authContext.login({}, data.accessToken);
           navigate("/");
         })
@@ -112,7 +110,7 @@ const Login = () => {
                   onInputHandler={onInputHandler}
                   validations={[
                     requiredValidatior(),
-                    minValidator(10),
+                    minValidator(8),
                     maxValidator(20),
                   ]}
                 ></InputBox>

@@ -455,7 +455,7 @@
 
 @media only screen and (max-width: 975px) {
   .main-header__course-menu,
-  .main-header__dropdown,
+  .main-header__dropdown:not(#dropdown__profile),
   .main-header__search-wrapper {
     display: none;
   }

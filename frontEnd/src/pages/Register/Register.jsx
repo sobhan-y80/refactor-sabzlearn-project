@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { mainUrlApi } from "../../Utils/Utils";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
@@ -43,7 +43,6 @@ const Register = () => {
   );
 
   const authContext = useContext(AuthContext);
-  console.log(authContext);
 
   const RegisterNewUser = async () => {
     if (formState.isFormValid) {
@@ -68,10 +67,10 @@ const Register = () => {
           authContext.login(data.user, data.accessToken);
           toast.success("خوش اومدییی ;)");
           setTimeout(() => {
-            console.log("chekc the settime out");
-          }, 1000);
-          navigate("/");
-        });
+            navigate("/");
+          }, 5000);
+        })
+        .catch((err) => console.log(err));
     } else {
       toast.error("اطلاعات درست نیست !!");
     }
