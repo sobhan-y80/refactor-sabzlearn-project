@@ -455,24 +455,6 @@ td {
   position: relative;
 }
 
-td:not(:last-child, :first-child)::after {
-  content: "کپی کنید";
-  width: 100%;
-  height: 100%;
-  background-color: red;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  opacity: 0.2;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-table tbody tr:hover td {
-  background-color: var(--box-color);
-}
-
 table button {
   padding: 0.5rem 0.7rem;
   margin: 0.3rem;

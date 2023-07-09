@@ -62,15 +62,26 @@ const Register = () => {
         },
         body: JSON.stringify(mainNewUserObj),
       })
-        .then((res) => res.json())
-        .then(async (data) => {
-          authContext.login(data.user, data.accessToken);
-          toast.success("خوش اومدییی ;)");
-          setTimeout(() => {
-            navigate("/");
-          }, 5000);
+        .then(async (res) => {
+          if (res.status === 409) {
+            toast.error("نام کاربری یا ایمیل قبلا استفاده شده");
+          } else if (res.status === 403) {
+            toast.error("این شماره در سایت مسدود شده!!!");
+          } else if (res.status === 201) {
+            const data = await res.json();
+
+            authContext.login(data.user, data.accessToken);
+
+            toast.success("خوش اومدییی ;)");
+
+            setTimeout(() => {
+              navigate("/");
+            }, 4000);
+          }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          toast.error("خطا در سرور :((");
+        });
     } else {
       toast.error("اطلاعات درست نیست !!");
     }

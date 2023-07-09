@@ -16,6 +16,7 @@ import Notification from "./pages/PanelAdmin/Notification/Notification";
 import DiscountCode from "./pages/PanelAdmin/DiscountCode/DiscountCode";
 import Orders from "./pages/PanelAdmin/Orders/Orders";
 import PrevArticle from "./pages/PanelAdmin/PrevArticle/PrevArticle";
+import NotFound from "./pages/NotFound/NotFound";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -25,6 +26,7 @@ const routes = [
   { path: "/Login", element: <Login /> },
   { path: "/Register", element: <Register /> },
   { path: "/ContactUs", element: <ContactUs /> },
+  { path: "/NotFound", element: <NotFound /> },
   { path: "/Search/:valueSearch", element: <Search /> },
   {
     path: "/p-Admin",

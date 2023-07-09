@@ -28,8 +28,11 @@ const Product = () => {
   const [commentCourse, setCommentCourse] = useState([]);
   const [sessionCourse, setSessionCourse] = useState([]);
   const [relatedCourse, setRelatedCourse] = useState([]);
-  let shuffledRelatedCourse = useShuffled(relatedCourse ? relatedCourse : "");
+  let shuffledRelatedCourse =
+    relatedCourse.length && useShuffled(relatedCourse);
   const courseProgressBarRef = useRef();
+
+  console.log("isDataLoad", isDataLoad);
 
   const [formState, onInputHandler] = useForm(
     {
@@ -43,19 +46,23 @@ const Product = () => {
 
   const courseInfoRender = async () => {
     await fetch(`${mainUrlApi}/courses/${courseID}`)
-      .then((res) => res.json())
-      .then((courseInfoData) => {
-        setCourseInfo(courseInfoData);
-        setCommentCourse(courseInfoData.comments);
-        setSessionCourse(courseInfoData.sessions);
-        setIsCourseExsist(true);
+      .then(async (res) => {
+        if (res.status === 404) {
+          navigate("/NotFound ");
+        } else if (res.status === 200) {
+          const courseInfoData = await res.json();
+          setCourseInfo(courseInfoData);
+          setCommentCourse(courseInfoData.comments);
+          setSessionCourse(courseInfoData.sessions);
+          setIsCourseExsist(true);
+          setIsDataLoad(true);
+        }
       })
       .catch((er) => console.log(err));
 
     await fetch(`${mainUrlApi}/courses/related/${courseID}`)
       .then((res) => res.json())
       .then((relatedCourseData) => setRelatedCourse(relatedCourseData));
-    setIsDataLoad(true);
   };
 
   const courseProgressScrollHandler = () => {

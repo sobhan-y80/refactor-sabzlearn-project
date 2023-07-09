@@ -13,6 +13,7 @@ import Chart from "../../../Components/Chart/Chart";
 
 function Main() {
   const [lastUsers, setLastUsers] = useState([]);
+  let copyTextMain;
 
   const UsersRender = () => {
     const localStorageData = JSON.parse(localStorage.getItem("token"));
@@ -25,7 +26,6 @@ function Main() {
       .then((usersData) => setLastUsers(usersData.reverse()));
   };
 
-  console.log(lastUsers);
   useEffect(() => {
     UsersRender();
   }, []);

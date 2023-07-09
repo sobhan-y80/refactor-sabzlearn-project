@@ -116,7 +116,6 @@ function PanelAdmin() {
   const [adminInfo, setAdminInfo] = useState({});
   const getMe = () => {
     const localStorageData = JSON.parse(localStorage.getItem("token"));
-    console.log(localStorageData);
     fetch(`${mainUrlApi}/auth/me`, {
       headers: {
         Authorization: `Bearer ${localStorageData.token}`,

@@ -1,0 +1,11 @@
+.header:is(.notFound) .global__searchbar {
+  display: none;
+}
+
+.notfound-title__wrapper .landing-header__searchbar {
+  width: 100% !important;
+}
+
+.notfound-title__wrapper .main-header__serach-icon {
+  font-size: 3.7rem;
+}

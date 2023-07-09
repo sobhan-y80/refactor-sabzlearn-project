@@ -1,6 +1,7 @@
 import React from "react";
 
 function CommentBox({ ...props }) {
+  console.log(Boolean(props.creator));
   return (
     <>
       <div className="comment__contnet">
@@ -34,14 +35,14 @@ function CommentBox({ ...props }) {
                 </svg>
               </div>
               <span className="commnet-card__header__profile-name">
-                {props.creator.name}
+                {props.creator && props.creator.name}
               </span>
             </div>
             <div className="comment-card__user-stutus">
               <span className="comment-card__user-stutus-text">
-                {props.creator.role === "ADMIN"
+                {props.creator && props.creator.role === "ADMIN"
                   ? "ادمین"
-                  : props.creator.role === "USER"
+                  : props.creator && props.creator.role === "USER"
                   ? "کاربر"
                   : ""}
               </span>

@@ -49,13 +49,19 @@ const Login = () => {
         },
         body: JSON.stringify(mainNewUserObj),
       })
-        .then((res) => res.json())
-        .then((data) => {
-          authContext.login({}, data.accessToken);
-          navigate("/");
+        .then(async (res) => {
+          if (res.status === 401) {
+            toast.error("کاربری با این مشخصات نداریم :(");
+          } else if (res.status === 401) {
+            toast.error("پسورد درست نیست !!");
+          } else if (res.status === 200) {
+            const data = await res.json();
+            authContext.login({}, data.accessToken);
+            navigate("/");
+          }
         })
         .catch((err) => {
-          toast.error("خطا در ورود به سایت :((");
+          toast.error("خطا در سرور :((");
         });
     } else {
       toast.error("لطفا اطلاعات رو به درستی پر کن");
