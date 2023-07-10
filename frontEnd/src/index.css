@@ -19,7 +19,7 @@
 
   #modal-content > div {
     min-width: 30%;
-    min-height: 25%;
+    height: max-content;
     padding: 1rem;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 16px;
@@ -27,6 +27,17 @@
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  #modal-wrapper > div.no-graphic {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: unset;
+    -webkit-backdrop-filter: unset;
+  }
+
+  #modal-wrapper.no-graphic div {
+    backdrop-filter: unset;
+    -webkit-backdrop-filter: unset;
   }
 
   .modal-btn {
@@ -54,14 +65,17 @@
     0% {
       transform: translateY(-100%) scale(0.2);
       backdrop-filter: unset;
+      background-color: unset;
     }
     50% {
       transform: translateY(0) scale(0.7);
       backdrop-filter: unset;
+      background-color: unset;
     }
     60% {
       transform: translateY(0) scale(1);
       backdrop-filter: unset;
+      background-color: unset;
     }
     100% {
       backdrop-filter: blur(1rem);

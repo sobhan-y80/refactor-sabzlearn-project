@@ -27,6 +27,7 @@ const inputReducer = (state, action) => {
 };
 
 const InputBox = ({
+  inputDefaultValue = null,
   id,
   type,
   placeHolder,
@@ -41,9 +42,10 @@ const InputBox = ({
     !mainInput.value && e.target.classList.remove("active");
   };
 
+  console.log(inputDefaultValue);
   const [mainInput, dipatch] = useReducer(inputReducer, {
-    value: "",
-    isValid: false,
+    value: inputDefaultValue ? inputDefaultValue : "",
+    isValid: inputDefaultValue ? true : false,
   });
 
   const { value, isValid } = mainInput;

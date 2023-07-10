@@ -140,7 +140,6 @@ function PanelAdmin() {
       .then((res) => res.json())
       .then((adminInfo) => setAdminInfo(adminInfo));
   };
-  console.log(adminInfo);
   useEffect(() => {
     getMe();
   }, []);

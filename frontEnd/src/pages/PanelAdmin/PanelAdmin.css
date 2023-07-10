@@ -481,6 +481,10 @@ table button {
   background-color: var(--primary-color);
 }
 
+.actionEdit:hover path {
+  fill: var(--white-color);
+}
+
 .deleteBtn {
   border: 0.15rem solid var(--dangerous);
 }
@@ -499,6 +503,9 @@ table button {
 }
 
 .banUserBtn:hover {
-  color: var(--white-color);
   background-color: var(--warning);
+}
+
+.banUserBtn:hover path {
+  fill: var(--white-color);
 }
