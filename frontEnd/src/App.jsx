@@ -8,6 +8,7 @@ import "./css/reset.css";
 import "./css/default.css";
 import "./css/css-varible.css";
 import "./css/font.css";
+import { toast } from "react-hot-toast";
 
 function App() {
   const Route = useRoutes(routes);
@@ -27,6 +28,7 @@ function App() {
   );
 
   const logout = useCallback(() => {
+    localStorage.clear();
     setIsLoggedIn(false);
     userInfo({});
   }, []);

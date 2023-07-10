@@ -309,7 +309,7 @@ nav {
 }
 
 :has(#menuToggle #toggleMenuInput:checked) #menu-wrapper {
-  width: 40%;
+  width: 30%;
 }
 
 .panel-sidebar__mobile-menu-notif {
@@ -363,6 +363,16 @@ nav {
 
   .panel-sidebar__menu-notif {
     padding: 0.5rem 1rem;
+  }
+
+  :has(#menuToggle #toggleMenuInput:checked) #menu-wrapper {
+    width: 40%;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  :has(#menuToggle #toggleMenuInput:checked) #menu-wrapper {
+    width: 60%;
   }
 }
 
@@ -458,6 +468,7 @@ td {
 table button {
   padding: 0.5rem 0.7rem;
   margin: 0.3rem;
+  border: 0.15rem solid var(--white-color);
   border-radius: 0.5rem;
   transition: all 300ms;
 }
@@ -480,4 +491,14 @@ table button {
 
 .deleteBtn:hover path {
   fill: var(--white-color);
+}
+
+.banUserBtn {
+  color: var(--warning);
+  border: 0.15rem solid var(--warning);
+}
+
+.banUserBtn:hover {
+  color: var(--white-color);
+  background-color: var(--warning);
 }

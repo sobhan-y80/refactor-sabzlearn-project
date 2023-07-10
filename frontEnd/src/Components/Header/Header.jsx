@@ -250,9 +250,7 @@ const Header = memo(({ customClassForParet }) => {
                       </div>
                     ) : (
                       <Link to="/Login" className="main-header__account-btn">
-                        <span className="main-header__profile-login-text">
-                          ورود / ثبت نام
-                        </span>
+                        ورود / ثبت نام
                       </Link>
                     )}
                     {authContext.isLoggedIn && (
@@ -260,6 +258,18 @@ const Header = memo(({ customClassForParet }) => {
                         id="dropdown__profile"
                         className="main-header__dropdown"
                       >
+                        {authContext.userInfo.role === "ADMIN" ? (
+                          <li className="main-header__item">
+                            <NavLink
+                              to="/p-admin/main"
+                              className="main-header__link"
+                            >
+                              پنل مدیریت
+                            </NavLink>
+                          </li>
+                        ) : (
+                          <div></div>
+                        )}
                         <li className="main-header__item">
                           <NavLink className="main-header__link">
                             پیشخوان
@@ -292,6 +302,7 @@ const Header = memo(({ customClassForParet }) => {
                         </li>
                         <li className="main-header__item">
                           <NavLink
+                            onClick={(e) => authContext.logout()}
                             id="logout"
                             className="main-header__link hpc__DANGER"
                           >
