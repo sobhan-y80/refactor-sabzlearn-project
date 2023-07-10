@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./Main.css";
 import xAsisData, { mainUrlApi } from "../../../Utils/Utils";
-import {
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  XAxis,
-  CartesianGrid,
-  Tooltip,
-} from "recharts";
 import Chart from "../../../Components/Chart/Chart";
+import DeleteModal from "../../../Components/Modals/DeleteModal/DeleteModal";
+import { Toaster, toast } from "react-hot-toast";
 
 function Main() {
   const [lastUsers, setLastUsers] = useState([]);
-  let copyTextMain;
+  const [isModalEdit, setIsModalEdit] = useState(false);
+  const [isModalDelete, setIsModalDelete] = useState(false);
+  const [mainUserDataInfo, setMainUserDataInfo] = useState(null);
 
   const UsersRender = () => {
     const localStorageData = JSON.parse(localStorage.getItem("token"));
@@ -24,6 +20,33 @@ function Main() {
     })
       .then((res) => res.json())
       .then((usersData) => setLastUsers(usersData.reverse()));
+  };
+
+  const actionDeleteHandler = (userData) => {
+    setMainUserDataInfo(userData);
+    setIsModalDelete(true);
+  };
+
+  const cancelDeleteMemberAction = () => {
+    setIsModalDelete(false);
+  };
+
+  const deleteMemberAction = () => {
+    const localStorageData = JSON.parse(localStorage.getItem("token"));
+    fetch(`${mainUrlApi}/users/${mainUserDataInfo._id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorageData.token}`,
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        UsersRender();
+        toast.success("کاربر پاک شد");
+      } else if (res.status === 404) {
+        toast.error("کاربر پیدا نشد");
+      }
+    });
+    setIsModalDelete(false);
   };
 
   useEffect(() => {
@@ -196,7 +219,10 @@ function Main() {
                     <td>{user.email}</td>
                     <td>{user.phone}</td>
                     <td>
-                      <button className="actionEdit">
+                      <button
+                        // onClick={(e) => actionEditHandler(user)}
+                        className="actionEdit"
+                      >
                         <svg
                           width="24"
                           height="24"
@@ -210,7 +236,10 @@ function Main() {
                           />
                         </svg>
                       </button>
-                      <button className="deleteBtn">
+                      <button
+                        onClick={(e) => actionDeleteHandler(user)}
+                        className="deleteBtn"
+                      >
                         <svg
                           width="24"
                           height="24"
@@ -232,6 +261,14 @@ function Main() {
           </table>
         </div>
       </div>
+      {isModalDelete && (
+        <DeleteModal
+          deleteAction={deleteMemberAction}
+          cancelAction={cancelDeleteMemberAction}
+          userMainInfo={mainUserDataInfo}
+        ></DeleteModal>
+      )}
+      <Toaster></Toaster>
     </>
   );
 }
