@@ -8,6 +8,7 @@ import Footer from "../../Components/Footer/Footer";
 import { mainUrlApi } from "../../Utils/Utils";
 import PaginationCustom from "../../Components/Pagination/Pagination";
 import { useParams } from "react-router-dom";
+import CategoryBar from "../../Components/CategoryBar/CategoryBar";
 
 const itemCategoryCourseData = [
   { id: 1, name: "مرتب سازی پیشفرض", key: "default" },
@@ -28,8 +29,6 @@ const Category = () => {
     key: "default",
   });
 
-  const [itemCategoryCourse, setItemCategoryCourse] = useState([]);
-
   const [customCategorySort, setCustomCategorySort] = useState([]);
 
   const courseCategoryRender = () => {
@@ -40,13 +39,9 @@ const Category = () => {
 
   const changeCategorySortHandler = (e) => {
     const categoryMain = e.target.dataset.key;
+    console.log(categoryMain);
 
     if (categoryMain) {
-      const categoryMainObj = itemCategoryCourseData
-        .filter((item) => item.key === categoryMain)
-        .pop();
-      setMainItemCategoryCourse(categoryMainObj);
-
       const mainCourse = [...courseCategory];
       let outputArray = [];
       switch (categoryMain) {
@@ -87,14 +82,6 @@ const Category = () => {
   };
 
   useEffect(() => {
-    const itemCategoryCourseMain = itemCategoryCourseData.filter(
-      (item) => item.key !== mainItemCategoryCourse.key
-    );
-
-    setItemCategoryCourse(itemCategoryCourseMain);
-  }, [mainItemCategoryCourse]);
-
-  useEffect(() => {
     courseCategoryRender();
   }, [categoryID]);
 
@@ -129,20 +116,14 @@ const Category = () => {
                           <i className="fa-solid fa-angle-down custom-fillter-icon"></i>
                         </span>
                         <div className="custom-fillter__dropdown">
-                          <ul
-                            className="custom-fillter__dropdown-list"
-                            onClick={(e) => changeCategorySortHandler(e)}
-                          >
-                            {itemCategoryCourse.map((item) => (
-                              <li
-                                key={item.id}
-                                className={`custom-fillter__dropdown-item`}
-                                data-key={item.key}
-                              >
-                                {item.name}
-                              </li>
-                            ))}
-                          </ul>
+                          <CategoryBar
+                            mainItemCategoryCourse={mainItemCategoryCourse}
+                            categorItemArray={itemCategoryCourseData}
+                            setMainItemCategoryCourse={
+                              setMainItemCategoryCourse
+                            }
+                            changeCategoryHandler={changeCategorySortHandler}
+                          ></CategoryBar>
                         </div>
                       </div>
                     </div>

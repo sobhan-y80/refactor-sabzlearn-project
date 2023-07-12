@@ -42,7 +42,6 @@ const InputBox = ({
     !mainInput.value && e.target.classList.remove("active");
   };
 
-  console.log(inputDefaultValue);
   const [mainInput, dipatch] = useReducer(inputReducer, {
     value: inputDefaultValue ? inputDefaultValue : "",
     isValid: inputDefaultValue ? true : false,
@@ -133,7 +132,11 @@ const InputBox = ({
         <span className="input-box__placeholder">
           {placeHolder ? placeHolder : children}
         </span>
-        <i className="input-box__shape"></i>
+        <i
+          className={`input-box__shape ${
+            type === "dark-input" ? "bg-[#242532]" : ""
+          }`}
+        ></i>
       </div>
     );
   }

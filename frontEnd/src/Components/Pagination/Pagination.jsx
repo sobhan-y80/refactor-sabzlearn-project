@@ -20,6 +20,10 @@ function PaginationCustom({
     const startIndex = endIndex - pageItemCount;
     const mainArray = arrays.slice(startIndex, endIndex);
 
+    if (mainArray.length === 0 && arrays.length) {
+      setCurentPage(CurentPage);
+    }
+
     let pageNum = Math.ceil(arrays.length / pageItemCount);
     let pageNumebrArr = Array.from(Array(pageNum).keys());
 
@@ -116,6 +120,7 @@ function PaginationCustom({
           </ul>
         </div>
       )}
+      <div className="my-2"></div>
     </>
   );
 }
