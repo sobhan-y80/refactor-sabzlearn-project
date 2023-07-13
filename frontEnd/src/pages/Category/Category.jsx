@@ -11,11 +11,11 @@ import { useParams } from "react-router-dom";
 import CategoryBar from "../../Components/CategoryBar/CategoryBar";
 
 const itemCategoryCourseData = [
-  { id: 1, name: "مرتب سازی پیشفرض", key: "default" },
-  { id: 2, name: "بالاترین امتیاز", key: "score" },
-  { id: 3, name: "اولین دوره ها", key: "last" },
-  { id: 4, name: "ارزانترین", key: "free" },
-  { id: 5, name: "گرانترین", key: "money" },
+  { _id: 1, title: "مرتب سازی پیشفرض", key: "default" },
+  { _id: 2, title: "بالاترین امتیاز", key: "score" },
+  { _id: 3, title: "اولین دوره ها", key: "last" },
+  { _id: 4, title: "ارزانترین", key: "free" },
+  { _id: 5, title: "گرانترین", key: "money" },
 ];
 
 const Category = () => {
@@ -25,7 +25,7 @@ const Category = () => {
 
   const [mainItemCategoryCourse, setMainItemCategoryCourse] = useState({
     id: 1,
-    name: "مرتب سازی پیشفرض",
+    title: "مرتب سازی پیشفرض",
     key: "default",
   });
 
@@ -39,7 +39,6 @@ const Category = () => {
 
   const changeCategorySortHandler = (e) => {
     const categoryMain = e.target.dataset.key;
-    console.log(categoryMain);
 
     if (categoryMain) {
       const mainCourse = [...courseCategory];
@@ -111,12 +110,13 @@ const Category = () => {
                             className="custom-fillter__default-name"
                             ref={customDefaultNameElm}
                           >
-                            {mainItemCategoryCourse.name}
+                            {mainItemCategoryCourse.title}
                           </span>
                           <i className="fa-solid fa-angle-down custom-fillter-icon"></i>
                         </span>
                         <div className="custom-fillter__dropdown">
                           <CategoryBar
+                            isKey={true}
                             mainItemCategoryCourse={mainItemCategoryCourse}
                             categorItemArray={itemCategoryCourseData}
                             setMainItemCategoryCourse={

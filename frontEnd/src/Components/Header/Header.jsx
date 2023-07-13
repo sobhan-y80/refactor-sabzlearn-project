@@ -191,13 +191,15 @@ const Header = memo(({ customClassForParet }) => {
                 id="menu__wrapper"
                 className="main-header__menu main-header__course-menu"
               >
-                {menus.map((menu) => (
+                {menus.slice(menus.length - 7, menus.length).map((menu) => (
                   <li key={menu._id} className="main-header__item">
                     <Link
                       to={`/Category/${menu.href}`}
                       className="main-header__link"
                     >
-                      {menu.title}
+                      <span className="truncate max-w-[8rem]">
+                        {menu.title}
+                      </span>
                       {menu.submenus.length ? (
                         <span className="main-header__icon-wrapper">
                           <i className="fa-solid fa-angle-down main-header__link-icon"></i>

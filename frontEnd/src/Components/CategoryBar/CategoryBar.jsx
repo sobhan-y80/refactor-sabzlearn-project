@@ -2,30 +2,42 @@ import React, { useEffect, useState } from "react";
 
 function CategoryBar({
   categorItemArray,
-  mainCategoryItem,
   mainItemCategoryCourse,
   setMainItemCategoryCourse,
   changeCategoryHandler = null,
+  isKey = false,
+  setCategoryId = null,
 }) {
   const [itemCategoryCourse, setItemCategoryCourse] = useState([]);
 
   const changeCategorySortHandler = (e) => {
     changeCategoryHandler && changeCategoryHandler(e);
+
     const categoryMain = e.target.dataset.key;
+
+    setCategoryId && setCategoryId(categoryMain);
+
     const categoryMainObj = categorItemArray
-      .filter((item) => item.key === categoryMain)
+      .filter((item) => (isKey ? item.key : item._id === categoryMain))
       .pop();
+
     setMainItemCategoryCourse(categoryMainObj);
-    console.log(categoryMainObj);
   };
 
   useEffect(() => {
-    const itemCategoryCourseMain = categorItemArray.filter(
-      (item) => item.key !== mainItemCategoryCourse.key
-    );
+    let itemCategoryCourseMain;
+    if (isKey) {
+      itemCategoryCourseMain = categorItemArray.filter(
+        (item) => item.key !== mainItemCategoryCourse.key
+      );
+    } else {
+      itemCategoryCourseMain = categorItemArray.filter(
+        (item) => item._id !== mainItemCategoryCourse._id
+      );
+    }
 
     setItemCategoryCourse(itemCategoryCourseMain);
-  }, [mainItemCategoryCourse]);
+  }, [mainItemCategoryCourse, categorItemArray]);
 
   return (
     <ul
@@ -34,11 +46,11 @@ function CategoryBar({
     >
       {itemCategoryCourse.map((item) => (
         <li
-          key={item.id}
+          key={item._id}
           className={`custom-fillter__dropdown-item`}
-          data-key={item.key}
+          data-key={isKey ? item.key : item._id}
         >
-          {item.name}
+          {item.title}
         </li>
       ))}
     </ul>

@@ -20,8 +20,6 @@ const validator = (value, validation) => {
     }
   }
 
-  // console.log(validationResualt);
-
   if (validationResualt.length) {
     return false;
   } else {

@@ -32,8 +32,6 @@ const Product = () => {
     relatedCourse.length && useShuffled(relatedCourse);
   const courseProgressBarRef = useRef();
 
-  console.log("isDataLoad", isDataLoad);
-
   const [formState, onInputHandler] = useForm(
     {
       commentTextArea: {

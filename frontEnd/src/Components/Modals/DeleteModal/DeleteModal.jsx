@@ -2,20 +2,27 @@ import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import ModalHOC from "../../../HOCs/ModalHOC";
 
-function DeleteModal({ role, deleteAction, cancelAction, userMainInfo }) {
-  console.log(userMainInfo);
+function DeleteModal({ role, deleteAction, cancelAction, MainInfo }) {
+  console.log(MainInfo);
   let mainMessage = {};
   switch (role) {
     case "Delete": {
       mainMessage = {
-        body: `از پاک کردن کاربر ${userMainInfo.name} مطمعن هستید !!?`,
+        body: `از پاک کردن کاربر ${MainInfo.name} مطمعن هستید !!?`,
+        messageBtn: `آره پاکش کن`,
+      };
+      break;
+    }
+    case "DELETE_MENU": {
+      mainMessage = {
+        body: `از پاک کردن منو ${MainInfo.title} مطمعن هستید !!?`,
         messageBtn: `آره پاکش کن`,
       };
       break;
     }
     case "Ban": {
       mainMessage = {
-        body: `از مسدود کردن ${userMainInfo.name} مطمعن هستید !!؟`,
+        body: `از مسدود کردن ${MainInfo.name} مطمعن هستید !!؟`,
         messageBtn: `آره مسدودش کن`,
       };
       break;
@@ -24,7 +31,7 @@ function DeleteModal({ role, deleteAction, cancelAction, userMainInfo }) {
     default:
       {
         mainMessage = {
-          body: `از پاک کردن کاربر ${userMainInfo.name} مطمعن هستید !!?`,
+          body: `از پاک کردن کاربر ${MainInfo.name} مطمعن هستید !!?`,
           messageBtn: `آره پاکش کن`,
         };
       }
@@ -43,7 +50,7 @@ function DeleteModal({ role, deleteAction, cancelAction, userMainInfo }) {
           </button>
           <button
             onClick={(e) => cancelAction()}
-            className="modal-btn col-span-1 border "
+            className="modal-btn col-span-1 border"
           >
             نه
           </button>

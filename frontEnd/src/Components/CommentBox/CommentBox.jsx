@@ -1,7 +1,6 @@
 import React from "react";
 
 function CommentBox({ ...props }) {
-  console.log(Boolean(props.creator));
   return (
     <>
       <div className="comment__contnet">

@@ -38,7 +38,7 @@
 .custom-fillter__dropdown {
   user-select: none;
   top: 9rem;
-  left: -5rem;
+  left: 0;
   position: absolute;
   background-color: var(--box-color-glass);
   border-bottom: 0.2rem solid var(--primary-color);

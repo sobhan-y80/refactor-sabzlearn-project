@@ -53,12 +53,14 @@
   }
 
   .delete_btn-modal {
+    color: var(--white-color);
     border: 0.2rem solid var(--dangerous);
+    background-color: var(--dangerous);
   }
 
   .delete_btn-modal:hover {
     color: var(--white-color);
-    background-color: var(--dangerous);
+    background-color: transparent;
   }
 
   @keyframes fadeIn {

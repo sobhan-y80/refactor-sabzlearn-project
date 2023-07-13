@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import ModalHOC from "../../../HOCs/ModalHOC";
 
 function EditModal({ updateAction, cancelAction, userMainInfo, children }) {
-  console.log(children);
   return ReactDOM.createPortal(
     <>
       <div id="modal-content" className="no-graphic">

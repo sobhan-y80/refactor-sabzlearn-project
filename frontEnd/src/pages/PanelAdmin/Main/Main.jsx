@@ -299,7 +299,7 @@ function Main() {
           </span>
         </div>
         <div className="overflow-x-auto">
-          <table className="tabel w-full min-w-max table-auto text-right">
+          <table className="tabel w-full min-w-max table-auto text-center">
             <thead>
               <tr>
                 <th>#</th>
@@ -319,7 +319,7 @@ function Main() {
                     <td>{user.username}</td>
                     <td>{user.email}</td>
                     <td>{user.phone}</td>
-                    <td>
+                    <td className="flex justify-center">
                       <button
                         onClick={(e) => actionEditHandler(user)}
                         className="actionEdit"
@@ -384,7 +384,7 @@ function Main() {
           role="Delete"
           deleteAction={deleteMemberAction}
           cancelAction={cancelDeleteMemberAction}
-          userMainInfo={mainUserDataInfo}
+          MainInfo={mainUserDataInfo}
         ></DeleteModal>
       )}
       {isModalBan && (
@@ -392,7 +392,7 @@ function Main() {
           role="Ban"
           deleteAction={banMemberAction}
           cancelAction={cancelBanMemberAction}
-          userMainInfo={mainUserDataInfo}
+          MainInfo={mainUserDataInfo}
         ></DeleteModal>
       )}
       {isModalEdit && (
