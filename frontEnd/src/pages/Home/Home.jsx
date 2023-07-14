@@ -94,15 +94,12 @@ const Home = () => {
           </div>
           <div className="courses-contnet">
             <div className="container-fluid">
-              <div
-                id="courses__container"
-                className="grid gap-4 grid-cols-2 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 "
-              >
+              <div id="courses__container" className="grid gap-4 grid-cols-12">
                 <PaginationCustom
                   arrays={allCourses}
                   CurentPage={1}
                   pageItemCount={4}
-                  parentClassNameHolder={`grid-cols-1 flex justify-center items-center`}
+                  parentClassNameHolder={`col-span-6 md:col-span-4 lg:col-span-3 flex justify-center items-center`}
                 ></PaginationCustom>
               </div>
             </div>

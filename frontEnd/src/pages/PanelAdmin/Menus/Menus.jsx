@@ -174,7 +174,7 @@ function Menus() {
               <div className="col-span-12 my-5">
                 <div className="courses-header__left">
                   <div className="courses-header__select-wrapper">
-                    <div className="courses-header__custom-fillter w-6/12">
+                    <div className="courses-header__custom-fillter w-full md:w-6/12">
                       <span className="custom-fillter__default">
                         <span
                           id="custom-filter__selection-name"
@@ -233,7 +233,7 @@ function Menus() {
                 لیست منو ها
               </h2>
             </div>
-            <div className="panel-home__users-table">
+            <div className="panel-home__users-table overflow-x-auto">
               <table className="tabel w-full min-w-max table-auto text-center">
                 <thead>
                   <tr>

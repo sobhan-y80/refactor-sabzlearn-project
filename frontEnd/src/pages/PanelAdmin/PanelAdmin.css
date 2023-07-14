@@ -527,8 +527,6 @@ table button {
   fill: var(--white-color);
 }
 
-.detail-list {
-}
 .detail-list__item {
   cursor: pointer;
   padding: 0.5rem;
@@ -546,6 +544,13 @@ table button {
 
 .detail-list__item:hover .detail-item__text {
   font-weight: 600;
+}
+
+.detail-item__text {
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .detail-remove-btn {

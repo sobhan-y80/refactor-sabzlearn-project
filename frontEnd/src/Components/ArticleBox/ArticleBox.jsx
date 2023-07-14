@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./ArticleBox.css";
+import { mainUrl } from "../../Utils/Utils";
 
 function ArticleBox({ ...props }) {
   return (
@@ -14,7 +15,7 @@ function ArticleBox({ ...props }) {
           <div className="article-box__background-img"></div>
           <img
             className="article-box__img"
-            src={`http://localhost:4000/courses/covers/${props.cover}`}
+            src={`${mainUrl}/courses/covers/${props.cover}`}
             alt=""
           />
         </div>
@@ -25,7 +26,7 @@ function ArticleBox({ ...props }) {
           <span className="article-box__subtitle hpc__short-text">
             {props.description}
           </span>
-          <a href="#" className="article-box__link">
+          <a href="#" className="article-box__link text-sm">
             بیشتر بخون...
           </a>
         </div>

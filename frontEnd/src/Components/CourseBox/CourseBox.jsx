@@ -65,14 +65,10 @@ const CourseBox = ({ smalMode, ...props }) => {
           </span>
         </div>
         <div className="course-box__student-wrapper col-span-2 w-full sm:col-span-1 sm:w-auto">
-          <span
-            className={`course-box__studnet-count hpc__gold ${
-              smalMode ? "text-lg" : ""
-            }`}
-          >
+          <span className={`course-box__studnet-count hpc__gold text-lg`}>
             {props.registers ? props.registers : "دانشجو ندارد"}
           </span>
-          <span className="course-box__studnet-name text-sm">
+          <span className="course-box__studnet-name text-lg">
             {props.registers ? "دانشجو" : ""}
           </span>
         </div>
