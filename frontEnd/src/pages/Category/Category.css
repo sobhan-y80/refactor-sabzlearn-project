@@ -18,6 +18,7 @@
   position: relative;
 }
 .custom-fillter__default {
+  height: 100%;
   user-select: none;
   padding: 2rem 1.5rem;
   border-radius: 1rem;

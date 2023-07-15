@@ -1018,32 +1018,33 @@ const Product = () => {
                               id="more-product-wrapper"
                             >
                               {/* <!-- data loaded from js --> */}
-                              {shuffledRelatedCourse
-                                .slice(0, 3)
-                                .map((course) => (
-                                  <div
-                                    key={course._id}
-                                    className="col-span-12 md:col-span-4 my-3 md:my-0"
-                                  >
-                                    <Link
-                                      to={`${course.shortName}`}
-                                      className="more-product__link"
+                              {shuffledRelatedCourse.length &&
+                                shuffledRelatedCourse
+                                  .slice(0, 3)
+                                  .map((course) => (
+                                    <div
+                                      key={course._id}
+                                      className="col-span-12 md:col-span-4 my-3 md:my-0"
                                     >
-                                      <div className="more-product__img-wrapper">
-                                        <img
-                                          src={`${mainUrl}/courses/covers/${course.cover}`}
-                                          alt="more-product"
-                                          className="more-product__img"
-                                        />
-                                      </div>
-                                      <div className="more-product__content">
-                                        <span className="more-prodcut__product-title truncate">
-                                          {course.name}
-                                        </span>
-                                      </div>
-                                    </Link>
-                                  </div>
-                                ))}
+                                      <Link
+                                        to={`${course.shortName}`}
+                                        className="more-product__link"
+                                      >
+                                        <div className="more-product__img-wrapper">
+                                          <img
+                                            src={`${mainUrl}/courses/covers/${course.cover}`}
+                                            alt="more-product"
+                                            className="more-product__img"
+                                          />
+                                        </div>
+                                        <div className="more-product__content">
+                                          <span className="more-prodcut__product-title truncate">
+                                            {course.name}
+                                          </span>
+                                        </div>
+                                      </Link>
+                                    </div>
+                                  ))}
                             </div>
                           </div>
                         </div>

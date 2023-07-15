@@ -1,6 +1,7 @@
 import React from "react";
 
 const TextAreaInputType = ({
+  mode,
   onChange,
   focusHandler,
   blurHandler,
@@ -23,7 +24,11 @@ const TextAreaInputType = ({
         <span className="input-box__placeholder">
           {placeholder ? placeholder : children}
         </span>
-        <i className="input-box__shape"></i>
+        <i
+          className={`input-box__shape  ${
+            mode === "dark-input" ? "bg-[#242532]" : ""
+          }`}
+        ></i>
       </div>
     </>
   );

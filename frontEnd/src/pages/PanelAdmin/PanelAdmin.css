@@ -567,3 +567,23 @@ table button {
 .close_detail-modal:hover {
   background-color: transparent;
 }
+
+.radion-group {
+  border: 0.15rem solid var(--primary-color);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.radio-item-wrapper label {
+  font-weight: 600;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-item-wrapper:is(.active) label {
+  color: var(--dark-color);
+  background-color: var(--primary-color);
+}

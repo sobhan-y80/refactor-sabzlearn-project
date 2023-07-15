@@ -34,6 +34,7 @@ const InputBox = ({
   children,
   validations,
   onInputHandler,
+  mode = null,
 }) => {
   const inputFocusHandler = (e) => {
     e.target.classList.add("active");
@@ -67,6 +68,7 @@ const InputBox = ({
   if (type === "password") {
     return (
       <PasswordInputType
+        mode={mode}
         placeholder={placeHolder}
         children={children}
         focusHandler={inputFocusHandler}
@@ -81,6 +83,7 @@ const InputBox = ({
   } else if (type === "textarea") {
     return (
       <TextAreaInputType
+        mode={mode}
         placeholder={placeHolder}
         children={children}
         onChange={(e) => onChangeHandler(e)}
@@ -94,15 +97,12 @@ const InputBox = ({
     );
   } else if (type === "file") {
     return (
-      <FileInputType
-        placeholder={placeHolder}
-        focusHandler={inputFocusHandler}
-        blurHandler={inputBlurHandler}
-      ></FileInputType>
+      <FileInputType mode={mode} placeholder={placeHolder}></FileInputType>
     );
   } else if (type === "email") {
     return (
       <EmailInputType
+        mode={mode}
         placeholder={`ایمیل`}
         onChange={(e) => onChangeHandler(e)}
         blurHandler={inputBlurHandler}
@@ -122,7 +122,7 @@ const InputBox = ({
           onBlur={(e) => inputBlurHandler(e)}
           onChange={(e) => onChangeHandler(e)}
           id={id}
-          type="text"
+          type={`${type === "number" ? "number" : "text"}`}
           value={mainInput.value}
           className={`input-box__input ${mainInput.value ? "active" : ""} ${
             mainInput.isValid ? "success" : "err"
@@ -134,7 +134,7 @@ const InputBox = ({
         </span>
         <i
           className={`input-box__shape ${
-            type === "dark-input" ? "bg-[#242532]" : ""
+            mode === "dark-input" ? "bg-[#242532]" : ""
           }`}
         ></i>
       </div>

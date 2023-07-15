@@ -1,15 +1,15 @@
 import React from "react";
 
-const FileInputType = ({ focusHandler, blurHandler }) => {
+const FileInputType = ({ mode }) => {
   return (
     <>
       <div className="login-form__input-box">
         <label
           htmlFor="login-form__file-input"
-          className="login-form__drop-wrapper"
+          className={`login-form__drop-wrapper ${
+            mode === "dark-input" ? "bg-[#242532]" : ""
+          }`}
         >
-          <span className="drop-title">فایل رو دراپ کن</span>
-          یا
           <input
             onFocus={(e) => focusHandler(e)}
             onBlur={(e) => blurHandler(e)}

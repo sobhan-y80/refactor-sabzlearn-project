@@ -202,7 +202,6 @@ function Menus() {
                       <div className="custom-fillter__dropdown">
                         {leaderMenus.length && (
                           <CategoryBar
-                            isvalueDefault={true}
                             setCategoryId={setParentCategoryID}
                             mainItemCategoryCourse={mainItemCategoryCourse}
                             categorItemArray={leaderMenus}

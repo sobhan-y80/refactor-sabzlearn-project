@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const EmailInputType = ({
+  mode,
   onChange,
   focusHandler,
   blurHandler,
@@ -26,7 +27,11 @@ const EmailInputType = ({
         <span className="input-box__placeholder">
           {placeholder ? placeholder : children}
         </span>
-        <i className="input-box__shape"></i>
+        <i
+          className={`input-box__shape  ${
+            mode === "dark-input" ? "bg-[#242532]" : ""
+          }`}
+        ></i>
       </div>
     </>
   );

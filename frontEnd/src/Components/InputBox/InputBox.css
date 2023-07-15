@@ -260,7 +260,6 @@
 .login-form__file-input {
   padding: 0;
   width: unset;
-  font-family: var(--seccend-font);
 }
 
 input[type="file"]::file-selector-button {
@@ -281,16 +280,13 @@ input[type="file"]::file-selector-button:hover {
 .login-form__drop-wrapper {
   cursor: pointer;
   color: var(--text-main-header-color);
-  height: 15rem;
+  height: 100%;
   padding: 1rem 0;
   border: 0.1rem solid var(--box-color);
   border-radius: 10px;
   background-color: var(--box-color);
   transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
   position: relative;
 }
 

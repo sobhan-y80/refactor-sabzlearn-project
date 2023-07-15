@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const PasswordInputType = ({
+  mode,
   focusHandler,
   blurHandler,
   placeholder,
@@ -46,7 +47,11 @@ const PasswordInputType = ({
         <span className="input-box__placeholder">
           {placeholder ? placeholder : children}
         </span>
-        <i className="input-box__shape"></i>
+        <i
+          className={`input-box__shape  ${
+            mode === "dark-input" ? "bg-[#242532]" : ""
+          }`}
+        ></i>
       </div>
     </>
   );
