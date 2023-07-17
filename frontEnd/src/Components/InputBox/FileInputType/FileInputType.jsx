@@ -1,6 +1,6 @@
 import React from "react";
 
-const FileInputType = ({ mode }) => {
+const FileInputType = ({ mode, onChange, onInputHandel }) => {
   return (
     <>
       <div className="login-form__input-box">
@@ -11,13 +11,15 @@ const FileInputType = ({ mode }) => {
           }`}
         >
           <input
-            onFocus={(e) => focusHandler(e)}
-            onBlur={(e) => blurHandler(e)}
+            onChange={(e) => {
+              onChange(e);
+              onInputHandel(e);
+            }}
+            accept="image/*"
             title="فایل خود را انتخاب کنید"
             type="file"
             className="input-box__input login-form__file-input"
             id="login-form__file-input"
-            accept="image/*"
             required
           />
         </label>

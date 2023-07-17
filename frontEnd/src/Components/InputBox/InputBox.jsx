@@ -35,6 +35,7 @@ const InputBox = ({
   validations,
   onInputHandler,
   mode = null,
+  onChange = null,
 }) => {
   const inputFocusHandler = (e) => {
     e.target.classList.add("active");
@@ -54,13 +55,23 @@ const InputBox = ({
     onInputHandler(id, value, isValid);
   }, [value]);
 
-  const onChangeHandler = (e) => {
-    dipatch({
-      type: "CHANGE",
-      value: e.target.value,
-      isValid: true,
-      validation: validations,
-    });
+  const onChangeHandler = (e, inputType = null) => {
+    //
+    if (inputType) {
+      dipatch({
+        type: "CHANGE",
+        value: e.target.files[0].name,
+        isValid: true,
+        validation: validations,
+      });
+    } else {
+      dipatch({
+        type: "CHANGE",
+        value: e.target.value,
+        isValid: true,
+        validation: validations,
+      });
+    }
   };
 
   // ------------------- Fix File Left Behind -------------------
@@ -97,7 +108,12 @@ const InputBox = ({
     );
   } else if (type === "file") {
     return (
-      <FileInputType mode={mode} placeholder={placeHolder}></FileInputType>
+      <FileInputType
+        onChange={(e) => onChange(e)}
+        onInputHandel={(e) => onChangeHandler(e)}
+        mode={mode}
+        placeholder={placeHolder}
+      ></FileInputType>
     );
   } else if (type === "email") {
     return (

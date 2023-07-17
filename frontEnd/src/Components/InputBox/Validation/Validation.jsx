@@ -3,7 +3,7 @@ import Rules from "./Rules";
 const validator = (value, validation) => {
   const validationResualt = [];
 
-  const mainValue = value.trim();
+  const mainValue = !validator.value === Rules.fileImageValue && value.trim();
 
   for (const validator of validation) {
     if (validator.value === Rules.requiredValue) {
@@ -17,6 +17,9 @@ const validator = (value, validation) => {
     }
     if (validator.value === Rules.emailValue) {
       !testEmail(value) && validationResualt.push(false);
+    }
+    if (validator.value === Rules.fileImageValue) {
+      value.length === 0 && validationResualt.push(false);
     }
   }
 

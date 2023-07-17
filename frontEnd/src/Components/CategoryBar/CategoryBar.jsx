@@ -8,7 +8,6 @@ function CategoryBar({
   isKey = false,
   setCategoryId = null,
 }) {
-  console.log("categorItemArray", categorItemArray);
   const [itemCategoryCourse, setItemCategoryCourse] = useState([]);
 
   const changeCategorySortHandler = (e) => {

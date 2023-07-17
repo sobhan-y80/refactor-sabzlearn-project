@@ -14,7 +14,6 @@
   cursor: pointer;
   color: var(--white-color);
   font-size: 2rem;
-  padding: 1rem 0;
   position: relative;
 }
 .custom-fillter__default {
@@ -29,6 +28,11 @@
   gap: 1.5rem;
 }
 
+.custom-fillter__default:hover,
+:has(.custom-fillter__dropdown:hover) .custom-fillter__default {
+  border-radius: 1rem 1rem 0 0;
+}
+
 .custom-fillter-icon {
   transition: transform 200ms;
 }
@@ -38,13 +42,13 @@
 }
 .custom-fillter__dropdown {
   user-select: none;
-  top: 9rem;
+  top: 100%;
   left: 0;
   position: absolute;
   background-color: var(--box-color-glass);
   border-bottom: 0.2rem solid var(--primary-color);
   transition: all 150ms ease-in-out;
-  border-radius: 1.5rem;
+  border-radius: 0 0 1.5rem 1.5rem;
   width: 100%;
   z-index: -1;
   overflow: hidden;

@@ -1,38 +1,60 @@
 import React, { useEffect, useState } from "react";
 import InputBox from "../../../Components/InputBox/InputBox";
-import { requiredValidatior } from "../../../Components/InputBox/Validation/Rules";
+import {
+  fileValidator,
+  requiredValidatior,
+} from "../../../Components/InputBox/Validation/Rules";
 import { useForm } from "../../../Hooks/useForm";
 import CategoryBar from "../../../Components/CategoryBar/CategoryBar";
 import { mainUrlApi } from "../../../Utils/Utils";
-import { toast } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 
 function Products() {
   const [statusNewCourse, setStatusNewCourse] = useState(false);
   // false === preSell , true === running
   const [formState, onInputHandler] = useForm(
     {
-      itemName: {
+      CourseName: {
         value: "",
         isValid: false,
       },
-      hrefItemName: {
+      CourseShortName: {
+        value: "",
+        isValid: false,
+      },
+      CourseHref: {
+        value: "",
+        isValid: false,
+      },
+      CoursePrice: {
+        value: "",
+        isValid: false,
+      },
+      courseImage: {
+        value: "",
+        isValid: false,
+      },
+      CourseDesc: {
+        value: "",
+        isValid: false,
+      },
+      CourseSupport: {
         value: "",
         isValid: false,
       },
     },
     false
   );
-
   const [mainItemCategoryCourse, setMainItemCategoryCourse] = useState({
-    _id: "5",
+    _id: "-1",
     title: "یک دسته بندی انتخاب کن",
   });
-
   const [categoyCourse, setCategoyCourse] = useState([]);
   const [parentCategoryID, setParentCategoryID] = useState(-1);
-
   const [categoyCourseWithDefaultValue, setCategoyCourseWithDefaultValue] =
     useState([]);
+  const [categoryCover, setCategoryCover] = useState(null);
+
   const getCategoryCourse = async () => {
     fetch(`${mainUrlApi}/category`).then(async (res) => {
       if (res.status === 404) {
@@ -40,31 +62,67 @@ function Products() {
       } else if (res.status === 200) {
         const categoryData = await res.json();
 
-        console.log("categoryData : ", categoryData);
-        console.log("categoryData Type OF : ", typeof categoryData);
-        let mainLeaderMenusWithDefualtValue = [...categoryData].push(
-          mainItemCategoryCourse
-        );
+        let mainLeaderMenusWithDefualtValue = [
+          ...categoryData,
+          mainItemCategoryCourse,
+        ];
         setCategoyCourseWithDefaultValue(mainLeaderMenusWithDefualtValue);
         setCategoyCourse(categoryData);
       }
     });
   };
 
+  console.log(categoryCover);
+
+  const addNewProductHandler = () => {
+    if (formState.isFormValid && parentCategoryID != -1) {
+      const localStorageData = JSON.parse(localStorage.getItem("token"));
+
+      const mainStatus = statusNewCourse ? "start" : "presell";
+      console.log(mainStatus);
+
+      let formData = new FormData();
+
+      formData.append("name", formState.inputs.CourseName.value);
+      formData.append("description", formState.inputs.CourseDesc.value);
+      formData.append("shortName", formState.inputs.CourseShortName.value);
+      formData.append("categoryID", parentCategoryID);
+      formData.append("price", formState.inputs.CoursePrice.value);
+      formData.append("support", formState.inputs.CourseSupport.value);
+      formData.append("status", mainStatus);
+      formData.append("cover", categoryCover.name);
+
+      console.log(formData);
+
+      // const mainNewProductObj = {
+      //   name: formState.inputs.CourseName.value,
+      //   description: formState.inputs.CourseDesc.value,
+      //   cover: formState.inputs.courseImage.value,
+      //   shortName: formState.inputs.CourseShortName.value,
+      //   price: formState.inputs.CoursePrice.value,
+      //   status: mainStatus,
+      //   categoryID: parentCategoryID,
+      // };
+
+      fetch(`${mainUrlApi}/courses`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorageData.token}`,
+        },
+        body: JSON.stringify(formData),
+      }).then((res) => {
+        console.log(res);
+      });
+    } else {
+      toast.error("مشخصات رو کامل پر کنید");
+    }
+  };
+
+  console.log(categoryCover);
+  console.log(formState);
   useEffect(() => {
     getCategoryCourse();
   }, []);
-
-  // useEffect(() => {
-  //   // let mainLeaderMenusWithDefualtValue = [...categoyCourse].push(
-  //   //   mainItemCategoryCourse
-  //   // );
-  //   // console.log(
-  //   //   "mainLeaderMenusWithDefualtValue",
-  //   //   mainLeaderMenusWithDefualtValue
-  //   // );
-
-  // }, [categoyCourse]);
 
   return (
     <>
@@ -84,7 +142,16 @@ function Products() {
               <div className="col-span-12 lg:col-span-6 my-5">
                 <InputBox
                   mode="dark-input"
-                  id="CourseCover"
+                  id="CourseShortName"
+                  onInputHandler={onInputHandler}
+                  placeHolder="نام کوتاه"
+                  validations={[requiredValidatior()]}
+                ></InputBox>
+              </div>
+              <div className="col-span-12 lg:col-span-6 my-5">
+                <InputBox
+                  mode="dark-input"
+                  id="CourseHref"
                   onInputHandler={onInputHandler}
                   placeHolder="لینک منو"
                   validations={[requiredValidatior()]}
@@ -93,7 +160,7 @@ function Products() {
               <div className="col-span-12 lg:col-span-6 my-5">
                 <InputBox
                   mode="dark-input"
-                  id="CourseShortName"
+                  id="CoursePrice"
                   type="number"
                   onInputHandler={onInputHandler}
                   placeHolder="قیمت دوره"
@@ -103,54 +170,58 @@ function Products() {
               <div className="col-span-12 lg:col-span-6 my-5">
                 <InputBox
                   mode="dark-input"
-                  id="CoursePrice"
+                  id="CourseSupport"
                   onInputHandler={onInputHandler}
-                  placeHolder="نحوه پشتیبانی"
+                  placeHolder="پشتیبانی"
                   validations={[requiredValidatior()]}
                 ></InputBox>
               </div>
               <div className="col-span-12 lg:col-span-6 my-5">
                 <InputBox
                   mode="dark-input"
-                  validations={[requiredValidatior()]}
+                  id="courseImage"
+                  validations={[fileValidator()]}
                   onInputHandler={onInputHandler}
+                  onChange={(e) => setCategoryCover(e.target.files[0])}
                   type="file"
                 ></InputBox>
               </div>
               <div className="col-span-12 lg:col-span-6 my-5">
-                <span className="custom-fillter__default">
-                  <span
-                    id="custom-filter__selection-name"
-                    className="custom-fillter__default-name"
-                  >
-                    {mainItemCategoryCourse.title}
+                <div className="courses-header__custom-fillter w-full">
+                  <span className="custom-fillter__default">
+                    <span
+                      id="custom-filter__selection-name"
+                      className="custom-fillter__default-name"
+                    >
+                      {mainItemCategoryCourse.title}
+                    </span>
+                    <svg
+                      className="svg-inline--fa fa-angle-down custom-fillter-icon"
+                      aria-hidden="true"
+                      focusable="false"
+                      data-prefix="fas"
+                      data-icon="angle-down"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 448 512"
+                      data-fa-i2svg=""
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+                      ></path>
+                    </svg>
                   </span>
-                  <svg
-                    className="svg-inline--fa fa-angle-down custom-fillter-icon"
-                    aria-hidden="true"
-                    focusable="false"
-                    data-prefix="fas"
-                    data-icon="angle-down"
-                    role="img"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 448 512"
-                    data-fa-i2svg=""
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
-                    ></path>
-                  </svg>
-                </span>
-                <div className="custom-fillter__dropdown">
-                  {/* {categoyCourse.length && (
-                    <CategoryBar
-                      setCategoryId={setParentCategoryID}
-                      mainItemCategoryCourse={mainItemCategoryCourse}
-                      categorItemArray={categoyCourseWithDefaultValue}
-                      setMainItemCategoryCourse={setMainItemCategoryCourse}
-                    ></CategoryBar>
-                  )} */}
+                  <div className="custom-fillter__dropdown">
+                    {categoyCourse.length && (
+                      <CategoryBar
+                        setCategoryId={setParentCategoryID}
+                        mainItemCategoryCourse={mainItemCategoryCourse}
+                        categorItemArray={categoyCourseWithDefaultValue}
+                        setMainItemCategoryCourse={setMainItemCategoryCourse}
+                      ></CategoryBar>
+                    )}
+                  </div>
                 </div>
               </div>
               <div className="col-span-12 my-5">
@@ -159,7 +230,7 @@ function Products() {
                   id="CourseDesc"
                   type="textarea"
                   placeHolder="توضیحات دوره"
-                  validations={[requiredValidatior]}
+                  validations={[requiredValidatior()]}
                   onInputHandler={onInputHandler}
                 ></InputBox>
               </div>
@@ -204,6 +275,7 @@ function Products() {
             </div>
             <div className="col-span-12 my-5">
               <button
+                onClick={addNewProductHandler}
                 id="submit-new-user-btn"
                 className="login-form__submit w-full"
               >
@@ -234,6 +306,7 @@ function Products() {
           </table>
         </div>
       </div>
+      <Toaster></Toaster>
     </>
   );
 }
