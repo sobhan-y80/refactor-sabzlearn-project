@@ -14,7 +14,7 @@
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(1rem);
-    animation: fadeIn 500ms cubic-bezier(0.19, 1, 0.22, 1);
+    animation: fadeIn 1200ms cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   #modal-content > div {
@@ -33,6 +33,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: unset;
     -webkit-backdrop-filter: unset;
+    animation: fadeInNoGrap 1200ms cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   #modal-wrapper.no-graphic div {
@@ -87,6 +88,21 @@
     }
     100% {
       backdrop-filter: blur(1rem);
+    }
+  }
+
+  @keyframes fadeInNoGrap {
+    0% {
+      transform: translateY(-100%) scale(0.2);
+      background-color: unset;
+    }
+    50% {
+      transform: translateY(0) scale(0.7);
+      background-color: unset;
+    }
+    60% {
+      transform: translateY(0) scale(1);
+      background-color: unset;
     }
   }
 }

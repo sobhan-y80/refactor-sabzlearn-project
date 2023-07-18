@@ -460,8 +460,9 @@ table tr:hover:not(thead tr) {
 }
 
 table > :not(caption) > * > * {
-  padding: 1rem 1.5rem;
+  padding: 1rem 0.5rem;
   white-space: nowrap;
+  vertical-align: middle;
 }
 
 td {
