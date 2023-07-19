@@ -5,7 +5,7 @@ import ModalHOC from "../../../HOCs/ModalHOC";
 function EditModal({ updateAction, cancelAction, userMainInfo, children }) {
   return ReactDOM.createPortal(
     <>
-      <div id="modal-content" className="no-graphic">
+      <div id="modal-content">
         <div className="grid grid-cols-2 justify-items-center items-center gap-y-14">
           <div className="col-span-2 w-11/12 flex flex-col gap-14 pt-14">
             {children}

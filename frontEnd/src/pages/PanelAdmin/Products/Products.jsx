@@ -132,6 +132,7 @@ function Products() {
       if (res.status === 404) {
         toast.error("دوره ای یافت نشد");
       } else if (res.status === 200) {
+        getCourse();
         toast.success(`دوره ${mainCategoryId.name} با موفقیت پاک شد`);
       }
     });
@@ -198,7 +199,7 @@ function Products() {
                   validations={[requiredValidatior()]}
                 ></InputBox>
               </div>
-              <div className="col-span-12 lg:col-span-6 my-5"></div>
+              <div className="hidden col-span-12 lg:col-span-6 my-5 lg:block"></div>
               <div className="col-span-12 lg:col-span-6 my-5">
                 <InputBox
                   mode="dark-input"
@@ -262,8 +263,9 @@ function Products() {
               dir="ltr"
               className="col-span-12 grid gap-10 grid-cols-12 flex-row-reverse"
             >
-              <div className="col-span-12 hpc__part-section bg-[#242532] flex items-center justify-between">
-                <div className="w-3/12 h-full grid grid-cols-2 text-center radion-group">
+              <div className="col-span-12 hpc__part-section bg-[#242532] flex flex-col gap-5 items-center justify-between lg:flex-row-reverse">
+                <h2 className="panel-home__title">وضعیت دوره</h2>
+                <div className="w-10/12 lg:w-3/12 h-full grid grid-cols-2 text-center radion-group">
                   <div
                     className={`col-span-1 radio-item-wrapper ${
                       !statusNewCourse ? "active" : ""
@@ -293,7 +295,6 @@ function Products() {
                     <label htmlFor="courseStatusRun">در حال برگذاری</label>
                   </div>
                 </div>
-                <h2 className="panel-home__title">وضعیت دوره</h2>
               </div>
             </div>
             <div className="col-span-12 my-5">
@@ -312,12 +313,12 @@ function Products() {
             <span className="hpc__title">تمامی دوره ها</span>
           </span>
         </div>
-        <div className="panel-home__users-table table-responsive">
+        <div className="overflow-x-auto">
           <table className="table text-center">
             <thead>
               <tr>
                 <th>#</th>
-                <th>عکس</th>
+                <th className="hidden lg:block">عکس</th>
                 <th>نام دوره</th>
                 <th>مبلغ</th>
                 <th>تعداد شرکت کننده</th>
@@ -330,9 +331,9 @@ function Products() {
               {allCourses.map((course, index) => (
                 <tr key={course._id}>
                   <td>{index + 1}</td>
-                  <td>
+                  <td className="hidden lg:block">
                     <img
-                      width="100px"
+                      className="w-full"
                       src={`${mainUrl}/courses/covers/${course.cover}`}
                       alt=""
                     />
@@ -351,7 +352,7 @@ function Products() {
                   <td>{course.courseAverageScore}</td>
                   <td>
                     {course.status === "start"
-                      ? "در حال تتدریس"
+                      ? "در حال تدریس"
                       : "در حال پیشفروش"}
                   </td>
 

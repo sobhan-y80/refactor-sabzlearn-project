@@ -52,7 +52,7 @@ function DetailModal({
   if (typeInfoShow === "row") {
     return ReactDOM.createPortal(
       <>
-        <div id="modal-content" className="row no-graphic">
+        <div id="modal-content" className="row">
           <div className="flex flex-col gap-3">
             <ul className="detail-list flex flex-col gap-2">
               {mainInfoItems.map((menu) => (
