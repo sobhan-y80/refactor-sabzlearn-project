@@ -3,7 +3,7 @@ import Rules from "./Rules";
 const validator = (value, validation) => {
   const validationResualt = [];
 
-  const mainValue = !validator.value === Rules.fileImageValue && value.trim();
+  const mainValue = value.trim();
 
   for (const validator of validation) {
     if (validator.value === Rules.requiredValue) {

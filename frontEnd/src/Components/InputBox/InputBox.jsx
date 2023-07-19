@@ -86,9 +86,7 @@ const InputBox = ({
         blurHandler={inputBlurHandler}
         onChange={(e) => onChangeHandler(e)}
         value={mainInput.value}
-        className={`${mainInput.value ? "active" : ""} ${
-          mainInput.isValid ? "success" : "err"
-        }`}
+        className={`${value ? "active" : ""} ${isValid ? "success" : "err"}`}
       ></PasswordInputType>
     );
   } else if (type === "textarea") {
@@ -101,16 +99,14 @@ const InputBox = ({
         focusHandler={inputFocusHandler}
         blurHandler={inputBlurHandler}
         value={mainInput.value}
-        className={`${mainInput.value ? "active" : ""} ${
-          mainInput.isValid ? "success" : "err"
-        }`}
+        className={`${value ? "active" : ""} ${isValid ? "success" : "err"}`}
       ></TextAreaInputType>
     );
   } else if (type === "file") {
     return (
       <FileInputType
         onChange={(e) => onChange(e)}
-        onInputHandel={(e) => onChangeHandler(e)}
+        onInputHandel={(e) => onChangeHandler(e, true)}
         mode={mode}
         placeholder={placeHolder}
       ></FileInputType>
@@ -125,8 +121,8 @@ const InputBox = ({
         focusHandler={inputFocusHandler}
         children={children}
         value={mainInput.value}
-        className={`input-box__input ${mainInput.value ? "active" : ""} ${
-          mainInput.isValid ? "success" : "err"
+        className={`input-box__input ${value ? "active" : ""} ${
+          isValid ? "success" : "err"
         }`}
       ></EmailInputType>
     );
@@ -140,7 +136,7 @@ const InputBox = ({
           id={id}
           type={`${type === "number" ? "number" : "text"}`}
           value={mainInput.value}
-          className={`input-box__input ${mainInput.value ? "active" : ""} ${
+          className={`input-box__input ${value ? "active" : ""} ${
             mainInput.isValid ? "success" : "err"
           }`}
           autoComplete="off"

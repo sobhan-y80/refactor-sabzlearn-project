@@ -148,20 +148,25 @@ const Product = () => {
               <div className="col-span-2 lg:col-span-1 my-4 lg:my-0">
                 <div className="course-info__contnet">
                   <div className="course-info__price-wrapper flex justify-start items-center gap-5">
-                    <span className="course-info__price hpc__off">
-                      <span className="course-info__price-number">
-                        {courseInfo.price === 0
-                          ? 1_000_000
-                          : courseInfo.price.toLocaleString()}
+                    {courseInfo.discount ? (
+                      <span className="course-info__price hpc__off">
+                        <span className="course-info__price-number">
+                          {courseInfo.price === 0
+                            ? 1_000_000
+                            : courseInfo.price.toLocaleString()}
+                        </span>
+                        <span className="course-info__price-text">تومان</span>
                       </span>
-                      <span className="course-info__price-text">تومان</span>
-                    </span>
+                    ) : (
+                      ""
+                    )}
+
                     <span className="course-info__price-amount">
                       <span className="course-info__price-amount-number">
                         {courseInfo.price !== 0
-                          ? (
-                              (courseInfo.price * courseInfo.discount) /
-                              100
+                          ? (courseInfo.discount
+                              ? (courseInfo.price * courseInfo.discount) / 100
+                              : courseInfo.price
                             ).toLocaleString()
                           : "رایگان"}
                       </span>

@@ -9,6 +9,7 @@ import CategoryBar from "../../../Components/CategoryBar/CategoryBar";
 import { mainUrl, mainUrlApi } from "../../../Utils/Utils";
 import { Toaster, toast } from "react-hot-toast";
 import DeleteModal from "../../../Components/Modals/DeleteModal/DeleteModal";
+import { Link } from "react-router-dom";
 
 function Products() {
   const [statusNewCourse, setStatusNewCourse] = useState(false);
@@ -93,8 +94,6 @@ function Products() {
       formData.append("status", mainStatus);
       formData.append("cover", categoryCover);
 
-      console.log(formData);
-
       fetch(`${mainUrlApi}/courses`, {
         method: "POST",
         headers: {
@@ -102,7 +101,12 @@ function Products() {
         },
         body: formData,
       }).then((res) => {
-        console.log(res);
+        if (res.status === 201) {
+          toast.success("دوره با موفقیت ساخته شد");
+          getCourse();
+        } else if (res.status === 400) {
+          toast.error("خطا در سرور");
+        }
       });
     } else {
       toast.error("مشخصات رو کامل پر کنید");
@@ -308,10 +312,10 @@ function Products() {
             </div>
           </div>
         </div>
-        <div className="panel-home__last-users__title">
-          <span>
-            <span className="hpc__title">تمامی دوره ها</span>
-          </span>
+      </div>
+      <div className="hpc__part-section flex flex-col gap-5">
+        <div className="panel-home__last-users__title hpc__title">
+          تمامی دوره ها
         </div>
         <div className="overflow-x-auto">
           <table className="table text-center">
@@ -331,14 +335,20 @@ function Products() {
               {allCourses.map((course, index) => (
                 <tr key={course._id}>
                   <td>{index + 1}</td>
-                  <td className="hidden lg:block">
-                    <img
-                      className="w-full"
-                      src={`${mainUrl}/courses/covers/${course.cover}`}
-                      alt=""
-                    />
+                  <td className="hidden lg:block w-44">
+                    <Link to={`/Course/${course.shortName}`}>
+                      <img
+                        className="w-full rounded-lg"
+                        src={`${mainUrl}/courses/covers/${course.cover}`}
+                        alt=""
+                      />
+                    </Link>
                   </td>
-                  <td>{course.name}</td>
+                  <td>
+                    <Link to={`/Course/${course.shortName}`}>
+                      {course.name}
+                    </Link>
+                  </td>
                   <td>
                     {course.price === 0
                       ? "رایگان"
