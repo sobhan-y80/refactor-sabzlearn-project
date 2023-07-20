@@ -68,7 +68,7 @@ const MenuSideBar = () => {
           </NavLink>
         </li>
         <li className="panel-sidebar__list">
-          <NavLink to="Orders" className="panel-sidebar__link">
+          <NavLink to="Categories" className="panel-sidebar__link">
             <img
               src="../images/panel/category.svg"
               alt="icon"

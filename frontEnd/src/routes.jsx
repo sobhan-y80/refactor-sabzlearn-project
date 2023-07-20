@@ -17,6 +17,7 @@ import DiscountCode from "./pages/PanelAdmin/DiscountCode/DiscountCode";
 import Orders from "./pages/PanelAdmin/Orders/Orders";
 import PrevArticle from "./pages/PanelAdmin/PrevArticle/PrevArticle";
 import NotFound from "./pages/NotFound/NotFound";
+import Categories from "./pages/PanelAdmin/Categories/Categories";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -41,6 +42,7 @@ const routes = [
       { path: "DiscountCode", element: <DiscountCode></DiscountCode> },
       { path: "Notification", element: <Notification></Notification> },
       { path: "PrevArticle", element: <PrevArticle></PrevArticle> },
+      { path: "Categories", element: <Categories></Categories> },
     ],
   },
 ];
