@@ -27,6 +27,13 @@ function DeleteModal({ role, deleteAction, cancelAction, MainInfo }) {
       };
       break;
     }
+    case "DELETE_ARTICLE": {
+      mainMessage = {
+        body: `از پاک کردن مقاله ${MainInfo.title} مطمعن هستید !!?`,
+        messageBtn: `آره پاکش کن`,
+      };
+      break;
+    }
     case "Ban": {
       mainMessage = {
         body: `از مسدود کردن ${MainInfo.name} مطمعن هستید !!؟`,

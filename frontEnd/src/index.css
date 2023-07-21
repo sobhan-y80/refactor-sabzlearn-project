@@ -14,7 +14,7 @@
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.5);
-    animation: fadeIn 1200ms cubic-bezier(0.19, 1, 0.22, 1);
+    animation: fadeInModal 1200ms cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   #modal-content > div {
@@ -58,7 +58,7 @@
     }
   }
 
-  @keyframes fadeIn {
+  @keyframes fadeInModal {
     0% {
       transform: translateY(-100%) scale(0.2);
       background-color: unset;

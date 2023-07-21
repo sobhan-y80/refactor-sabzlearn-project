@@ -231,10 +231,6 @@
 
 /* Start Style TextArea */
 
-.login-form__textarea-box {
-  margin-top: 2rem;
-}
-
 .login-form__textarea {
   width: 100%;
   transition: height 1000ms !important;

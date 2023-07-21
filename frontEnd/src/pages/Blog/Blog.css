@@ -1,4 +1,5 @@
-html {
+html,
+.main-blog {
   overflow-x: unset !important;
 }
 /* Start Main Styles */
@@ -229,7 +230,7 @@ html {
   background: #2f3041;
   box-shadow: inset 20px 20px 60px #282937, inset -20px -20px 60px #36374b;
   position: absolute;
-  top: -2rem;
+  top: -1rem;
   right: -2rem;
 }
 

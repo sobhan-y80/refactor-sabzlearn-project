@@ -7,7 +7,10 @@ const CourseBox = ({ smalMode, ...props }) => {
   return (
     <div className="course-box">
       <div className="course-box__img-wrapper">
-        <Link className="course-box__img-wrapper__link">
+        <Link
+          to={`/Course/${props.shortName}`}
+          className="course-box__img-wrapper__link"
+        >
           <img
             className="course-box__img inline-block"
             // src="images/courses/jango.png"
