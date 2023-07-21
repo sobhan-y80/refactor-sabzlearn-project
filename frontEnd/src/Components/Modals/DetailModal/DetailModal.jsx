@@ -11,45 +11,48 @@ function DetailModal({
   mainInfo,
   isDeleteHandler,
   setMainSubMenu,
+  propertyName,
 }) {
-  const [mainInfoItems, setMainInfoItems] = useState(mainInfo);
-  const [isModalDelete, setIsModalDelete] = useState(false);
-  const [main_Info, setMain_Info] = useState(null);
+  if (typeInfoShow === "READ_DELETE") {
+    const [mainInfoItems, setMainInfoItems] = useState(mainInfo);
+    const [isModalDelete, setIsModalDelete] = useState(false);
+    const [main_Info, setMain_Info] = useState(null);
 
-  const DeleteHandler = (MainInfo) => {
-    setMain_Info(MainInfo);
-    setIsModalDelete(true);
-  };
+    const DeleteHandler = (MainInfo) => {
+      setMain_Info(MainInfo);
+      setIsModalDelete(true);
+    };
 
-  const deleteInfoAction = () => {
-    const localStorageData = JSON.parse(localStorage.getItem("token"));
+    const deleteInfoAction = () => {
+      const localStorageData = JSON.parse(localStorage.getItem("token"));
 
-    fetch(`${mainUrlApi}/menus/${main_Info._id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${localStorageData.token}`,
-      },
-    }).then((res) => {
-      if (res.status === 200) {
-        toast.success(`منو ${main_Info.title} با موفقیت پاک شد`);
-        setMainInfoItems(mainInfo.filter((menu) => menu._id !== main_Info._id));
-      } else {
-        toast.error("خطا در ارتباط با سرور");
-      }
-    });
+      fetch(`${mainUrlApi}/menus/${main_Info._id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorageData.token}`,
+        },
+      }).then((res) => {
+        if (res.status === 200) {
+          toast.success(`منو ${main_Info.title} با موفقیت پاک شد`);
+          setMainInfoItems(
+            mainInfo.filter((menu) => menu._id !== main_Info._id)
+          );
+        } else {
+          toast.error("خطا در ارتباط با سرور");
+        }
+      });
 
-    setIsModalDelete(false);
-  };
+      setIsModalDelete(false);
+    };
 
-  const cancelDeleteAction = () => {
-    setIsModalDelete(false);
-  };
+    const cancelDeleteAction = () => {
+      setIsModalDelete(false);
+    };
 
-  useEffect(() => {
-    setMainSubMenu(mainInfoItems);
-  }, [mainInfoItems]);
+    useEffect(() => {
+      setMainSubMenu(mainInfoItems);
+    }, [mainInfoItems]);
 
-  if (typeInfoShow === "row") {
     return ReactDOM.createPortal(
       <>
         <div id="modal-content" className="row">
@@ -100,12 +103,18 @@ function DetailModal({
       </>,
       document.getElementById("modal-wrapper")
     );
-  } else {
+  } else if (typeInfoShow === "READ") {
     return ReactDOM.createPortal(
       <>
         <div id="modal-content">
-          <div className="w-8/12">
-            <button onClick={() => cancelAction()}>بستن</button>
+          <div className="w-3/12 flex flex-col gap-10 items-center">
+            <p className="w-full truncate">{mainInfo[propertyName]}</p>
+            <button
+              className="close_detail-modal w-full"
+              onClick={() => cancelAction()}
+            >
+              بستن
+            </button>
           </div>
         </div>
         <Toaster></Toaster>

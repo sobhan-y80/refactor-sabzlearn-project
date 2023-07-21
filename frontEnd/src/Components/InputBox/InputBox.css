@@ -231,14 +231,19 @@
 
 /* Start Style TextArea */
 
+.login-form__textarea-box {
+  margin-top: 2rem;
+}
+
 .login-form__textarea {
   width: 100%;
   transition: height 1000ms !important;
   border: none;
   resize: none;
+  padding: 0 1rem !important;
 }
 
-:has(.input-box__input.login-form__textarea.active) .login-form__textarea {
+:has(.login-form__textarea.active) .login-form__textarea {
   height: 8rem;
   padding: 1rem;
   transform: translateY(1.2rem);
@@ -246,12 +251,20 @@
 }
 
 .login-form__textarea-box .input-box__placeholder {
-  transform: translateY(50%);
+  transform: translateY(0%);
 }
 
-:has(.input-box__input.login-form__textarea.active).login-form__textarea-box
-  .input-box__shape {
-  height: 8rem;
+.login-form__textarea-box:has(.login-form__textarea.active)
+  .input-box__placeholder {
+  transform: translateY(-100%) !important;
+}
+
+.login-form__textarea-box .input-box__shape {
+  bottom: -9px !important;
+}
+
+.login-form__textarea-box:has(.login-form__textarea.active) .input-box__shape {
+  height: 10rem;
 }
 /* Finish Style TextArea */
 

@@ -2,7 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import ModalHOC from "../../../HOCs/ModalHOC";
 
-function EditModal({ updateAction, cancelAction, userMainInfo, children }) {
+function EditModal({
+  updateAction,
+  cancelAction,
+  userMainInfo,
+  updateText = null,
+  children,
+}) {
   return ReactDOM.createPortal(
     <>
       <div id="modal-content">
@@ -14,7 +20,7 @@ function EditModal({ updateAction, cancelAction, userMainInfo, children }) {
             onClick={(e) => updateAction()}
             className="modal-btn col-span-1 truncate"
           >
-            آپدیت شو
+            {updateText ? updateText : "آپدیت شو"}
           </button>
           <button
             onClick={(e) => cancelAction()}

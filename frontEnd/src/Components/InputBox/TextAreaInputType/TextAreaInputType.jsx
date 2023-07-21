@@ -21,9 +21,12 @@ const TextAreaInputType = ({
           value={value}
           className={`input-box__input login-form__textarea ${className}`}
         ></textarea>
-        <span className="input-box__placeholder">
+        <label
+          htmlFor="login-form__textarea-input"
+          className="input-box__placeholder"
+        >
           {placeholder ? placeholder : children}
-        </span>
+        </label>
         <i
           className={`input-box__shape  ${
             mode === "dark-input" ? "bg-[#242532]" : ""
