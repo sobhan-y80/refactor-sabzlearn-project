@@ -75,6 +75,13 @@ function DeleteModal({ role, deleteAction, cancelAction, MainInfo }) {
       };
       break;
     }
+    case "DELETE_DISCOUNT": {
+      mainMessage = {
+        body: `از پاک کردن کد تخفیف ${MainInfo.code} مطمعن هستید !!؟`,
+        messageBtn: `آره مطمعنم`,
+      };
+      break;
+    }
 
     default:
       {

@@ -11,28 +11,7 @@ import { useForm } from "../../../Hooks/useForm";
 import Editor from "../../../Components/Editor/Editor";
 import CategoryBar from "../../../Components/CategoryBar/CategoryBar";
 import { Toaster, toast } from "react-hot-toast";
-body: "<p>این یه بادی تستیه</p>";
-categoryID: "635ef447f058a6af04d00510";
-cover: "da877ea96a7e8f7c9bced14ac791f424af4b0b4eab101ef636545c20e9eed116.jpg";
-createdAt: "2022-11-08T08:56:09.154Z";
-creator: {
-  createdAt: "2022-10-18T09:03:38.702Z";
-  email: "qadiryoilme@gmail.com";
-  name: "قدیر یلمه";
-  phone: "09156781234";
-  profile: "/images/yolme.jpg";
-  role: "ADMIN";
-  updatedAt: "2022-10-18T09:03:38.702Z";
-  username: "qadir_yolme";
-  __v: 0;
-  _id: "634e6bea1d5142b91afa9bb7";
-}
-description: "این توضیحات تستی برای پیش نویس مقاله هست";
-publish: 0;
-shortName: "test-link";
-title: "مقاله فیک برای تست پیش نویس";
-updatedAt: "2022-11-08T08:56:09.154Z";
-__v: 0;
+
 function Article() {
   const [allArticle, setAllArticle] = useState([]);
   const [mainArticle, setMainArticle] = useState(null);
@@ -166,6 +145,7 @@ function Article() {
   return (
     <>
       <div className="panel-home__last-users hpc__custom-scroll hpc__part-section">
+        <h2 className="panel-home__title">افزودن مقاله جدید</h2>
         <div className="login-form__box-inputs my-5">
           <div className="grid gap-10 grid-cols-12 hpc__center">
             <div className="col-span-12 grid gap-10 grid-cols-12">
@@ -269,7 +249,7 @@ function Article() {
 
       <div className="hpc__part-section flex flex-col gap-5">
         <div className="panel-home__last-users__title hpc__title">
-          تمامی دوره ها
+          تمامی مقالات
         </div>
         <div className="overflow-x-auto">
           <table className="table text-center">
@@ -303,7 +283,10 @@ function Article() {
                     </Link>
                   </td>
                   <td>
-                    <Link to={`/blog/${article.shortName}`}>
+                    <Link
+                      className="truncate w-60 inline-block"
+                      to={`/blog/${article.shortName}`}
+                    >
                       {article.shortName}
                     </Link>
                   </td>
