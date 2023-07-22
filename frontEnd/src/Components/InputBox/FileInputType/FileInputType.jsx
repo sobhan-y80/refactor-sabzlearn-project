@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const FileInputType = ({ mode, onChange, onInputHandel }) => {
+const FileInputType = ({ mode, onChange, onInputHandel, typeFile = null }) => {
+  const [typeMode, setTypeMode] = useState();
+
+  useEffect(() => {
+    switch (typeFile) {
+      case "VIDEO":
+        {
+          setTypeMode("video/*");
+        }
+        break;
+
+      default:
+        {
+          setTypeMode("image/*");
+        }
+        break;
+    }
+  }, []);
   return (
     <>
       <div className="login-form__input-box">
@@ -15,7 +32,7 @@ const FileInputType = ({ mode, onChange, onInputHandel }) => {
               onChange(e);
               onInputHandel(e);
             }}
-            accept="image/*"
+            accept={typeMode}
             title="فایل خود را انتخاب کنید"
             type="file"
             className="input-box__input login-form__file-input"

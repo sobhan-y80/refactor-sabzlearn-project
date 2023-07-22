@@ -7,8 +7,12 @@ function CategoryBar({
   changeCategoryHandler = null,
   isKey = false,
   setCategoryId = null,
+  propertyValue = null,
 }) {
   const [itemCategoryCourse, setItemCategoryCourse] = useState([]);
+  const [propertyName, setPropertyName] = useState(
+    propertyValue ? propertyValue : "title"
+  );
 
   const changeCategorySortHandler = (e) => {
     changeCategoryHandler && changeCategoryHandler(e);
@@ -41,7 +45,7 @@ function CategoryBar({
 
   return (
     <ul
-      className="custom-fillter__dropdown-list"
+      className="custom-fillter__dropdown-list h-80 overflow-y-auto"
       onClick={(e) => changeCategorySortHandler(e)}
     >
       {itemCategoryCourse.map((item) => (
@@ -50,7 +54,7 @@ function CategoryBar({
           className={`custom-fillter__dropdown-item`}
           data-key={isKey ? item.key : item._id}
         >
-          {item.title}
+          {item[propertyName]}
         </li>
       ))}
     </ul>

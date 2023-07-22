@@ -18,6 +18,7 @@ import Orders from "./pages/PanelAdmin/Orders/Orders";
 import PrevArticle from "./pages/PanelAdmin/PrevArticle/PrevArticle";
 import NotFound from "./pages/NotFound/NotFound";
 import Categories from "./pages/PanelAdmin/Categories/Categories";
+import Session from "./pages/PanelAdmin/Session/Session";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -43,6 +44,7 @@ const routes = [
       { path: "Notification", element: <Notification></Notification> },
       { path: "PrevArticle", element: <PrevArticle></PrevArticle> },
       { path: "Categories", element: <Categories></Categories> },
+      { path: "Session", element: <Session></Session> },
     ],
   },
 ];

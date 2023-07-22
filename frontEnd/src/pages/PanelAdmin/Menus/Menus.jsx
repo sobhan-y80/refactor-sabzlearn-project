@@ -8,6 +8,11 @@ import { Toaster, toast } from "react-hot-toast";
 import DeleteModal from "../../../Components/Modals/DeleteModal/DeleteModal";
 import DetailModal from "../../../Components/Modals/DetailModal/DetailModal";
 
+const mainObj = {
+  _id: "5",
+  title: "یک منو جدید اضافه کن",
+};
+
 function Menus() {
   const [menus, setMenus] = useState([]);
   const [leaderMenus, setLeaderMenus] = useState([]);
@@ -29,14 +34,12 @@ function Menus() {
     false
   );
 
-  const [mainItemCategoryCourse, setMainItemCategoryCourse] = useState({
-    _id: "5",
-    title: "یک منو جدید اضافه کن",
-  });
+  const [mainItemCategoryCourse, setMainItemCategoryCourse] = useState(mainObj);
   const [isModalDelete, setIsModalDelete] = useState(false);
   const [mainCategoryId, setMainCategoryId] = useState(null);
   const [isModalDetail, setIsModalDetail] = useState(false);
   const [mainSubMenu, setMainSubMenu] = useState([]);
+  const [isDeleteForSubMenu, setIsDeleteForSubMenu] = useState(false);
 
   const renderMenus = () => {
     fetch(`${mainUrlApi}/menus/all`)
@@ -44,10 +47,17 @@ function Menus() {
       .then((menusData) => {
         setMenus(menusData);
         let mainLeaderMenus = menusData.filter((menu) => !Boolean(menu.parent));
+        let mainLeaderMenusWithDefualtValue;
 
-        let mainLeaderMenusWithDefualtValue = [...mainLeaderMenus].push(
-          mainItemCategoryCourse
-        );
+        if (mainItemCategoryCourse._id === mainObj._id) {
+          mainLeaderMenusWithDefualtValue = [
+            ...mainLeaderMenus,
+            mainItemCategoryCourse,
+          ];
+        } else {
+          mainLeaderMenusWithDefualtValue = [...mainLeaderMenus, mainObj];
+          setMainItemCategoryCourse(mainObj);
+        }
 
         setLeaderMenus(mainLeaderMenus);
         setLeaderMenuWithDefaultValue(mainLeaderMenusWithDefualtValue);
@@ -63,7 +73,7 @@ function Menus() {
         parent: parentCategoryID === -1 ? undefined : parentCategoryID,
       };
 
-      fetch(`${mainUrlApi}/menus/`, {
+      fetch(`${mainUrlApi}/menus`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorageData.token}`,
@@ -74,8 +84,8 @@ function Menus() {
         if (res.status === 400) {
           toast.error("خطا در سرور");
         } else if (res.status === 201) {
-          toast.success("منو با موفقیت ساخته شد");
           renderMenus();
+          toast.success("منو با موفقیت ساخته شد");
         }
       });
     } else {
@@ -106,8 +116,8 @@ function Menus() {
       },
     }).then((res) => {
       if (res.status === 200) {
+        setMainCategoryId(mainObj);
         toast.success(`منو ${mainCategoryId.title} با موفقیت پاک شد`);
-        renderMenus();
       } else {
         toast.error("خطا در ارتباط با سرور");
       }
@@ -126,13 +136,39 @@ function Menus() {
     );
   };
 
+  const deleteInfoHandler = (MainInfo) => {
+    setIsDeleteForSubMenu(true);
+    setMainSubMenu(MainInfo);
+    setIsModalDelete(true);
+  };
+
+  const deleteInfoAction = () => {
+    const localStorageData = JSON.parse(localStorage.getItem("token"));
+
+    fetch(`${mainUrlApi}/menus/${mainSubMenu._id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorageData.token}`,
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        renderMenus();
+        setIsModalDelete(false);
+        toast.success(`منو ${mainSubMenu.title} با موفقیت پاک شد`);
+      } else {
+        toast.error("خطا در ارتباط با سرور");
+      }
+    });
+  };
+
   const closeDetailModalHandler = () => {
     setIsModalDetail(false);
+    setIsDeleteForSubMenu(false);
   };
 
   useEffect(() => {
     renderMenus();
-  }, [mainSubMenu]);
+  }, [mainSubMenu, mainCategoryId]);
 
   useEffect(() => {
     if (!mainSubMenu.length) {
@@ -204,7 +240,7 @@ function Menus() {
                           <CategoryBar
                             setCategoryId={setParentCategoryID}
                             mainItemCategoryCourse={mainItemCategoryCourse}
-                            categorItemArray={leaderMenus}
+                            categorItemArray={leaderMenuWithDefaultValue}
                             setMainItemCategoryCourse={
                               setMainItemCategoryCourse
                             }
@@ -320,15 +356,17 @@ function Menus() {
       {isModalDelete && (
         <DeleteModal
           role="DELETE_MENU"
-          deleteAction={deleteAction}
+          deleteAction={isDeleteForSubMenu ? deleteInfoAction : deleteAction}
           cancelAction={cancelDeleteAction}
-          MainInfo={mainCategoryId}
+          MainInfo={isDeleteForSubMenu ? mainSubMenu : mainCategoryId}
         ></DeleteModal>
       )}
       {isModalDetail && (
         <DetailModal
           typeInfoShow={"READ_DELETE"}
           isDeleteHandler={true}
+          deleteHandler={deleteInfoHandler}
+          deleteAction={deleteInfoAction}
           mainInfo={mainSubMenu}
           cancelAction={closeDetailModalHandler}
           setMainSubMenu={setMainSubMenu}

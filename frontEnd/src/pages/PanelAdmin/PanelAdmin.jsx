@@ -28,6 +28,16 @@ const MenuSideBar = () => {
           </NavLink>
         </li>
         <li className="panel-sidebar__list">
+          <NavLink to="Session" className="panel-sidebar__link">
+            <img
+              src="../images/panel/Session.svg"
+              alt="icon"
+              className="panel-sidebar__link-icon"
+            />
+            <span className="panel-sidebar__link-text">سرفصل ها</span>
+          </NavLink>
+        </li>
+        <li className="panel-sidebar__list">
           <NavLink to="Menus" className="panel-sidebar__link">
             <img
               src="../images/panel/menu-board.svg"

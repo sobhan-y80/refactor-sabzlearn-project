@@ -31,7 +31,7 @@ const Product = () => {
   let shuffledRelatedCourse =
     relatedCourse.length && useShuffled(relatedCourse);
   const courseProgressBarRef = useRef();
-
+  console.log(sessionCourse);
   const [formState, onInputHandler] = useForm(
     {
       commentTextArea: {
@@ -1070,13 +1070,15 @@ const Product = () => {
           {sessionCourse.length ? (
             sessionCourse.map((session, index) => (
               <Link
-                to={session.video}
+                to={session.free === 0 ? "" : session.video}
                 key={session._id}
-                className="topic__accordion-body topic__accordion-link"
+                className={`topic__accordion-body topic__accordion-link ${
+                  session.free === 0 ? "cursor-not-allowed" : ""
+                }`}
               >
                 <span className="topic__accordion-body-right">
                   <span className="topic__accordion-count">{index + 1}</span>
-                  <span to={session.video} className="topic__accordion-link">
+                  <span className="topic__accordion-link">
                     <span className="topic__accordion-svg-wrapper">
                       <svg
                         className="topic__accordion-svg"

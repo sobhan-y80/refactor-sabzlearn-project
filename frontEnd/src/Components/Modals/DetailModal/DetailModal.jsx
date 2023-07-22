@@ -12,58 +12,21 @@ function DetailModal({
   isDeleteHandler,
   setMainSubMenu,
   propertyName,
+  deleteAction,
+  deleteHandler,
 }) {
   if (typeInfoShow === "READ_DELETE") {
-    const [mainInfoItems, setMainInfoItems] = useState(mainInfo);
-    const [isModalDelete, setIsModalDelete] = useState(false);
-    const [main_Info, setMain_Info] = useState(null);
-
-    const DeleteHandler = (MainInfo) => {
-      setMain_Info(MainInfo);
-      setIsModalDelete(true);
-    };
-
-    const deleteInfoAction = () => {
-      const localStorageData = JSON.parse(localStorage.getItem("token"));
-
-      fetch(`${mainUrlApi}/menus/${main_Info._id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorageData.token}`,
-        },
-      }).then((res) => {
-        if (res.status === 200) {
-          toast.success(`منو ${main_Info.title} با موفقیت پاک شد`);
-          setMainInfoItems(
-            mainInfo.filter((menu) => menu._id !== main_Info._id)
-          );
-        } else {
-          toast.error("خطا در ارتباط با سرور");
-        }
-      });
-
-      setIsModalDelete(false);
-    };
-
-    const cancelDeleteAction = () => {
-      setIsModalDelete(false);
-    };
-
-    useEffect(() => {
-      setMainSubMenu(mainInfoItems);
-    }, [mainInfoItems]);
-
     return ReactDOM.createPortal(
       <>
         <div id="modal-content" className="row">
           <div className="flex flex-col gap-3">
             <ul className="detail-list flex flex-col gap-2">
-              {mainInfoItems.map((menu) => (
+              {mainInfo.map((menu) => (
                 <li key={menu._id} className="detail-list__item">
                   <span className="detail-item__text">{menu.title}</span>
                   {isDeleteHandler && (
                     <button
-                      onClick={() => DeleteHandler(menu)}
+                      onClick={() => deleteHandler(menu)}
                       className="deleteBtn detail-item__button detail-remove-btn"
                     >
                       <svg
@@ -91,14 +54,14 @@ function DetailModal({
             </button>
           </div>
         </div>
-        {isDeleteHandler && isModalDelete && (
+        {/* {isDeleteHandler && isModalDelete && (
           <DeleteModal
             role="DELETE_MENU"
-            deleteAction={deleteInfoAction}
+            deleteAction={deleteAction}
             cancelAction={cancelDeleteAction}
             MainInfo={main_Info}
           ></DeleteModal>
-        )}
+        )} */}
         <Toaster></Toaster>
       </>,
       document.getElementById("modal-wrapper")

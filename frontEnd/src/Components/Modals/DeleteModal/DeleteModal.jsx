@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import ModalHOC from "../../../HOCs/ModalHOC";
 
 function DeleteModal({ role, deleteAction, cancelAction, MainInfo }) {
-  console.log(MainInfo);
   let mainMessage = {};
   switch (role) {
     case "Delete": {
@@ -30,6 +29,13 @@ function DeleteModal({ role, deleteAction, cancelAction, MainInfo }) {
     case "DELETE_ARTICLE": {
       mainMessage = {
         body: `از پاک کردن مقاله ${MainInfo.title} مطمعن هستید !!?`,
+        messageBtn: `آره پاکش کن`,
+      };
+      break;
+    }
+    case "DELETE_SESSION": {
+      mainMessage = {
+        body: `از پاک کردن سرفصل ${MainInfo.title} مطمعن هستید !!?`,
         messageBtn: `آره پاکش کن`,
       };
       break;

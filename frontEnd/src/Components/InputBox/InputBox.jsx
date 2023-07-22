@@ -36,6 +36,7 @@ const InputBox = ({
   onInputHandler,
   mode = null,
   onChange = null,
+  typeFile = null,
 }) => {
   const inputFocusHandler = (e) => {
     e.target.classList.add("active");
@@ -109,6 +110,7 @@ const InputBox = ({
         onInputHandel={(e) => onChangeHandler(e, true)}
         mode={mode}
         placeholder={placeHolder}
+        typeFile={typeFile}
       ></FileInputType>
     );
   } else if (type === "email") {
