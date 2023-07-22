@@ -130,7 +130,11 @@ function Notification() {
             <tbody id="course-tbody-table">
               {allNotif.map((message, index) => (
                 <tr key={message._id}>
-                  <td>{index + 1}</td>
+                  <td
+                    className={`${message.answer === 1 ? "text-blue-500" : ""}`}
+                  >
+                    {index + 1}
+                  </td>
                   <td>{message.name}</td>
                   <td>{message.email}</td>
                   <td>{message.phone}</td>

@@ -68,7 +68,7 @@ const ContactUs = () => {
     <>
       <Header></Header>
       {/* <!-- Start Main --> */}
-      <div className="main">
+      <div className="main-wrapper">
         {/* <!-- Start Animation Shape --> */}
         <div className="animation-shape">
           <div className="animation-shape__circle"></div>

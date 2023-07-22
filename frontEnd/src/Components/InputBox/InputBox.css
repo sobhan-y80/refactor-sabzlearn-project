@@ -2,7 +2,8 @@
   padding: 5rem 0;
 }
 
-.main {
+.main,
+.main-wrapper {
   min-height: 100vh;
   padding: 5rem 0;
   background-color: #2f3041d7;
@@ -10,6 +11,10 @@
   align-items: center;
   justify-content: center;
   position: relative;
+}
+
+.main-wrapper {
+  overflow: hidden;
 }
 
 /* Start Animation Shape  */

@@ -519,6 +519,7 @@
 .topic__accordion-link {
   font-size: 2rem;
   width: 100%;
+  height: 7rem;
   padding: 0.7rem 0.5rem;
   display: flex;
   align-items: center;
