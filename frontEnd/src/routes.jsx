@@ -19,6 +19,7 @@ import PrevArticle from "./pages/PanelAdmin/PrevArticle/PrevArticle";
 import NotFound from "./pages/NotFound/NotFound";
 import Categories from "./pages/PanelAdmin/Categories/Categories";
 import Session from "./pages/PanelAdmin/Session/Session";
+import Comments from "./pages/PanelAdmin/Comments/Comments";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -45,6 +46,7 @@ const routes = [
       { path: "PrevArticle", element: <PrevArticle></PrevArticle> },
       { path: "Categories", element: <Categories></Categories> },
       { path: "Session", element: <Session></Session> },
+      { path: "Comments", element: <Comments></Comments> },
     ],
   },
 ];

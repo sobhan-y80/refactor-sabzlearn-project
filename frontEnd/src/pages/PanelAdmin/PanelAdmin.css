@@ -528,6 +528,18 @@ table button {
   fill: var(--white-color);
 }
 
+.acceptBtn {
+  border-color: var(--primary-color);
+}
+
+.acceptBtn:hover {
+  background-color: var(--primary-color);
+}
+
+.acceptBtn:hover path {
+  stroke: var(--white-color);
+}
+
 .detail-list__item {
   cursor: pointer;
   padding: 0.5rem;

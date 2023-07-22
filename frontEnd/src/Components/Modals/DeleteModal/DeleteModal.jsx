@@ -40,10 +40,38 @@ function DeleteModal({ role, deleteAction, cancelAction, MainInfo }) {
       };
       break;
     }
+    case "DELETE_COMMENT": {
+      mainMessage = {
+        body: `از پاک کردن پیام ${MainInfo.creator.name} مطمعن هستید !!?`,
+        messageBtn: `آره پاکش کن`,
+      };
+      break;
+    }
     case "Ban": {
       mainMessage = {
         body: `از مسدود کردن ${MainInfo.name} مطمعن هستید !!؟`,
         messageBtn: `آره مسدودش کن`,
+      };
+      break;
+    }
+    case "Ban_COMMENT": {
+      mainMessage = {
+        body: `از مسدود کردن ${MainInfo.creator.name} مطمعن هستید !!؟`,
+        messageBtn: `آره مسدودش کن`,
+      };
+      break;
+    }
+    case "ACCEPT_COMMENT": {
+      mainMessage = {
+        body: `از تایید پیام کردن ${MainInfo.creator.name} مطمعن هستید !!؟`,
+        messageBtn: `آره تاییدش کن`,
+      };
+      break;
+    }
+    case "REJECT_COMMENT": {
+      mainMessage = {
+        body: `از قبول نکردن پیام ${MainInfo.creator.name} مطمعن هستید !!؟`,
+        messageBtn: `آره مطمعنم`,
       };
       break;
     }

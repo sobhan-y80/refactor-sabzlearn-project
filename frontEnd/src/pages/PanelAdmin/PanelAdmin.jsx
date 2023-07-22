@@ -78,6 +78,16 @@ const MenuSideBar = () => {
           </NavLink>
         </li>
         <li className="panel-sidebar__list">
+          <NavLink to="Comments" className="panel-sidebar__link">
+            <img
+              src="../images/panel/comment.svg"
+              alt="icon"
+              className="panel-sidebar__link-icon"
+            />
+            <span className="panel-sidebar__link-text">کامنت ها</span>
+          </NavLink>
+        </li>
+        <li className="panel-sidebar__list">
           <NavLink to="Categories" className="panel-sidebar__link">
             <img
               src="../images/panel/category.svg"

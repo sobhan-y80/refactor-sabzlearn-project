@@ -87,7 +87,7 @@ const Product = () => {
       if (formState.isFormValid) {
         const localStorageData = JSON.parse(localStorage.getItem("token"));
         const commentObj = {
-          courseShortName: "js-20-lib",
+          courseShortName: courseID,
           body: formState.inputs.commentTextArea.value,
           score: scoreOfCourseInComment,
         };
@@ -1032,7 +1032,7 @@ const Product = () => {
                                       className="col-span-12 md:col-span-4 my-3 md:my-0"
                                     >
                                       <Link
-                                        to={`${course.shortName}`}
+                                        to={`/Course/${course.shortName}`}
                                         className="more-product__link"
                                       >
                                         <div className="more-product__img-wrapper">
