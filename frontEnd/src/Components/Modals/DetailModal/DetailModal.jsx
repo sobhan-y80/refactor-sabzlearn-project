@@ -84,6 +84,25 @@ function DetailModal({
       </>,
       document.getElementById("modal-wrapper")
     );
+  } else if (typeInfoShow === "READ_ORDER_DETAIL") {
+    return ReactDOM.createPortal(
+      <>
+        <div id="modal-content">
+          <div className="w-3/12 flex flex-col gap-10 items-center">
+            <span>توضیحات</span>
+            <p className="w-full">{mainInfo.course.description}</p>
+            <button
+              className="close_detail-modal w-full"
+              onClick={() => cancelAction()}
+            >
+              بستن
+            </button>
+          </div>
+        </div>
+        <Toaster></Toaster>
+      </>,
+      document.getElementById("modal-wrapper")
+    );
   }
 }
 

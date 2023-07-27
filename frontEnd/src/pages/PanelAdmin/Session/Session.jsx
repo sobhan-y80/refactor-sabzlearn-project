@@ -319,7 +319,7 @@ function Session() {
         <div className="panel-home__last-users hpc__custom-scroll hpc__part-section">
           <div className="panel-home__last-users__header row flex-nowrap flex-column flex-md-row align-items-center justify-content-md-between justify-content-center">
             <h2 className="col-span-12 md:col-span-4 panel-home__last-users__title hpc__title flex justify-center md:justify-start">
-              لیست منو ها
+              لیست دوره ها
             </h2>
           </div>
           <div className="panel-home__users-table overflow-x-auto">

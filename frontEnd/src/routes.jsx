@@ -21,7 +21,7 @@ import Categories from "./pages/PanelAdmin/Categories/Categories";
 import Session from "./pages/PanelAdmin/Session/Session";
 import Comments from "./pages/PanelAdmin/Comments/Comments";
 import PanelUser from "./pages/PanelUser/PanelUser";
-import MainUser from "./pages/PanelUser/Main/Main";
+import OrdersUser from "./pages/PanelUser/Orders/Orders";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -37,6 +37,7 @@ const routes = [
     path: "/p-Admin",
     element: <PanelAdmin></PanelAdmin>,
     children: [
+      { path: "", element: <Main></Main> },
       { path: "Main", element: <Main></Main> },
       { path: "Menus", element: <Menus></Menus> },
       { path: "Users", element: <Users></Users> },
@@ -54,7 +55,10 @@ const routes = [
   {
     path: "/my-account",
     element: <PanelUser></PanelUser>,
-    children: [{ path: "Main", element: <MainUser></MainUser> }],
+    children: [
+      { path: "", element: <OrdersUser></OrdersUser> },
+      { path: "Main", element: <OrdersUser></OrdersUser> },
+    ],
   },
 ];
 
