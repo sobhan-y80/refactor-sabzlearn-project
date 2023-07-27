@@ -16,6 +16,7 @@ import { useForm } from "../../Hooks/useForm";
 import AuthContext from "../../Context/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
 import PaginationCustom from "../../Components/Pagination/Pagination";
+import DeleteModal from "../../Components/Modals/DeleteModal/DeleteModal";
 
 const Product = () => {
   const { courseID } = useParams();
@@ -31,7 +32,6 @@ const Product = () => {
   let shuffledRelatedCourse =
     relatedCourse.length && useShuffled(relatedCourse);
   const courseProgressBarRef = useRef();
-  console.log(sessionCourse);
   const [formState, onInputHandler] = useForm(
     {
       commentTextArea: {
@@ -41,6 +41,7 @@ const Product = () => {
     },
     false
   );
+  const [isRegisterModal, setIsRegisterModal] = useState(false);
 
   const courseInfoRender = async () => {
     await fetch(`${mainUrlApi}/courses/${courseID}`)
@@ -68,14 +69,6 @@ const Product = () => {
     courseProgressBarRef.current &&
       scrollPosition >= 500 &&
       courseProgressBarRef.current.classList.add("active");
-  };
-
-  const toggleAccordionHandler = (e) => {
-    if (e.target.parentElement.parentElement.classList.contains("active")) {
-      e.target.parentElement.parentElement.classList.remove("active");
-    } else {
-      e.target.parentElement.parentElement.classList.add("active");
-    }
   };
 
   const changeHandler = (e) => {
@@ -111,6 +104,37 @@ const Product = () => {
       setTimeout(() => {
         navigate("/Login");
       }, 5000);
+    }
+  };
+
+  const registerCourseHandler = () => {
+    setIsRegisterModal(true);
+  };
+
+  const cancelRegisterAction = () => {
+    setIsRegisterModal(false);
+  };
+  const registerCourseAction = () => {
+    const localStorageData = JSON.parse(localStorage.getItem("token"));
+    console.log(courseInfo);
+    console.log(localStorageData.token);
+
+    if (courseInfo.price === 0) {
+      const registerObj = {
+        price: courseInfo.price,
+      };
+
+      fetch(`${mainUrlApi}/courses/${courseInfo._id}/register`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorageData.token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(registerObj),
+      }).then((res) => {
+        console.log(res);
+      });
+      // }else if(res){}
     }
   };
 
@@ -216,8 +240,13 @@ const Product = () => {
                     {/* <!-- Finish button About teachs --> */}
                     {/* <!-- Start button About Membership Status --> */}
                     <div className="course-info__buying-product-contnet col-span-8">
-                      <a
-                        href="#"
+                      <button
+                        onClick={
+                          !courseInfo.isUserRegisteredToThisCourse &&
+                          courseInfo.price === 0
+                            ? registerCourseHandler
+                            : undefined
+                        }
                         id="prodcut-buying-status"
                         className={`course-info__buying-product-btn course-info__link ${
                           courseInfo.isUserRegisteredToThisCourse
@@ -228,7 +257,7 @@ const Product = () => {
                         {courseInfo.isUserRegisteredToThisCourse
                           ? "داشنجوری دوره هستید"
                           : "خرید دوره"}
-                      </a>
+                      </button>
                     </div>
                     {/* <!-- Finish button About Membership Status --> */}
                   </div>
@@ -1236,6 +1265,14 @@ const Product = () => {
         {/* <!-- Finish Comment --> */}
 
         <Footer></Footer>
+        {isRegisterModal && (
+          <DeleteModal
+            role="REGISTER_COURSE"
+            deleteAction={registerCourseAction}
+            cancelAction={cancelRegisterAction}
+            MainInfo={courseInfo}
+          ></DeleteModal>
+        )}
         <Toaster></Toaster>
       </>
     );

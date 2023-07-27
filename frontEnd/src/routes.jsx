@@ -20,6 +20,8 @@ import NotFound from "./pages/NotFound/NotFound";
 import Categories from "./pages/PanelAdmin/Categories/Categories";
 import Session from "./pages/PanelAdmin/Session/Session";
 import Comments from "./pages/PanelAdmin/Comments/Comments";
+import PanelUser from "./pages/PanelUser/PanelUser";
+import MainUser from "./pages/PanelUser/Main/Main";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -48,6 +50,11 @@ const routes = [
       { path: "Session", element: <Session></Session> },
       { path: "Comments", element: <Comments></Comments> },
     ],
+  },
+  {
+    path: "/my-account",
+    element: <PanelUser></PanelUser>,
+    children: [{ path: "Main", element: <MainUser></MainUser> }],
   },
 ];
 

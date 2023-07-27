@@ -85,12 +85,15 @@ function Products() {
 
       let formData = new FormData();
 
-      formData.append("name", formState.inputs.CourseName.value);
-      formData.append("description", formState.inputs.CourseDesc.value);
-      formData.append("shortName", formState.inputs.CourseShortName.value);
+      formData.append("name", formState.inputs.CourseName.value.trim());
+      formData.append("description", formState.inputs.CourseDesc.value.trim());
+      formData.append(
+        "shortName",
+        formState.inputs.CourseShortName.value.trim()
+      );
       formData.append("categoryID", parentCategoryID);
-      formData.append("price", formState.inputs.CoursePrice.value);
-      formData.append("support", formState.inputs.CourseSupport.value);
+      formData.append("price", formState.inputs.CoursePrice.value.trim());
+      formData.append("support", formState.inputs.CourseSupport.value.trim());
       formData.append("status", mainStatus);
       formData.append("cover", categoryCover);
 

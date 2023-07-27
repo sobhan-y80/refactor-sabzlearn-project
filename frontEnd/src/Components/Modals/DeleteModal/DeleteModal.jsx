@@ -82,6 +82,13 @@ function DeleteModal({ role, deleteAction, cancelAction, MainInfo }) {
       };
       break;
     }
+    case "REGISTER_COURSE": {
+      mainMessage = {
+        body: `از خرید دوره ${MainInfo.name} مطمعن هستید !!؟`,
+        messageBtn: `آره مطمعنم`,
+      };
+      break;
+    }
 
     default:
       {
