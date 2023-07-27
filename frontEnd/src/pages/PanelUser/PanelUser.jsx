@@ -37,7 +37,7 @@ const MenuSideBar = () => {
           </NavLink>
         </li>
         <li className="panel-sidebar__list">
-          <NavLink to="Main" className="panel-sidebar__link">
+          <NavLink to="registerCourse" className="panel-sidebar__link">
             <img
               src="../images/panel/home.svg"
               alt="icon"

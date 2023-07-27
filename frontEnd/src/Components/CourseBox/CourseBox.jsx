@@ -3,19 +3,24 @@ import { Link, NavLink } from "react-router-dom";
 import "./CourseBox.css";
 import { mainUrl } from "../../Utils/Utils";
 
-const CourseBox = ({ smalMode, ...props }) => {
+const CourseBox = ({ smalMode, smalDetailMode = null, ...props }) => {
+  console.log(props);
   return (
     <div className="course-box">
       <div className="course-box__img-wrapper">
         <Link
-          to={`/Course/${props.shortName}`}
+          to={`/Course/${
+            props.shortName ? props.shortName : props.course.name
+          }`}
           className="course-box__img-wrapper__link"
         >
           <img
             className="course-box__img inline-block"
             // src="images/courses/jango.png"
 
-            src={`${mainUrl}/courses/covers/${props.cover}`}
+            src={`${mainUrl}/courses/covers/${
+              props.cover ? props.cover : props.course.cover
+            }`}
             width="100%"
             alt="course img"
           />
@@ -36,17 +41,19 @@ const CourseBox = ({ smalMode, ...props }) => {
 
           <p className="course-box__name">
             <Link
-              to={`/Course/${props.shortName}`}
+              to={`/Course/${
+                props.shortName ? props.shortName : props.course.name
+              }`}
               className="course-box__link hpc__short-text"
             >
-              {props.name}
+              {props.name ? props.name : props.course.name}
             </Link>
           </p>
         </div>
         <div
-          className={`course-box__price-wrapper col-span-2 w-full sm:col-span-1 sm:w-auto ${
-            smalMode ? "text-xs" : ""
-          }`}
+          className={`course-box__price-wrapper col-span-2 w-full ${
+            !smalDetailMode ? "sm:col-span-1 sm:w-auto" : ""
+          }  ${smalMode ? "text-xs" : ""}`}
         >
           <span className="course-box__price hpc__off">
             <span className="course-box__price-number">
@@ -67,14 +74,16 @@ const CourseBox = ({ smalMode, ...props }) => {
             </span>
           </span>
         </div>
-        <div className="course-box__student-wrapper col-span-2 w-full sm:col-span-1 sm:w-auto">
-          <span className={`course-box__studnet-count hpc__gold text-lg`}>
-            {props.registers ? props.registers : "دانشجو ندارد"}
-          </span>
-          <span className="course-box__studnet-name text-lg">
-            {props.registers ? "دانشجو" : ""}
-          </span>
-        </div>
+        {!smalDetailMode && (
+          <div className="course-box__student-wrapper col-span-2 w-full sm:col-span-1 sm:w-auto">
+            <span className={`course-box__studnet-count hpc__gold text-lg`}>
+              {props.registers ? props.registers : "دانشجو ندارد"}
+            </span>
+            <span className="course-box__studnet-name text-lg">
+              {props.registers ? "دانشجو" : ""}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

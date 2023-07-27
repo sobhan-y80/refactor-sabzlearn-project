@@ -119,24 +119,27 @@ const Product = () => {
     console.log(courseInfo);
     console.log(localStorageData.token);
 
-    if (courseInfo.price === 0) {
-      const registerObj = {
-        price: courseInfo.price,
-      };
+    // if (courseInfo.price === 0) {
+    const registerObj = {
+      price: courseInfo.price,
+    };
 
-      fetch(`${mainUrlApi}/courses/${courseInfo._id}/register`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorageData.token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(registerObj),
-      }).then((res) => {
-        console.log(res);
-      });
-      // }else if(res){}
-    }
+    fetch(`${mainUrlApi}/courses/${courseInfo._id}/register`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorageData.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(registerObj),
+    }).then((res) => {
+      console.log(res);
+      if (res.status === 409) {
+        toast.error("شما در این دوره ثبت نام کرده اید");
+      }
+    });
+    // }else if(res){}
   };
+  // };
 
   useEffect(() => {
     courseInfoRender();
@@ -148,6 +151,8 @@ const Product = () => {
       window.removeEventListener("scroll", courseProgressScrollHandler);
     };
   }, []);
+
+  console.log(courseInfo);
 
   if (isDataLoad) {
     return (
@@ -243,9 +248,7 @@ const Product = () => {
                       <button
                         onClick={
                           !courseInfo.isUserRegisteredToThisCourse &&
-                          courseInfo.price === 0
-                            ? registerCourseHandler
-                            : undefined
+                          registerCourseHandler
                         }
                         id="prodcut-buying-status"
                         className={`course-info__buying-product-btn course-info__link ${
@@ -1117,7 +1120,7 @@ const Product = () => {
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                          <g id="SVGRepo_bgCarrier" strokeWidth="0" />
 
                           <g
                             id="SVGRepo_tracerCarrier"

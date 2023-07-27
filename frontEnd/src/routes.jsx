@@ -22,6 +22,7 @@ import Session from "./pages/PanelAdmin/Session/Session";
 import Comments from "./pages/PanelAdmin/Comments/Comments";
 import PanelUser from "./pages/PanelUser/PanelUser";
 import OrdersUser from "./pages/PanelUser/Orders/Orders";
+import RegisterCourse from "./pages/PanelUser/RegisterCourse/RegisterCourse";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -58,6 +59,7 @@ const routes = [
     children: [
       { path: "", element: <OrdersUser></OrdersUser> },
       { path: "Main", element: <OrdersUser></OrdersUser> },
+      { path: "registerCourse", element: <RegisterCourse></RegisterCourse> },
     ],
   },
 ];
