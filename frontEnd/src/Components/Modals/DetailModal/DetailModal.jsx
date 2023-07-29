@@ -71,7 +71,7 @@ function DetailModal({
       <>
         <div id="modal-content">
           <div className="w-3/12 flex flex-col gap-10 items-center">
-            <p className="w-full truncate">{mainInfo[propertyName]}</p>
+            <p className="w-full">{mainInfo[propertyName]}</p>
             <button
               className="close_detail-modal w-full"
               onClick={() => cancelAction()}

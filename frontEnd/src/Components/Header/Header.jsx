@@ -66,7 +66,7 @@ const Header = memo(({ customClassForParet }) => {
                   to=""
                   className="top-bar__email-text top-bar__link"
                 >
-                  soobhanybi@gmail.com
+                  sobhan13831383yaghobi@gmail.com
                 </Link>
               </div>
               <div className="top-bar__social-media">
