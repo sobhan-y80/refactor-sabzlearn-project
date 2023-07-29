@@ -44,7 +44,10 @@ const Product = () => {
   const [isRegisterModal, setIsRegisterModal] = useState(false);
 
   const courseInfoRender = async () => {
-    await fetch(`${mainUrlApi}/courses/${courseID}`)
+    const localStorageData = JSON.parse(localStorage.getItem("token"));
+    await fetch(`${mainUrlApi}/courses/${courseID}`, {
+      Authorization: `Bearer ${localStorageData.token}`,
+    })
       .then(async (res) => {
         if (res.status === 404) {
           navigate("/NotFound ");
@@ -108,7 +111,15 @@ const Product = () => {
   };
 
   const registerCourseHandler = () => {
-    setIsRegisterModal(true);
+    let isRegistered = authContext.userInfo.courses.filter(
+      (course) => course._id === courseInfo._id
+    );
+
+    if (isRegistered.length === 0) {
+      setIsRegisterModal(true);
+    } else {
+      toast.error("شما در این دوره ثبت نام کرده اید");
+    }
   };
 
   const cancelRegisterAction = () => {
@@ -131,12 +142,15 @@ const Product = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(registerObj),
-    }).then((res) => {
-      console.log(res);
-      if (res.status === 409) {
-        toast.error("شما در این دوره ثبت نام کرده اید");
-      }
-    });
+    })
+      .then((res) => {
+        if (res.status === 201) {
+          toast.success("در دوره با موفقیت ثبت نام شدید");
+        } else {
+          toast.error("شما در این دوره ثبت نام کرده اید");
+        }
+      })
+      .finally(() => setIsRegisterModal(false));
     // }else if(res){}
   };
   // };
