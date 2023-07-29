@@ -28,14 +28,15 @@ function OrdersUser() {
       },
     })
       .then((res) => res.json())
-      .then((mainUserOrderData) => setMainUserOrder(mainUserOrderData.pop()));
+      .then((mainUserOrderData) => {
+        let mainPrderInfoObj = mainUserOrderData.pop();
+        setMainUserOrder(mainPrderInfoObj);
+      });
   };
 
   const closeDetailModalHandler = () => {
     setIsModalDetail(false);
   };
-
-  console.log(mainUserOrder);
 
   useEffect(() => {
     OrderRender();
@@ -105,7 +106,7 @@ function OrdersUser() {
             </div>
           </div>
         </div>
-        {isModalDetail && mainUserOrder && (
+        {isModalDetail && Object.keys(mainUserOrder).length !== 0 && (
           <DetailModal
             typeInfoShow={"READ_ORDER_DETAIL"}
             mainInfo={mainUserOrder}

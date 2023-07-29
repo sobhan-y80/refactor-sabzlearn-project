@@ -45,7 +45,7 @@ function CategoryBar({
 
   return (
     <ul
-      className="custom-fillter__dropdown-list h-80 overflow-y-auto"
+      className="custom-fillter__dropdown-list max-h-80 overflow-y-auto"
       onClick={(e) => changeCategorySortHandler(e)}
     >
       {itemCategoryCourse.map((item) => (

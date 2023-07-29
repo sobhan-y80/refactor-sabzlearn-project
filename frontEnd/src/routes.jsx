@@ -6,6 +6,8 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import Search from "./pages/Search/Search";
+import NotFound from "./pages/NotFound/NotFound";
+
 import PanelAdmin from "./pages/PanelAdmin/PanelAdmin";
 import Menus from "./pages/PanelAdmin/Menus/Menus";
 import Users from "./pages/PanelAdmin/Users/Users";
@@ -16,13 +18,15 @@ import Notification from "./pages/PanelAdmin/Notification/Notification";
 import DiscountCode from "./pages/PanelAdmin/DiscountCode/DiscountCode";
 import Orders from "./pages/PanelAdmin/Orders/Orders";
 import PrevArticle from "./pages/PanelAdmin/PrevArticle/PrevArticle";
-import NotFound from "./pages/NotFound/NotFound";
 import Categories from "./pages/PanelAdmin/Categories/Categories";
 import Session from "./pages/PanelAdmin/Session/Session";
 import Comments from "./pages/PanelAdmin/Comments/Comments";
+import TicketsAdmin from "./pages/PanelAdmin/Tickets/TicketsAdmin";
+
 import PanelUser from "./pages/PanelUser/PanelUser";
 import OrdersUser from "./pages/PanelUser/Orders/Orders";
 import RegisterCourse from "./pages/PanelUser/RegisterCourse/RegisterCourse";
+import Tickets from "./pages/PanelUser/Tickets/Tickets";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -51,6 +55,7 @@ const routes = [
       { path: "Categories", element: <Categories></Categories> },
       { path: "Session", element: <Session></Session> },
       { path: "Comments", element: <Comments></Comments> },
+      { path: "Tickets", element: <TicketsAdmin></TicketsAdmin> },
     ],
   },
   {
@@ -60,6 +65,7 @@ const routes = [
       { path: "", element: <OrdersUser></OrdersUser> },
       { path: "Main", element: <OrdersUser></OrdersUser> },
       { path: "registerCourse", element: <RegisterCourse></RegisterCourse> },
+      { path: "Tickets", element: <Tickets></Tickets> },
     ],
   },
 ];
