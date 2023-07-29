@@ -28,6 +28,8 @@ import OrdersUser from "./pages/PanelUser/Orders/Orders";
 import RegisterCourse from "./pages/PanelUser/RegisterCourse/RegisterCourse";
 import Tickets from "./pages/PanelUser/Tickets/Tickets";
 import EditUser from "./pages/PanelUser/editUser/editUser";
+import PAdminPrivate from "./Components/PAdminPrivate/PAdminPrivate";
+import PUserPrivate from "./Components/PUserPrivate/PUserPrivate";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -41,7 +43,11 @@ const routes = [
   { path: "/Search/:valueSearch", element: <Search /> },
   {
     path: "/p-Admin",
-    element: <PanelAdmin></PanelAdmin>,
+    element: (
+      <PAdminPrivate>
+        <PanelAdmin></PanelAdmin>
+      </PAdminPrivate>
+    ),
     children: [
       { path: "", element: <Main></Main> },
       { path: "Main", element: <Main></Main> },
@@ -61,7 +67,11 @@ const routes = [
   },
   {
     path: "/my-account",
-    element: <PanelUser></PanelUser>,
+    element: (
+      <PUserPrivate>
+        <PanelUser></PanelUser>
+      </PUserPrivate>
+    ),
     children: [
       { path: "", element: <OrdersUser></OrdersUser> },
       { path: "Main", element: <OrdersUser></OrdersUser> },
