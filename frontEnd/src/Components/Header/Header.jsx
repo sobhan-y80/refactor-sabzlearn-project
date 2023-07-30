@@ -273,32 +273,42 @@ const Header = memo(({ customClassForParet }) => {
                           <div></div>
                         )}
                         <li className="main-header__item">
-                          <NavLink className="main-header__link">
+                          <NavLink
+                            to={"/my-account/main"}
+                            className="main-header__link"
+                          >
                             پیشخوان
                           </NavLink>
                         </li>
                         <li className="main-header__item">
-                          <NavLink className="main-header__link">
+                          <NavLink
+                            to={"/my-account/registerCourse"}
+                            className="main-header__link"
+                          >
                             سفارش ها
                           </NavLink>
                         </li>
                         <li className="main-header__item">
-                          <NavLink className="main-header__link">
-                            کیف پول من
-                          </NavLink>
-                        </li>
-                        <li className="main-header__item">
-                          <NavLink className="main-header__link">
+                          <NavLink
+                            to={"/my-account/editUser"}
+                            className="main-header__link"
+                          >
                             جزعیات حساب
                           </NavLink>
                         </li>
                         <li className="main-header__item">
-                          <NavLink className="main-header__link">
+                          <NavLink
+                            to={"/my-account/registerCourse"}
+                            className="main-header__link"
+                          >
                             دوره های خریداری شده
                           </NavLink>
                         </li>
                         <li className="main-header__item">
-                          <NavLink className="main-header__link">
+                          <NavLink
+                            to={"/my-account/Tickets"}
+                            className="main-header__link"
+                          >
                             تیکت های پشتیبانی
                           </NavLink>
                         </li>

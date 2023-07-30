@@ -42,7 +42,10 @@ function RegisterCourse() {
               >
                 {userCourses.length ? (
                   userCourses.map((course) => (
-                    <div className="col-span-6 sm:col-span-6 md:col-span-4 lg:col-span-3 my-2 `}">
+                    <div
+                      key={course._id}
+                      className="col-span-6 sm:col-span-6 md:col-span-4 lg:col-span-3 my-2 `}"
+                    >
                       <CourseBox smalDetailMode={true} {...course}></CourseBox>
                     </div>
                   ))

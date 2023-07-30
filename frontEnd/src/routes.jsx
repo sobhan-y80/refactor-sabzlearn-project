@@ -29,6 +29,7 @@ import PanelUser from "./pages/PanelUser/PanelUser";
 import OrdersUser from "./pages/PanelUser/Orders/Orders";
 import RegisterCourse from "./pages/PanelUser/RegisterCourse/RegisterCourse";
 import Tickets from "./pages/PanelUser/Tickets/Tickets";
+import EditUser from "./pages/PanelUser/EditUser/EditUser";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -83,6 +84,8 @@ const routes = [
       { path: "Main", element: <OrdersUser></OrdersUser> },
       { path: "registerCourse", element: <RegisterCourse></RegisterCourse> },
       { path: "Tickets", element: <Tickets></Tickets> },
+      { path: "Tickets", element: <Tickets></Tickets> },
+      { path: "EditUser", element: <EditUser></EditUser> },
     ],
   },
 ];
