@@ -60,7 +60,7 @@ const Product = () => {
           setIsDataLoad(true);
         }
       })
-      .catch((er) => console.log(err));
+      .catch((err) => console.log(err));
 
     await fetch(`${mainUrlApi}/courses/related/${courseID}`)
       .then((res) => res.json())
@@ -127,10 +127,7 @@ const Product = () => {
   };
   const registerCourseAction = () => {
     const localStorageData = JSON.parse(localStorage.getItem("token"));
-    console.log(courseInfo);
-    console.log(localStorageData.token);
 
-    // if (courseInfo.price === 0) {
     const registerObj = {
       price: courseInfo.price,
     };
@@ -151,9 +148,7 @@ const Product = () => {
         }
       })
       .finally(() => setIsRegisterModal(false));
-    // }else if(res){}
   };
-  // };
 
   useEffect(() => {
     courseInfoRender();
@@ -165,8 +160,6 @@ const Product = () => {
       window.removeEventListener("scroll", courseProgressScrollHandler);
     };
   }, []);
-
-  console.log(courseInfo);
 
   if (isDataLoad) {
     return (

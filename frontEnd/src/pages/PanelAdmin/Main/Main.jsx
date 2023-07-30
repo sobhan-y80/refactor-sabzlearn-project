@@ -63,7 +63,6 @@ function Main() {
   };
 
   const updateMemberAction = () => {
-    console.log("update successfully");
     const isValueSame = () => {
       const mainUserInfoObj = {
         name: mainUserDataInfo.name,

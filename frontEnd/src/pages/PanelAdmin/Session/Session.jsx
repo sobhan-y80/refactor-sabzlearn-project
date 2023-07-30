@@ -159,7 +159,6 @@ function Session() {
         const mainSessions = mainSessionsOfCourse.filter(
           (session) => session._id !== mainSession._id
         );
-        console.log(mainSessions);
 
         setMainSessionsOfCourse(mainSessions);
 

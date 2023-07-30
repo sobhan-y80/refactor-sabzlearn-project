@@ -100,8 +100,6 @@ function DiscountCode() {
         max: formState.inputs.count.value,
       };
 
-      console.log(newDiscountObj);
-
       fetch(`${mainUrlApi}/offs`, {
         method: "POST",
         headers: {

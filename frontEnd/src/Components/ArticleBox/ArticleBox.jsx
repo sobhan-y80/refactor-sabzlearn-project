@@ -5,7 +5,6 @@ import { mainUrl } from "../../Utils/Utils";
 import { Link } from "react-router-dom";
 
 function ArticleBox({ ...props }) {
-  console.log(props);
   return (
     <div
       className={`article-wrapper-box flex items-center justify-center ${

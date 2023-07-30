@@ -52,7 +52,6 @@ function TicketsAdmin() {
 
   const actionAnswerHandler = (Ticket) => {
     setIsAnswerModal(true);
-    console.log(Ticket);
     setMainTicket(Ticket);
   };
   const answerAction = () => {

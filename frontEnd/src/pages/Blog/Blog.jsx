@@ -14,7 +14,6 @@ const Blog = () => {
 
   const articleInfoRender = () => {
     const localStorageData = JSON.parse(localStorage.getItem("token"));
-    console.log(ArticleID);
     fetch(`${mainUrlApi}/articles/${ArticleID}`, {
       headers: {
         Authorization: `Bearer ${

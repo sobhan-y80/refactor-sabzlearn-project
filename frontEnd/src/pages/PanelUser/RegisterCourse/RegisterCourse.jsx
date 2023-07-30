@@ -17,8 +17,6 @@ function RegisterCourse() {
       .then((courseData) => setUserCourses(courseData));
   };
 
-  console.log(userCourses);
-
   useEffect(() => {
     RegisterCoursesRender();
   }, []);

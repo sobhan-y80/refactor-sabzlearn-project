@@ -91,7 +91,6 @@ function Notification() {
         "Content-Type": "application/json",
       },
     }).then((res) => {
-      console.log(res);
       if (res.status === 200) {
         toast.success(`پیام ${mainNotif.name} با موفقیت پاک شد`);
         allNotifRender();

@@ -37,7 +37,6 @@ function Categories() {
   };
 
   const addMenuHandler = () => {
-    console.log(formState);
     if (formState.isFormValid) {
       const localStorageData = JSON.parse(localStorage.getItem("token"));
 
@@ -106,7 +105,6 @@ function Categories() {
         },
         body: JSON.stringify(newCategoryInfoObj),
       }).then((res) => {
-        console.log(res);
         if (res.status === 200) {
           allCategoryRender();
           toast.success("دسته بندی با موفقیت بروزرسانی شد");

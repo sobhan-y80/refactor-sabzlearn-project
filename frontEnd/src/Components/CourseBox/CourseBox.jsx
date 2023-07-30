@@ -4,7 +4,6 @@ import "./CourseBox.css";
 import { mainUrl } from "../../Utils/Utils";
 
 const CourseBox = ({ smalMode, smalDetailMode = null, ...props }) => {
-  console.log(props);
   return (
     <div className="course-box">
       <div className="course-box__img-wrapper">

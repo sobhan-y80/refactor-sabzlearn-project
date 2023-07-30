@@ -106,8 +106,6 @@ function Tickets() {
         body: formState.inputs.ticketBody.value,
         priority: 23,
       };
-      console.log(localStorageData.token);
-      console.log(mainNewTicketObj);
 
       fetch(`${mainUrlApi}/tickets`, {
         method: "POST",
@@ -176,7 +174,6 @@ function Tickets() {
       });
   };
 
-  console.log(allTickets);
   // ============== Finish Show Tickets Handler ==============
 
   useEffect(() => {
