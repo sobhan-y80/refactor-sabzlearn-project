@@ -6,11 +6,7 @@ function PAdminPrivate({ children }) {
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
   return (
-    <>
-      {authContext.userInfo.role === "ADMIN"
-        ? { children }
-        : navigate("/Login")}
-    </>
+    <>{authContext.userInfo.role === "ADMIN" ? children : navigate("/Login")}</>
   );
 }
 

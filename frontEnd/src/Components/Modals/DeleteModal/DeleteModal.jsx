@@ -89,6 +89,20 @@ function DeleteModal({ role, deleteAction, cancelAction, MainInfo }) {
       };
       break;
     }
+    case "CHANGE_ROLE_TO_ADMIN": {
+      mainMessage = {
+        body: `از ارتقا کاربر ${MainInfo.name} به ادمین مطمعن هستید !؟`,
+        messageBtn: `آره مطمعنم`,
+      };
+      break;
+    }
+    case "CHANGE_ROLE_TO_USER": {
+      mainMessage = {
+        body: `از تبدیل به کاربر کردن ادمین ${MainInfo.name} مطمعن هستید`,
+        messageBtn: `آره مطمعنم`,
+      };
+      break;
+    }
 
     default:
       {

@@ -540,6 +540,18 @@ table button {
   stroke: var(--white-color);
 }
 
+.changeRol:hover {
+  background-color: var(--white-color);
+}
+
+.changeRol:hover path {
+  fill: var(--primary-color);
+}
+
+.changeRol.admin:hover path {
+  fill: var(--golden-color);
+}
+
 .detail-list__item {
   cursor: pointer;
   padding: 0.5rem;

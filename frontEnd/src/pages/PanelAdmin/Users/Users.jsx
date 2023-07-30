@@ -43,6 +43,8 @@ function Users() {
   const [isModalDelete, setIsModalDelete] = useState(false);
   const [isModalBan, setIsModalBan] = useState(false);
   const [isModalEdit, setIsModalEdit] = useState(false);
+  const [isModalChangeRole, setIsModalChangeRole] = useState(false);
+  const [isChangeForUser, setIsChangeForUser] = useState(true);
 
   const RegisterNewUser = async () => {
     if (formState.isFormValid) {
@@ -101,7 +103,6 @@ function Users() {
   };
 
   const updateMemberAction = () => {
-    console.log("update successfully");
     const isValueSame = () => {
       const mainUserInfoObj = {
         name: mainUserDataInfo.name,
@@ -189,6 +190,46 @@ function Users() {
     });
     setIsModalBan(false);
   };
+
+  const changeRoleUserHandler = (userData) => {
+    if (userData.role === "ADMIN") {
+      setIsChangeForUser(false);
+      setMainUserDataInfo(userData);
+      setIsModalChangeRole(true);
+    } else if (userData.role === "USER") {
+      setIsChangeForUser(true);
+      setMainUserDataInfo(userData);
+      setIsModalChangeRole(true);
+    }
+  };
+
+  const changeRoleAction = () => {
+    const localStorageData = JSON.parse(localStorage.getItem("token"));
+
+    const changeRoleObj = {
+      id: mainUserDataInfo._id,
+      role: isChangeForUser ? "ADMIN" : "USER",
+    };
+
+    fetch(`${mainUrlApi}/users/role`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${localStorageData.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(changeRoleObj),
+    }).then((res) => {
+      if (res.status === 201 || res.status === 200) {
+        setIsModalChangeRole(false);
+        toast.success("تغییر نقش با موفقیت اعمال شد");
+        allUsersRender();
+      } else {
+        setIsModalChangeRole(false);
+        toast.error("خطا در سرور :/");
+      }
+    });
+  };
+  const cancelChangeAction = () => setIsModalChangeRole(false);
 
   useEffect(() => {
     allUsersRender();
@@ -279,6 +320,7 @@ function Users() {
                 <thead>
                   <tr>
                     <th>#</th>
+                    <th>نقش</th>
                     <th>نام</th>
                     <th>نام کاربری</th>
                     <th>ایمیل</th>
@@ -290,12 +332,46 @@ function Users() {
                   {[...allUsers].reverse().map((user, index) => {
                     return (
                       <tr key={user._id}>
-                        <td>{index + 1}</td>
+                        <td
+                          className={`${
+                            user.role === "ADMIN" ? "text-[#d4af37]" : ""
+                          }`}
+                        >
+                          {index + 1}
+                        </td>
+                        <td>{user.role === "ADMIN" ? "ادمین" : "کاربر"}</td>
                         <td>{user.name}</td>
                         <td>{user.username}</td>
                         <td>{user.email}</td>
                         <td>{user.phone}</td>
                         <td className="flex justify-center">
+                          <button
+                            onClick={() => changeRoleUserHandler(user)}
+                            className={`changeRol ${
+                              user.role === "ADMIN" ? "admin" : ""
+                            }`}
+                          >
+                            <svg
+                              width="20"
+                              height="21"
+                              viewBox="0 0 20 21"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                d="M10 2.25C7.37665 2.25 5.25 4.37665 5.25 7C5.25 9.62335 7.37665 11.75 10 11.75C12.6234 11.75 14.75 9.62335 14.75 7C14.75 4.37665 12.6234 2.25 10 2.25ZM6.75 7C6.75 5.20507 8.20507 3.75 10 3.75C11.7949 3.75 13.25 5.20507 13.25 7C13.25 8.79493 11.7949 10.25 10 10.25C8.20507 10.25 6.75 8.79493 6.75 7Z"
+                                fill="var(--white-color)"
+                              />
+                              <path
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                d="M14.3664 0.329246C13.451 0.249991 12.3096 0.249995 10.8538 0.25H9.14616C7.69036 0.249995 6.54903 0.249991 5.63362 0.329246C4.70118 0.409977 3.9332 0.577186 3.24432 0.953347C2.27685 1.48162 1.48162 2.27685 0.953347 3.24432C0.577186 3.9332 0.409977 4.70118 0.329246 5.63362C0.249991 6.54902 0.249995 7.69035 0.25 9.14616V12.3005C0.25 12.359 0.25 12.3946 0.250335 12.4257C0.27184 14.4183 1.30611 16.1666 2.85969 17.181C3.74659 17.7601 4.80376 18.1011 5.93795 18.1133C5.96899 18.1136 6.00458 18.1136 6.06294 18.1136L6.0747 18.1136L6.07593 18.1136C6.14293 18.114 6.20698 18.1413 6.25371 18.1893L6.25452 18.1901L6.61454 18.5642C7.2601 19.2349 7.79744 19.7932 8.28257 20.1768C8.79398 20.5811 9.3375 20.8659 10 20.8659C10.6625 20.8659 11.206 20.5811 11.7174 20.1768C12.2025 19.7932 12.7399 19.235 13.3854 18.5642L13.7463 18.1893C13.793 18.1413 13.8571 18.114 13.9241 18.1136L13.9253 18.1136L13.9371 18.1136C13.9954 18.1136 14.031 18.1136 14.0621 18.1133C15.1962 18.1011 16.2534 17.7601 17.1403 17.181C18.6939 16.1666 19.7282 14.4183 19.7497 12.4257C19.75 12.3945 19.75 12.3587 19.75 12.2998V9.14612C19.75 7.69034 19.75 6.54902 19.6708 5.63362C19.59 4.70118 19.4228 3.9332 19.0467 3.24432C18.5184 2.27685 17.7231 1.48162 16.7557 0.953347C16.0668 0.577186 15.2988 0.409977 14.3664 0.329246ZM3.96319 2.26987C4.39438 2.03442 4.92944 1.89583 5.76301 1.82366C6.60616 1.75066 7.68267 1.75 9.18182 1.75H10.8182C12.3173 1.75 13.3938 1.75066 14.237 1.82366C15.0706 1.89583 15.6056 2.03442 16.0368 2.26987C16.7519 2.66033 17.3397 3.24811 17.7301 3.96319C17.9656 4.39438 18.1042 4.92944 18.1763 5.76301C18.2493 6.60616 18.25 7.68267 18.25 9.18182V12.2949C18.25 12.3073 18.25 12.3182 18.25 12.328C18.25 12.3706 18.2499 12.3917 18.2498 12.4095C18.2371 13.58 17.7523 14.637 16.9749 15.3989C16.1268 14.1054 14.6639 13.25 13 13.25H7C5.33606 13.25 3.87316 14.1054 3.02505 15.3989C2.24774 14.637 1.76288 13.58 1.75025 12.4095C1.75001 12.3876 1.75 12.3607 1.75 12.2949V9.18182C1.75 7.68267 1.75066 6.60616 1.82366 5.76301C1.89583 4.92944 2.03442 4.39438 2.26987 3.96319C2.66033 3.24811 3.24811 2.66033 3.96319 2.26987ZM13 14.75C14.1474 14.75 15.1571 15.3448 15.7357 16.2443C15.2193 16.4756 14.6482 16.6069 14.0459 16.6134C14.024 16.6136 13.9971 16.6136 13.9313 16.6136L13.9158 16.6137C13.4468 16.6163 12.9984 16.807 12.6713 17.1431L12.6605 17.1543L12.3416 17.4857C11.6496 18.2046 11.1826 18.6875 10.7872 19.0001C10.4088 19.2991 10.1884 19.3659 10 19.3659C9.8116 19.3659 9.59116 19.2991 9.21283 19.0001C8.81742 18.6875 8.35043 18.2046 7.65842 17.4857L7.33946 17.1543L7.32868 17.1431C7.00157 16.807 6.55323 16.6163 6.08422 16.6137L6.0687 16.6136C6.00293 16.6136 5.97604 16.6136 5.95413 16.6134C5.35184 16.6069 4.78069 16.4756 4.26434 16.2443C4.84291 15.3448 5.85264 14.75 7 14.75H13Z"
+                                fill="var(--white-color)"
+                              />
+                            </svg>
+                          </button>
                           <button
                             onClick={(e) => actionEditHandler(user)}
                             className="actionEdit"
@@ -356,6 +432,18 @@ function Users() {
             </div>
           </div>
         </div>
+        {isModalChangeRole && (
+          <DeleteModal
+            role={
+              mainUserDataInfo.role === "USER"
+                ? "CHANGE_ROLE_TO_ADMIN"
+                : "CHANGE_ROLE_TO_USER"
+            }
+            deleteAction={changeRoleAction}
+            cancelAction={cancelChangeAction}
+            MainInfo={mainUserDataInfo}
+          ></DeleteModal>
+        )}
         {isModalDelete && (
           <DeleteModal
             role="Delete"
