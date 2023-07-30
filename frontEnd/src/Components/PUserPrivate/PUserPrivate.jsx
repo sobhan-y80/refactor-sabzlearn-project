@@ -7,7 +7,7 @@ function PUserPrivate({ children }) {
   const navigate = useNavigate();
   //   console.log(authContext.isLoggedIn);
 
-  return <>{authContext.isLoggedIn ? { children } : navigate("/Login")}</>;
+  return <>{authContext.isLoggedIn ? children : navigate("/Login")}</>;
 }
 
 export default PUserPrivate;

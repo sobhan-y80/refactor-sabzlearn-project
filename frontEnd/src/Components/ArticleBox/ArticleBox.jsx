@@ -2,8 +2,10 @@ import React from "react";
 
 import "./ArticleBox.css";
 import { mainUrl } from "../../Utils/Utils";
+import { Link } from "react-router-dom";
 
 function ArticleBox({ ...props }) {
+  console.log(props);
   return (
     <div
       className={`article-wrapper-box flex items-center justify-center ${
@@ -26,9 +28,12 @@ function ArticleBox({ ...props }) {
           <span className="article-box__subtitle hpc__short-text">
             {props.description}
           </span>
-          <a href="#" className="article-box__link text-sm">
+          <Link
+            to={`/Blog/${props.shortName}`}
+            className="article-box__link text-sm"
+          >
             بیشتر بخون...
-          </a>
+          </Link>
         </div>
       </div>
     </div>
