@@ -16,6 +16,15 @@ const mainObj = {
 };
 
 function DiscountCode() {
+  const [formAllDicountState, onInputHandlerAllDisCount] = useForm(
+    {
+      discountAll: {
+        value: "",
+        isValid: false,
+      },
+    },
+    false
+  );
   const [formState, onInputHandler] = useForm(
     {
       CodeName: {
@@ -42,7 +51,6 @@ function DiscountCode() {
     []
   );
   const [isModalDelete, setIsModalDelete] = useState(false);
-  console.log(allDiscount);
 
   const getAllcourses = () => {
     fetch(`${mainUrlApi}/courses`)
@@ -138,12 +146,64 @@ function DiscountCode() {
     });
   };
 
+  const addDiscountAllProduct = () => {
+    if (formAllDicountState.isFormValid) {
+      const localStorageData = JSON.parse(localStorage.getItem("token"));
+
+      const discountAllObj = {
+        discount: formAllDicountState.inputs.discountAll.value.trim(),
+      };
+      fetch(`${mainUrlApi}/offs/all`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorageData.token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(discountAllObj),
+      }).then((res) => {
+        if (res.status === 200) {
+          toast.success("تخفیف برای تمامی دوره ها با موفقیت اعمال شد");
+        } else {
+          toast.error("خطا در سرور :/");
+        }
+      });
+    } else {
+      toast.error("لطفا درصد تخفیف را وارد کنید");
+    }
+  };
+
   useEffect(() => {
     getAllcourses();
     getAllDiscount();
   }, []);
   return (
     <>
+      <div className="panel-home__last-users hpc__custom-scroll hpc__part-section">
+        <h2 className="panel-home__title">
+          افزودن کد تخفیف برای تمامی دوره ها
+        </h2>
+        <div className="login-form__box-inputs my-5">
+          <div className="col-span-12 lg:col-span-6 my-5">
+            <InputBox
+              mode="dark-input"
+              id="discountAll"
+              type="number"
+              onInputHandler={onInputHandlerAllDisCount}
+              placeHolder="درصد تخفیف"
+              validations={[requiredValidatior()]}
+            ></InputBox>
+          </div>
+          <div className="col-span-12 my-5">
+            <button
+              onClick={addDiscountAllProduct}
+              id="submit-new-user-btn"
+              className="login-form__submit w-full"
+            >
+              اعمال شوو
+            </button>
+          </div>
+        </div>
+      </div>
       <div className="panel-home__last-users hpc__custom-scroll hpc__part-section">
         <h2 className="panel-home__title">افزودن کد تخفیف</h2>
         <div className="login-form__box-inputs my-5">
