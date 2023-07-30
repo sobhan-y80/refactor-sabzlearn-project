@@ -2,19 +2,7 @@ import React, { useEffect, useState } from "react";
 import { mainUrlApi } from "../../Utils/Utils";
 import DetailModal from "../Modals/DetailModal/DetailModal";
 import { Toaster, toast } from "react-hot-toast";
-answer: 0;
-body: "محتوا لود نمیشه";
-course: "634e6b0e1d5142b91afa9bb3";
-createdAt: "2023-07-28T17:24:16.592Z";
-departmentID: "پشتیبانی";
-departmentSubID: "پشتیبانی سایت";
-isAnswer: 0;
-priority: 23;
-title: "لود نشدن";
-updatedAt: "2023-07-28T17:24:16.592Z";
-user: "sobhan yaghobi";
-__v: 0;
-_id: "64c3f9c0c03d69cc3b70ed67";
+
 function TicketBox({ ...props }) {
   const [mainAnswer, setMainAnswer] = useState();
   const [isModalDetail, setIsModalDetail] = useState(false);
@@ -51,7 +39,7 @@ function TicketBox({ ...props }) {
               onClick={() => toast.error("پیغامی ثبت نشده")}
               className="flex w-[13rem] justify-between items-center"
             >
-              <div className="w-5 h-5 rounded-full bg-[#f7bd02]"></div>
+              <div className="w-5 h-5 rounded-full bg-[#dc3545]"></div>
               پاسخ داده نشده
             </div>
           ) : (

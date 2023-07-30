@@ -8,6 +8,7 @@ import ContactUs from "./pages/ContactUs/ContactUs";
 import Search from "./pages/Search/Search";
 import NotFound from "./pages/NotFound/NotFound";
 
+import PAdminPrivate from "./Components/PAdminPrivate/PAdminPrivate";
 import PanelAdmin from "./pages/PanelAdmin/PanelAdmin";
 import Menus from "./pages/PanelAdmin/Menus/Menus";
 import Users from "./pages/PanelAdmin/Users/Users";
@@ -23,13 +24,11 @@ import Session from "./pages/PanelAdmin/Session/Session";
 import Comments from "./pages/PanelAdmin/Comments/Comments";
 import TicketsAdmin from "./pages/PanelAdmin/Tickets/TicketsAdmin";
 
+import PUserPrivate from "./Components/PUserPrivate/PUserPrivate";
 import PanelUser from "./pages/PanelUser/PanelUser";
 import OrdersUser from "./pages/PanelUser/Orders/Orders";
 import RegisterCourse from "./pages/PanelUser/RegisterCourse/RegisterCourse";
 import Tickets from "./pages/PanelUser/Tickets/Tickets";
-import EditUser from "./pages/PanelUser/editUser/editUser";
-import PAdminPrivate from "./Components/PAdminPrivate/PAdminPrivate";
-import PUserPrivate from "./Components/PUserPrivate/PUserPrivate";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -84,7 +83,6 @@ const routes = [
       { path: "Main", element: <OrdersUser></OrdersUser> },
       { path: "registerCourse", element: <RegisterCourse></RegisterCourse> },
       { path: "Tickets", element: <Tickets></Tickets> },
-      { path: "EditUser", element: <EditUser></EditUser> },
     ],
   },
 ];
