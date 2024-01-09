@@ -15,7 +15,7 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState(null);
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState({}); 
 
   const login = useCallback(
     (userInfo, token) => {
